@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import App from "./components/app/app.jsx";
 
 const Settings = {
-  ADVERTS_COUNT: 37
+  ADVERTS_COUNT: 36
 };
 
 ReactDOM.render(
