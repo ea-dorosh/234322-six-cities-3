@@ -6,9 +6,7 @@ const Main = (props) => {
   // eslint-disable-next-line react/prop-types
   const advertsCount = props.advertsCount;
   // eslint-disable-next-line react/prop-types
-  const placesName = props.placesNames;
-  console.log(advertsCount)
-  console.log(placesName)
+  const placesName = props.placesName;
 
   return (
     <div className="page page--gray page--main">

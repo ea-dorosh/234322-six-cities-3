@@ -6,13 +6,12 @@ const App = (props) => {
   // eslint-disable-next-line react/prop-types
   const advertsCount = props.advertsCount;
   // eslint-disable-next-line react/prop-types
-  const placesName = props.placesNames;
-  console.log(placesName)
+  const placesName = props.placesName;
 
   return (
     <Main
       advertsCount = {advertsCount}
-      placeName = {placesName}
+      placesName = {placesName}
     />
   );
 };

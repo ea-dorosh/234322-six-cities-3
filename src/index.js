@@ -15,7 +15,7 @@ const placesName = [
 ReactDOM.render(
     <App
       advertsCount = {Settings.ADVERTS_COUNT}
-      placesNames = {placesName}
+      placesName = {placesName}
     />,
     document.querySelector(`#root`)
 );

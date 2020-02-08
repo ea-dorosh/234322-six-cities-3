@@ -2,8 +2,8 @@ import React from "react";
 
 const PlaceCard = (props) => {
 
-  // eslint-disable-next-line no-unused-vars
-  const placesName = props;
+  // eslint-disable-next-line no-unused-vars,react/prop-types
+  const placesName = props.placesName;
 
   return (
     <article className="cities__place-card place-card">
@@ -35,7 +35,7 @@ const PlaceCard = (props) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          {/* <a href="#">{placesName}</a>*/}
+          <a href="#">{placesName[0]}</a>
         </h2>
         <p className="place-card__type">Apartment</p>
       </div>
