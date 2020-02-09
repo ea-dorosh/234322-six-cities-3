@@ -6,7 +6,7 @@ const Settings = {
   ADVERTS_COUNT: 36
 };
 
-const placesName = [
+const placesNames = [
   `Beautiful & luxurious apartment at great location`,
   `Wood and stone place`,
   `Nice, cozy, warm big bed apartment`
@@ -15,7 +15,7 @@ const placesName = [
 ReactDOM.render(
     <App
       advertsCount = {Settings.ADVERTS_COUNT}
-      placesName = {placesName}
+      placesNames = {placesNames}
     />,
     document.querySelector(`#root`)
 );

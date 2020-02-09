@@ -1,9 +1,8 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const PlaceCard = (props) => {
-
-  // eslint-disable-next-line no-unused-vars,react/prop-types
-  const placesName = props.placesName;
+  const {placesNames} = props;
 
   return (
     <article className="cities__place-card place-card">
@@ -35,12 +34,16 @@ const PlaceCard = (props) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{placesName[0]}</a>
+          <a href="#">{placesNames}</a>
         </h2>
         <p className="place-card__type">Apartment</p>
       </div>
     </article>
   );
+};
+
+PlaceCard.propTypes = {
+  placesNames: PropTypes.string.isRequired,
 };
 
 export default PlaceCard;

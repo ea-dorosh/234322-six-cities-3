@@ -1,19 +1,23 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Main from "../main/main.jsx";
 
 
 const App = (props) => {
-  // eslint-disable-next-line react/prop-types
   const advertsCount = props.advertsCount;
-  // eslint-disable-next-line react/prop-types
-  const placesName = props.placesName;
+  const placesNames = props.placesNames;
 
   return (
     <Main
       advertsCount = {advertsCount}
-      placesName = {placesName}
+      placesNames = {placesNames}
     />
   );
+};
+
+App.propTypes = {
+  advertsCount: PropTypes.number.isRequired,
+  placesNames: PropTypes.array.isRequired,
 };
 
 

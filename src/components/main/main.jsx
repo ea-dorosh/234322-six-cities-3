@@ -1,12 +1,11 @@
 import React from "react";
+import PropTypes from "prop-types";
 import PlaceCard from "../place-card/place-card.jsx";
 
 
 const Main = (props) => {
-  // eslint-disable-next-line react/prop-types
   const advertsCount = props.advertsCount;
-  // eslint-disable-next-line react/prop-types
-  const placesName = props.placesName;
+  const placesNames = props.placesNames;
 
   return (
     <div className="page page--gray page--main">
@@ -93,7 +92,10 @@ const Main = (props) => {
               </form>
               <div className="cities__places-list places__list tabs__content">
                 <PlaceCard
-                  placesName = {placesName}
+                  placesNames = {placesNames[0]}
+                />
+                <PlaceCard
+                  placesNames = {placesNames[1]}
                 />
               </div>
             </section>
@@ -105,6 +107,11 @@ const Main = (props) => {
       </main>
     </div>
   );
+};
+
+Main.propTypes = {
+  advertsCount: PropTypes.number.isRequired,
+  placesNames: PropTypes.array.isRequired,
 };
 
 
