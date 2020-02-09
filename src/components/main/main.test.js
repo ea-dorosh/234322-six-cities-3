@@ -7,6 +7,7 @@ it(`Should Main render correctly`, () => {
     .create(<Main
       advertsCount={15}
       placesNames={[`array`, `of`, `strings`]}
+      onPlaceNameHeaderClick={()=>{}}
     />)
     .toJSON();
 

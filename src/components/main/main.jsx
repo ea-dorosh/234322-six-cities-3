@@ -115,7 +115,7 @@ Main.propTypes = {
   placesNames: PropTypes.arrayOf(
       PropTypes.string
   ).isRequired,
-  onPlaceNameHeaderClick: PropTypes.func,
+  onPlaceNameHeaderClick: PropTypes.func.isRequired,
 };
 
 

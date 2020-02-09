@@ -46,7 +46,7 @@ const PlaceCard = (props) => {
 
 PlaceCard.propTypes = {
   placesNames: PropTypes.string.isRequired,
-  onPlaceNameHeaderClick: PropTypes.func,
+  onPlaceNameHeaderClick: PropTypes.func.isRequired,
 };
 
 export default PlaceCard;
