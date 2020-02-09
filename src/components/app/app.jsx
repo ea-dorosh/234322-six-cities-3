@@ -3,21 +3,28 @@ import PropTypes from "prop-types";
 import Main from "../main/main.jsx";
 
 
+const placeNameHeaderHandler = () => {
+  // eslint-disable-next-line no-alert,no-console
+  console.log(1 + 1);
+};
+
 const App = (props) => {
-  const advertsCount = props.advertsCount;
-  const placesNames = props.placesNames;
+  const {advertsCount, placesNames} = props;
 
   return (
     <Main
       advertsCount = {advertsCount}
       placesNames = {placesNames}
+      onPlaceNameHeaderClick = {placeNameHeaderHandler}
     />
   );
 };
 
 App.propTypes = {
   advertsCount: PropTypes.number.isRequired,
-  placesNames: PropTypes.array.isRequired,
+  placesNames: PropTypes.arrayOf(
+      PropTypes.string
+  ).isRequired,
 };
 
 

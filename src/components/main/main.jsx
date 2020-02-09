@@ -4,8 +4,7 @@ import PlaceCard from "../place-card/place-card.jsx";
 
 
 const Main = (props) => {
-  const advertsCount = props.advertsCount;
-  const placesNames = props.placesNames;
+  const {advertsCount, placesNames, onPlaceNameHeaderClick} = props;
 
   return (
     <div className="page page--gray page--main">
@@ -93,9 +92,11 @@ const Main = (props) => {
               <div className="cities__places-list places__list tabs__content">
                 <PlaceCard
                   placesNames = {placesNames[0]}
+                  onPlaceNameHeaderClick = {onPlaceNameHeaderClick}
                 />
                 <PlaceCard
                   placesNames = {placesNames[1]}
+                  onPlaceNameHeaderClick = {onPlaceNameHeaderClick}
                 />
               </div>
             </section>
@@ -111,7 +112,10 @@ const Main = (props) => {
 
 Main.propTypes = {
   advertsCount: PropTypes.number.isRequired,
-  placesNames: PropTypes.array.isRequired,
+  placesNames: PropTypes.arrayOf(
+      PropTypes.string
+  ).isRequired,
+  onPlaceNameHeaderClick: PropTypes.func,
 };
 
 
