@@ -90,14 +90,13 @@ const Main = (props) => {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <PlaceCard
-                  placesNames = {placesNames[0]}
-                  onPlaceNameHeaderClick = {onPlaceNameHeaderClick}
-                />
-                <PlaceCard
-                  placesNames = {placesNames[1]}
-                  onPlaceNameHeaderClick = {onPlaceNameHeaderClick}
-                />
+                {placesNames.map((it) => (
+                  <PlaceCard
+                    key={it}
+                    placesNames = {it}
+                    onPlaceNameHeaderClick = {onPlaceNameHeaderClick}
+                  />
+                ))}
               </div>
             </section>
             <div className="cities__right-section">
