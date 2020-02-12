@@ -5,7 +5,7 @@ import PlaceCard from "./place-card.jsx";
 it(`Should PlaceCard render correctly`, () => {
   const tree = renderer
     .create(<PlaceCard
-      placesNames={`some string`}
+      placeName={`some string`}
       onPlaceNameHeaderClick={()=>{}}
     />)
     .toJSON();

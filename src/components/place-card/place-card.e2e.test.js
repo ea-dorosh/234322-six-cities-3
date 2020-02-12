@@ -12,7 +12,7 @@ it(`Should Place Name Header be pressed`, () => {
 
   const placeCard = shallow(
       <PlaceCard
-        placesNames={`some string`}
+        placeName={`some string`}
         onPlaceNameHeaderClick={onPlaceNameHeaderClick}
       />
   );
