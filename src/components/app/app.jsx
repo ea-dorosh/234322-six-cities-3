@@ -3,10 +3,7 @@ import PropTypes from "prop-types";
 import Main from "../main/main.jsx";
 
 
-const placeNameHeaderHandler = () => {
-  // eslint-disable-next-line no-alert,no-console
-  console.log(1 + 1);
-};
+const placeNameHeaderHandler = () => {};
 
 const App = (props) => {
   const {advertsCount, placesNames} = props;

@@ -93,7 +93,7 @@ const Main = (props) => {
                 {placesNames.map((it) => (
                   <PlaceCard
                     key={it}
-                    placesNames = {it}
+                    placeName = {it}
                     onPlaceNameHeaderClick = {onPlaceNameHeaderClick}
                   />
                 ))}
