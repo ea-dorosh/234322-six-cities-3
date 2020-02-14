@@ -262,7 +262,7 @@ exports[`Should App render correctly 1`] = `
                       className="place-card__price-value"
                     >
                       €
-                      380
+                      141
                     </b>
                     <span
                       className="place-card__price-text"
@@ -340,7 +340,7 @@ exports[`Should App render correctly 1`] = `
                     alt="Place image"
                     className="place-card__image"
                     height="200"
-                    src="img/apartment-02.jpg"
+                    src="img/apartment-03.jpg"
                     width="260"
                   />
                 </a>
@@ -358,7 +358,7 @@ exports[`Should App render correctly 1`] = `
                       className="place-card__price-value"
                     >
                       €
-                      416
+                      254
                     </b>
                     <span
                       className="place-card__price-text"
@@ -436,7 +436,7 @@ exports[`Should App render correctly 1`] = `
                     alt="Place image"
                     className="place-card__image"
                     height="200"
-                    src="img/apartment-01.jpg"
+                    src="img/apartment-03.jpg"
                     width="260"
                   />
                 </a>
@@ -454,7 +454,7 @@ exports[`Should App render correctly 1`] = `
                       className="place-card__price-value"
                     >
                       €
-                      150
+                      473
                     </b>
                     <span
                       className="place-card__price-text"
@@ -550,7 +550,7 @@ exports[`Should App render correctly 1`] = `
                       className="place-card__price-value"
                     >
                       €
-                      495
+                      117
                     </b>
                     <span
                       className="place-card__price-text"
