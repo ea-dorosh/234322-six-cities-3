@@ -6,7 +6,6 @@ it(`Should App render correctly`, () => {
   const tree = renderer
     .create(<App
       advertsCount={15}
-      placesNames={[`array`, `of`, `string`]}
     />)
     .toJSON();
 

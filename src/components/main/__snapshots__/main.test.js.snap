@@ -244,7 +244,7 @@ exports[`Should Main render correctly 1`] = `
                     alt="Place image"
                     className="place-card__image"
                     height="200"
-                    src="img/apartment-01.jpg"
+                    src="url path-1 string"
                     width="260"
                   />
                 </a>
@@ -261,7 +261,8 @@ exports[`Should Main render correctly 1`] = `
                     <b
                       className="place-card__price-value"
                     >
-                      €120
+                      €
+                      50
                     </b>
                     <span
                       className="place-card__price-text"
@@ -309,7 +310,7 @@ exports[`Should Main render correctly 1`] = `
                   <a
                     href="#"
                   >
-                    array
+                    apartment-1 name string
                   </a>
                 </h2>
                 <p
@@ -339,7 +340,7 @@ exports[`Should Main render correctly 1`] = `
                     alt="Place image"
                     className="place-card__image"
                     height="200"
-                    src="img/apartment-01.jpg"
+                    src="url path-2 string"
                     width="260"
                   />
                 </a>
@@ -356,7 +357,8 @@ exports[`Should Main render correctly 1`] = `
                     <b
                       className="place-card__price-value"
                     >
-                      €120
+                      €
+                      250
                     </b>
                     <span
                       className="place-card__price-text"
@@ -404,7 +406,7 @@ exports[`Should Main render correctly 1`] = `
                   <a
                     href="#"
                   >
-                    of
+                    apartment-2 name string
                   </a>
                 </h2>
                 <p
@@ -434,7 +436,7 @@ exports[`Should Main render correctly 1`] = `
                     alt="Place image"
                     className="place-card__image"
                     height="200"
-                    src="img/apartment-01.jpg"
+                    src="url path-3 string"
                     width="260"
                   />
                 </a>
@@ -451,7 +453,8 @@ exports[`Should Main render correctly 1`] = `
                     <b
                       className="place-card__price-value"
                     >
-                      €120
+                      €
+                      500
                     </b>
                     <span
                       className="place-card__price-text"
@@ -499,7 +502,7 @@ exports[`Should Main render correctly 1`] = `
                   <a
                     href="#"
                   >
-                    strings
+                    apartment-3 name string
                   </a>
                 </h2>
                 <p

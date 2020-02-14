@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const PlaceCard = (props) => {
-  const {placeName, onPlaceNameHeaderClick} = props;
+  const {offer, onPlaceNameHeaderClick} = props;
 
   return (
     <article className="cities__place-card place-card">
@@ -11,14 +11,14 @@ const PlaceCard = (props) => {
       </div>
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
-          <img className="place-card__image" src="img/apartment-01.jpg" width="260" height="200"
+          <img className="place-card__image" src={offer.img} width="260" height="200"
             alt="Place image"/>
         </a>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
-            <b className="place-card__price-value">&euro;120</b>
+            <b className="place-card__price-value">&euro;{offer.price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
           <button className="place-card__bookmark-button button" type="button">
@@ -36,7 +36,7 @@ const PlaceCard = (props) => {
         <h2
           onClick={onPlaceNameHeaderClick}
           className="place-card__name">
-          <a href="#">{placeName}</a>
+          <a href="#">{offer.name}</a>
         </h2>
         <p className="place-card__type">Apartment</p>
       </div>
@@ -45,7 +45,11 @@ const PlaceCard = (props) => {
 };
 
 PlaceCard.propTypes = {
-  placeName: PropTypes.string.isRequired,
+  offer: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    img: PropTypes.string.isRequired
+  }).isRequired,
   onPlaceNameHeaderClick: PropTypes.func.isRequired,
 };
 

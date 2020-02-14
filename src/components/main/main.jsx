@@ -4,7 +4,7 @@ import PlaceCard from "../place-card/place-card.jsx";
 
 
 const Main = (props) => {
-  const {advertsCount, placesNames, onPlaceNameHeaderClick} = props;
+  const {advertsCount, offers, onPlaceNameHeaderClick} = props;
 
   return (
     <div className="page page--gray page--main">
@@ -90,10 +90,10 @@ const Main = (props) => {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {placesNames.map((it) => (
+                {offers.map((it, index) => (
                   <PlaceCard
-                    key={it}
-                    placeName = {it}
+                    key={index}
+                    offer = {it}
                     onPlaceNameHeaderClick = {onPlaceNameHeaderClick}
                   />
                 ))}
@@ -111,8 +111,12 @@ const Main = (props) => {
 
 Main.propTypes = {
   advertsCount: PropTypes.number.isRequired,
-  placesNames: PropTypes.arrayOf(
-      PropTypes.string
+  offers: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+        img: PropTypes.string.isRequired
+      })
   ).isRequired,
   onPlaceNameHeaderClick: PropTypes.func.isRequired,
 };
