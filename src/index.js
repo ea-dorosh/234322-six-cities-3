@@ -6,7 +6,7 @@ import {createOffers} from "./mocks/offers.js";
 const OFFERS_QUANTITY = 4;
 
 const Settings = {
-  ADVERTS_COUNT: 36
+  ADVERTS_COUNT: OFFERS_QUANTITY
 };
 
 const offers = createOffers(OFFERS_QUANTITY);
