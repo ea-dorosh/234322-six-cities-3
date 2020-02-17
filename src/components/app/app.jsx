@@ -1,16 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Main from "../main/main.jsx";
-import {createOffers} from "../../mocks/offers";
 
-const OFFERS_QUANTITY = 4;
-
-const offers = createOffers(OFFERS_QUANTITY);
 
 const placeNameHeaderHandler = () => {};
 
 const App = (props) => {
-  const {advertsCount} = props;
+  const {advertsCount, offers} = props;
 
   return (
     <Main
@@ -22,6 +18,13 @@ const App = (props) => {
 };
 
 App.propTypes = {
+  offers: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+        img: PropTypes.string.isRequired
+      })
+  ).isRequired,
   advertsCount: PropTypes.number.isRequired,
 };
 

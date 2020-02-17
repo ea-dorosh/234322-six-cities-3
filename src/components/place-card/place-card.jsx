@@ -5,17 +5,23 @@ class PlaceCard extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = {
-
-    };
   }
 
+
   render() {
-    const {offer, onPlaceNameHeaderClick} = this.props;
-    const {} = this.state;
+    const {offer, onPlaceNameHeaderClick, handleCardHover} = this.props;
+
 
     return (
-      <article className="cities__place-card place-card">
+      <article
+        className="cities__place-card place-card"
+        onMouseEnter={() => {
+          handleCardHover(offer);
+        }}
+        onMouseLeave={() => {
+          handleCardHover(null);
+        }}
+      >
         <div className="place-card__mark">
           <span>Premium</span>
         </div>
@@ -60,6 +66,7 @@ PlaceCard.propTypes = {
     price: PropTypes.number.isRequired,
     img: PropTypes.string.isRequired
   }).isRequired,
+  handleCardHover: PropTypes.func.isRequired,
   onPlaceNameHeaderClick: PropTypes.func.isRequired,
 };
 

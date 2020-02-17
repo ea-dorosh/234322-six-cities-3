@@ -15,6 +15,7 @@ it(`Should Place Name Header be pressed`, () => {
       <PlaceCard
         offer={offer}
         onPlaceNameHeaderClick={onPlaceNameHeaderClick}
+        handleCardHover={()=>{}}
       />
   );
 
@@ -24,3 +25,4 @@ it(`Should Place Name Header be pressed`, () => {
 
   expect(onPlaceNameHeaderClick.mock.calls.length).toBe(1);
 });
+

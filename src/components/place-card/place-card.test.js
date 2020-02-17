@@ -9,6 +9,7 @@ it(`Should PlaceCard render correctly`, () => {
     .create(<PlaceCard
       offer={offer}
       onPlaceNameHeaderClick={()=>{}}
+      handleCardHover={()=>{}}
     />)
     .toJSON();
 
