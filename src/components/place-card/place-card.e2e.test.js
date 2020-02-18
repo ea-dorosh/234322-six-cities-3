@@ -9,11 +9,13 @@ Enzyme.configure({
 
 it(`Should Place Name Header be pressed`, () => {
   const onPlaceNameHeaderClick = jest.fn();
+  const offer = {name: `apartment-1 name string`, price: 50, img: `url path-1 string`};
 
   const placeCard = shallow(
       <PlaceCard
-        placeName={`some string`}
+        offer={offer}
         onPlaceNameHeaderClick={onPlaceNameHeaderClick}
+        handleCardHover={()=>{}}
       />
   );
 
@@ -23,3 +25,4 @@ it(`Should Place Name Header be pressed`, () => {
 
   expect(onPlaceNameHeaderClick.mock.calls.length).toBe(1);
 });
+

@@ -3,6 +3,8 @@
 exports[`Should PlaceCard render correctly 1`] = `
 <article
   className="cities__place-card place-card"
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
 >
   <div
     className="place-card__mark"
@@ -21,7 +23,7 @@ exports[`Should PlaceCard render correctly 1`] = `
         alt="Place image"
         className="place-card__image"
         height="200"
-        src="img/apartment-01.jpg"
+        src="url path-1 string"
         width="260"
       />
     </a>
@@ -38,7 +40,8 @@ exports[`Should PlaceCard render correctly 1`] = `
         <b
           className="place-card__price-value"
         >
-          €120
+          €
+          50
         </b>
         <span
           className="place-card__price-text"
@@ -86,7 +89,7 @@ exports[`Should PlaceCard render correctly 1`] = `
       <a
         href="#"
       >
-        some string
+        apartment-1 name string
       </a>
     </h2>
     <p
