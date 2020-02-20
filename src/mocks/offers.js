@@ -1,4 +1,4 @@
-import {getRandomNumber} from "../utils";
+import {getRandomNumber, getRandomElement} from "../utils";
 
 const PRICE = {
   MIN: 50,
@@ -12,12 +12,22 @@ const offersNames = [
   `Nice, cozy, warm big bed apartment`
 ];
 
+const offersTypes = [
+  `apartment`,
+  `room`,
+  `house`,
+  `hotel`
+];
+
 const createOffer = (index) => {
 
   return {
-    name: offersNames[index],
-    price: getRandomNumber(PRICE.MIN, PRICE.MAX),
     img: `img/apartment-0${getRandomNumber(1, 3)}.jpg`,
+    isPremium: !!(index % 2),
+    price: getRandomNumber(PRICE.MIN, PRICE.MAX),
+    name: offersNames[index],
+    type: getRandomElement(offersTypes),
+    rating: parseFloat(`${getRandomNumber(2, 4)}.${getRandomNumber(0, 9)}`)
   };
 };
 

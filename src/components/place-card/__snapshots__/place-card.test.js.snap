@@ -76,6 +76,13 @@ exports[`Should PlaceCard render correctly 1`] = `
         className="place-card__stars rating__stars"
       >
         <span
+          style={
+            Object {
+              "width": "80%",
+            }
+          }
+        />
+        <span
           className="visually-hidden"
         >
           Rating
@@ -95,7 +102,7 @@ exports[`Should PlaceCard render correctly 1`] = `
     <p
       className="place-card__type"
     >
-      Apartment
+      string
     </p>
   </div>
 </article>

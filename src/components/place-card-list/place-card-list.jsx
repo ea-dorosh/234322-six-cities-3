@@ -43,9 +43,12 @@ class PlaceCardList extends PureComponent {
 PlaceCardList.propTypes = {
   offers: PropTypes.arrayOf(
       PropTypes.shape({
+        isPremium: PropTypes.bool.isRequired,
         name: PropTypes.string.isRequired,
         price: PropTypes.number.isRequired,
-        img: PropTypes.string.isRequired
+        img: PropTypes.string.isRequired,
+        type: PropTypes.string.isRequired,
+        rating: PropTypes.number.isRequired
       })
   ).isRequired,
   onPlaceNameHeaderClick: PropTypes.func.isRequired,

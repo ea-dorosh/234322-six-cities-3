@@ -11,7 +11,6 @@ const Settings = {
 
 const offers = createOffers(OFFERS_QUANTITY);
 
-
 ReactDOM.render(
     <App
       advertsCount = {Settings.ADVERTS_COUNT}
