@@ -65,7 +65,9 @@ class PlaceCard extends PureComponent {
             </div>
           </div>
           <h2
-            onClick={onPlaceNameHeaderClick}
+            onClick={() => {
+              onPlaceNameHeaderClick(offer);
+            }}
             className="place-card__name">
             <a href="#">{offer.name}</a>
           </h2>
@@ -83,7 +85,7 @@ PlaceCard.propTypes = {
     price: PropTypes.number.isRequired,
     img: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired
+    rating: PropTypes.number.isRequired,
   }).isRequired,
   handleCardHover: PropTypes.func.isRequired,
   onPlaceNameHeaderClick: PropTypes.func.isRequired,

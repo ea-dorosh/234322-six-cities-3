@@ -75,7 +75,7 @@ exports[`Should DetailInfo render correctly 1`] = `
             <img
               alt="Photo studio"
               className="property__image"
-              src="img/room.jpg"
+              src="path-1 string"
             />
           </div>
           <div
@@ -84,43 +84,7 @@ exports[`Should DetailInfo render correctly 1`] = `
             <img
               alt="Photo studio"
               className="property__image"
-              src="img/apartment-01.jpg"
-            />
-          </div>
-          <div
-            className="property__image-wrapper"
-          >
-            <img
-              alt="Photo studio"
-              className="property__image"
-              src="img/apartment-02.jpg"
-            />
-          </div>
-          <div
-            className="property__image-wrapper"
-          >
-            <img
-              alt="Photo studio"
-              className="property__image"
-              src="img/apartment-03.jpg"
-            />
-          </div>
-          <div
-            className="property__image-wrapper"
-          >
-            <img
-              alt="Photo studio"
-              className="property__image"
-              src="img/studio-01.jpg"
-            />
-          </div>
-          <div
-            className="property__image-wrapper"
-          >
-            <img
-              alt="Photo studio"
-              className="property__image"
-              src="img/apartment-01.jpg"
+              src="path-2 string"
             />
           </div>
         </div>
@@ -144,7 +108,7 @@ exports[`Should DetailInfo render correctly 1`] = `
             <h1
               className="property__name"
             >
-              Beautiful & luxurious studio at great location
+              apartment-1 name string
             </h1>
             <button
               className="property__bookmark-button button"
@@ -173,6 +137,13 @@ exports[`Should DetailInfo render correctly 1`] = `
               className="property__stars rating__stars"
             >
               <span
+                style={
+                  Object {
+                    "width": "80%",
+                  }
+                }
+              />
+              <span
                 className="visually-hidden"
               >
                 Rating
@@ -181,7 +152,7 @@ exports[`Should DetailInfo render correctly 1`] = `
             <span
               className="property__rating-value rating__value"
             >
-              4.8
+              4
             </span>
           </div>
           <ul
@@ -190,17 +161,20 @@ exports[`Should DetailInfo render correctly 1`] = `
             <li
               className="property__feature property__feature--entire"
             >
-              Apartment
+              string
             </li>
             <li
               className="property__feature property__feature--bedrooms"
             >
-              3 Bedrooms
+              2
+               Bedrooms
             </li>
             <li
               className="property__feature property__feature--adults"
             >
-              Max 4 adults
+              Max 
+              4
+               adults
             </li>
           </ul>
           <div
@@ -209,7 +183,8 @@ exports[`Should DetailInfo render correctly 1`] = `
             <b
               className="property__price-value"
             >
-              €120
+              €
+              50
             </b>
             <span
               className="property__price-text"
@@ -231,52 +206,12 @@ exports[`Should DetailInfo render correctly 1`] = `
               <li
                 className="property__inside-item"
               >
-                Wi-Fi
+                detail-1 string
               </li>
               <li
                 className="property__inside-item"
               >
-                Washing machine
-              </li>
-              <li
-                className="property__inside-item"
-              >
-                Towels
-              </li>
-              <li
-                className="property__inside-item"
-              >
-                Heating
-              </li>
-              <li
-                className="property__inside-item"
-              >
-                Coffee machine
-              </li>
-              <li
-                className="property__inside-item"
-              >
-                Baby seat
-              </li>
-              <li
-                className="property__inside-item"
-              >
-                Kitchen
-              </li>
-              <li
-                className="property__inside-item"
-              >
-                Dishwasher
-              </li>
-              <li
-                className="property__inside-item"
-              >
-                Cabel TV
-              </li>
-              <li
-                className="property__inside-item"
-              >
-                Fridge
+                detail-2 string
               </li>
             </ul>
           </div>
@@ -292,20 +227,20 @@ exports[`Should DetailInfo render correctly 1`] = `
               className="property__host-user user"
             >
               <div
-                className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper"
+                className="property__avatar-wrapper user__avatar-wrapper property__avatar-wrapper--pro"
               >
                 <img
                   alt="Host avatar"
                   className="property__avatar user__avatar"
                   height="74"
-                  src="img/avatar-angelina.jpg"
+                  src="path sting"
                   width="74"
                 />
               </div>
               <span
                 className="property__user-name"
               >
-                Angelina
+                just sting
               </span>
             </div>
             <div
@@ -314,12 +249,7 @@ exports[`Should DetailInfo render correctly 1`] = `
               <p
                 className="property__text"
               >
-                A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
-              </p>
-              <p
-                className="property__text"
-              >
-                An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.
+                just sting
               </p>
             </div>
           </div>

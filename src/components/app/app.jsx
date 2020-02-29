@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-import {Switch, Route, BrowserRouter} from "react-router-dom";
+import {BrowserRouter, Route, Switch} from "react-router-dom";
 import Main from "../main/main.jsx";
 import DetailInfo from "../detail-info/detail-info.jsx";
 
@@ -15,9 +15,9 @@ class App extends PureComponent {
     this._placeNameHeaderHandler = this._placeNameHeaderHandler.bind(this);
   }
 
-  _placeNameHeaderHandler(offer) {
+  _placeNameHeaderHandler(detailInfo) {
     this.setState({
-      detailInfo: offer
+      detailInfo
     });
   }
 
@@ -34,6 +34,8 @@ class App extends PureComponent {
   }
 
   render() {
+    const {offers} = this.props;
+
     if (this.state.detailInfo) {
       return <DetailInfo offer={this.state.detailInfo} />;
     }
@@ -44,8 +46,8 @@ class App extends PureComponent {
           <Route exact path="/">
             {this._renderMain()}
           </Route>
-          <Route exact path="/detail-info">
-            <DetailInfo/>
+          <Route exact path="/offer">
+            <DetailInfo offer={offers[1]}/>
           </Route>
         </Switch>
       </BrowserRouter>
@@ -54,16 +56,7 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  offers: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-        img: PropTypes.string.isRequired,
-        type: PropTypes.string.isRequired,
-        isPremium: PropTypes.bool.isRequired,
-        rating: PropTypes.number.isRequired
-      })
-  ).isRequired,
+  offers: PropTypes.array.isRequired,
   advertsCount: PropTypes.number.isRequired,
 };
 
