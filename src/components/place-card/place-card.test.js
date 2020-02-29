@@ -2,7 +2,14 @@ import React from "react";
 import renderer from "react-test-renderer";
 import PlaceCard from "./place-card.jsx";
 
-const offer = {name: `apartment-1 name string`, price: 50, img: `url path-1 string`, isPremium: true, type: `string`, rating: 4.0};
+const offer = {
+  name: `apartment-1 name string`,
+  price: 50,
+  img: `url path-1 string`,
+  isPremium: true,
+  type: `string`,
+  rating: 4.0
+};
 
 it(`Should PlaceCard render correctly`, () => {
   const tree = renderer

@@ -14,7 +14,9 @@ it(`Should Place Name Header be pressed`, () => {
   const placeCard = shallow(
       <PlaceCard
         offer={offer}
-        onPlaceNameHeaderClick={onPlaceNameHeaderClick}
+        onPlaceNameHeaderClick={()=> {
+          onPlaceNameHeaderClick(offer);
+        }}
         handleCardHover={()=>{}}
       />
   );
