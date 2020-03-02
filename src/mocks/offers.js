@@ -24,6 +24,13 @@ const offersTypes = [
   `hotel`
 ];
 
+const offersCords = [
+  [52.3909553943508, 4.85309666406198],
+  [52.369553943508, 4.85309666406198],
+  [52.3909553943508, 4.929309666406198],
+  [52.3809553943508, 4.939309666406198]
+];
+
 const createOffer = (index) => {
   const bedRoomQuantity = getRandomNumber(1, 6);
   const maxGuestQuantity = bedRoomQuantity * 2;
@@ -64,6 +71,10 @@ const createOffer = (index) => {
       img: `img/avatar-${holderName.toLowerCase()}.jpg`,
       isSuper: !(index % 2),
     },
+    cords: {
+      x: offersCords[index][0],
+      y: offersCords[index][1],
+    }
   };
 };
 
