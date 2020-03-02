@@ -1,30 +1,62 @@
-import React from "react";
+import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
+import {BrowserRouter, Route, Switch} from "react-router-dom";
 import Main from "../main/main.jsx";
+import DetailInfo from "../detail-info/detail-info.jsx";
 
+class App extends PureComponent {
+  constructor(props) {
+    super(props);
 
-const placeNameHeaderHandler = () => {};
+    this.state = {
+      detailInfo: null
+    };
 
-const App = (props) => {
-  const {advertsCount, offers} = props;
+    this._placeNameHeaderHandler = this._placeNameHeaderHandler.bind(this);
+  }
 
-  return (
-    <Main
-      advertsCount = {advertsCount}
-      onPlaceNameHeaderClick = {placeNameHeaderHandler}
-      offers = {offers}
-    />
-  );
-};
+  _placeNameHeaderHandler(detailInfo) {
+    this.setState({
+      detailInfo
+    });
+  }
+
+  _renderMain() {
+    const {advertsCount, offers} = this.props;
+
+    return (
+      <Main
+        advertsCount = {advertsCount}
+        onPlaceNameHeaderClick = {this._placeNameHeaderHandler}
+        offers = {offers}
+      />
+    );
+  }
+
+  render() {
+    const {offers} = this.props;
+
+    if (this.state.detailInfo) {
+      return <DetailInfo offer={this.state.detailInfo} />;
+    }
+
+    return (
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/">
+            {this._renderMain()}
+          </Route>
+          <Route exact path="/offer">
+            <DetailInfo offer={offers[1]}/>
+          </Route>
+        </Switch>
+      </BrowserRouter>
+    );
+  }
+}
 
 App.propTypes = {
-  offers: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-        img: PropTypes.string.isRequired
-      })
-  ).isRequired,
+  offers: PropTypes.array.isRequired,
   advertsCount: PropTypes.number.isRequired,
 };
 

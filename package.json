@@ -31,9 +31,10 @@
     "node": "10"
   },
   "dependencies": {
+    "jest-jasmine2": "latest",
     "prop-types": "15.7.2",
     "react": "16.12.0",
     "react-dom": "16.12.0",
-    "jest-jasmine2": "latest"
+    "react-router-dom": "5.1.2"
   }
 }

@@ -9,12 +9,14 @@ Enzyme.configure({
 
 it(`Should Place Name Header be pressed`, () => {
   const onPlaceNameHeaderClick = jest.fn();
-  const offer = {name: `apartment-1 name string`, price: 50, img: `url path-1 string`};
+  const offer = {name: `apartment-1 name string`, price: 50, img: `url path-1 string`, isPremium: true, type: `string`, rating: 4.0};
 
   const placeCard = shallow(
       <PlaceCard
         offer={offer}
-        onPlaceNameHeaderClick={onPlaceNameHeaderClick}
+        onPlaceNameHeaderClick={()=> {
+          onPlaceNameHeaderClick(offer);
+        }}
         handleCardHover={()=>{}}
       />
   );

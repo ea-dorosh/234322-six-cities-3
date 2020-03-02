@@ -106,13 +106,7 @@ const Main = (props) => {
 
 Main.propTypes = {
   advertsCount: PropTypes.number.isRequired,
-  offers: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-        img: PropTypes.string.isRequired
-      })
-  ).isRequired,
+  offers: PropTypes.array.isRequired,
   onPlaceNameHeaderClick: PropTypes.func.isRequired,
 };
 

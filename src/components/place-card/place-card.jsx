@@ -10,7 +10,24 @@ class PlaceCard extends PureComponent {
 
   render() {
     const {offer, onPlaceNameHeaderClick, handleCardHover} = this.props;
+    const premium = <div className="place-card__mark">
+      <span>Premium</span>
+    </div>;
 
+    let ratingStar = Math.round(offer.rating);
+
+    switch (ratingStar) {
+      case 1 : ratingStar = 20;
+        break;
+      case 2 : ratingStar = 40;
+        break;
+      case 3 : ratingStar = 60;
+        break;
+      case 4 : ratingStar = 80;
+        break;
+      case 5 : ratingStar = 100;
+        break;
+    }
 
     return (
       <article
@@ -22,9 +39,7 @@ class PlaceCard extends PureComponent {
           handleCardHover(null);
         }}
       >
-        <div className="place-card__mark">
-          <span>Premium</span>
-        </div>
+        {offer.isPremium ? premium : null}
         <div className="cities__image-wrapper place-card__image-wrapper">
           <a href="#">
             <img className="place-card__image" src={offer.img} width="260" height="200" alt="Place image"/>
@@ -45,15 +60,18 @@ class PlaceCard extends PureComponent {
           </div>
           <div className="place-card__rating rating">
             <div className="place-card__stars rating__stars">
+              <span style={{width: ratingStar + `%`}}/>
               <span className="visually-hidden">Rating</span>
             </div>
           </div>
           <h2
-            onClick={onPlaceNameHeaderClick}
+            onClick={() => {
+              onPlaceNameHeaderClick(offer);
+            }}
             className="place-card__name">
             <a href="#">{offer.name}</a>
           </h2>
-          <p className="place-card__type">Apartment</p>
+          <p className="place-card__type">{offer.type}</p>
         </div>
       </article>
     );
@@ -62,9 +80,12 @@ class PlaceCard extends PureComponent {
 
 PlaceCard.propTypes = {
   offer: PropTypes.shape({
+    isPremium: PropTypes.bool.isRequired,
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
-    img: PropTypes.string.isRequired
+    img: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
   }).isRequired,
   handleCardHover: PropTypes.func.isRequired,
   onPlaceNameHeaderClick: PropTypes.func.isRequired,
