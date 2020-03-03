@@ -314,10 +314,10 @@ exports[`Should App render correctly 1`] = `
                 </div>
                 <h2
                   className="place-card__name"
-                  onClick={[Function]}
                 >
                   <a
-                    href="#"
+                    href="/offer"
+                    onClick={[Function]}
                   >
                     apartment-1 name string
                   </a>
@@ -419,10 +419,10 @@ exports[`Should App render correctly 1`] = `
                 </div>
                 <h2
                   className="place-card__name"
-                  onClick={[Function]}
                 >
                   <a
-                    href="#"
+                    href="/offer"
+                    onClick={[Function]}
                   >
                     apartment-1 name string
                   </a>

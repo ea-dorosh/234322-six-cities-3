@@ -74,7 +74,23 @@ const createOffer = (index) => {
     coords: {
       x: offersCords[index][0],
       y: offersCords[index][1],
-    }
+    },
+    reviews: [
+      {
+        text: `some information about offer, some information about offer`,
+        rating: parseFloat(`${getRandomNumber(2, 4)}.${getRandomNumber(0, 9)}`),
+        name: `Konstantin`,
+        date: `2019-04-24`,
+        id: 1,
+      },
+      {
+        text: `some information about offer, some information about offer`,
+        rating: parseFloat(`${getRandomNumber(2, 4)}.${getRandomNumber(0, 9)}`),
+        name: `Kostya`,
+        date: `2017-05-26`,
+        id: 2,
+      },
+    ],
   };
 };
 

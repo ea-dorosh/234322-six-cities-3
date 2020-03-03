@@ -1,5 +1,6 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
+import {Link} from 'react-router-dom';
 
 class PlaceCard extends PureComponent {
   constructor(props) {
@@ -9,7 +10,7 @@ class PlaceCard extends PureComponent {
 
 
   render() {
-    const {offer, onPlaceNameHeaderClick, handleCardHover} = this.props;
+    const {offer, handleCardHover} = this.props;
     const premium = <div className="place-card__mark">
       <span>Premium</span>
     </div>;
@@ -65,11 +66,8 @@ class PlaceCard extends PureComponent {
             </div>
           </div>
           <h2
-            onClick={() => {
-              onPlaceNameHeaderClick(offer);
-            }}
             className="place-card__name">
-            <a href="#">{offer.name}</a>
+            <Link to={{pathname: `/offer`, state: offer}}>{offer.name}</Link>
           </h2>
           <p className="place-card__type">{offer.type}</p>
         </div>
