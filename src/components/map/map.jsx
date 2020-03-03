@@ -1,7 +1,8 @@
 import React, {PureComponent} from "react";
-
+import leaflet from "leaflet";
 import PropTypes from "prop-types";
 
+const AMSTERDAM = [52.38333, 4.9];
 
 class Map extends PureComponent {
   constructor(props) {
@@ -9,8 +10,17 @@ class Map extends PureComponent {
   }
 
   render() {
-    // const {offers} = this.props;
-    const city = [52.38333, 4.9];
+
+    return (
+      <section className="cities__map map">
+        <div id="map" style={{height: `100%`}}/>
+      </section>
+    );
+  }
+
+  componentDidMount() {
+    const {offers} = this.props;
+    const city = AMSTERDAM;
     const icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
       iconSize: [30, 30]
@@ -19,7 +29,7 @@ class Map extends PureComponent {
     const zoom = 12;
     const map = leaflet.map(`map`, {
       center: city,
-      zoom: zoom,
+      zoom,
       zoomControl: false,
       marker: true
     });
@@ -31,16 +41,25 @@ class Map extends PureComponent {
       })
       .addTo(map);
 
-    return (
-      <div id="map"/>
-    );
+    offers.map((offer) => {
+
+      leaflet
+        .marker([offer.coords.x, offer.coords.y], {icon})
+        .addTo(map);
+    });
   }
 }
 
-// Map.propTypes = {
-//   offers: PropTypes.array.isRequired,
-//   advertsCount: PropTypes.number.isRequired,
-// };
+Map.propTypes = {
+  offers: PropTypes.arrayOf(
+      PropTypes.shape({
+        cords: PropTypes.exact({
+          x: PropTypes.number.isRequired,
+          y: PropTypes.number.isRequired
+        })
+      })
+  ).isRequired,
+};
 
 
 export default Map;

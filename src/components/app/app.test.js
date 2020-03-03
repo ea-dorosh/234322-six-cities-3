@@ -19,6 +19,10 @@ const offers = [
       holderName: `just sting`,
       img: `path sting`,
       isSuper: true,
+    },
+    coords: {
+      x: 42.3909553943508,
+      y: 42.3909553943508
     }
   },
   {
@@ -37,6 +41,10 @@ const offers = [
       holderName: `just sting`,
       img: `path sting`,
       isSuper: true,
+    },
+    coords: {
+      x: 42.3909553943508,
+      y: 42.3909553943508
     }
   }
 ];

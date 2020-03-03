@@ -1,7 +1,6 @@
-/*
 import React from "react";
 import renderer from "react-test-renderer";
-import Map from "./app.jsx";
+import Map from "../map/map.jsx";
 
 const offers = [
   {
@@ -20,6 +19,10 @@ const offers = [
       holderName: `just sting`,
       img: `path sting`,
       isSuper: true,
+    },
+    coords: {
+      x: 42.3909553943508,
+      y: 42.3909553943508
     }
   },
   {
@@ -38,18 +41,21 @@ const offers = [
       holderName: `just sting`,
       img: `path sting`,
       isSuper: true,
+    },
+    coords: {
+      x: 42.3909553943508,
+      y: 42.3909553943508
     }
   }
 ];
 
-it(`Should App render correctly`, () => {
+it(`Should Map render correctly`, () => {
   const tree = renderer
     .create(<Map
-      advertsCount={15}
       offers={offers}
     />)
     .toJSON();
 
   expect(tree).toMatchSnapshot();
 });
-*/
+

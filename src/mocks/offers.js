@@ -71,7 +71,7 @@ const createOffer = (index) => {
       img: `img/avatar-${holderName.toLowerCase()}.jpg`,
       isSuper: !(index % 2),
     },
-    cords: {
+    coords: {
       x: offersCords[index][0],
       y: offersCords[index][1],
     }
