@@ -1,0 +1,126 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should ReviewsList render correctly 1`] = `
+<ul
+  className="reviews__list"
+>
+  <li
+    className="reviews__item"
+  >
+    <div
+      className="reviews__user user"
+    >
+      <div
+        className="reviews__avatar-wrapper user__avatar-wrapper"
+      >
+        <img
+          alt="Reviews avatar"
+          className="reviews__avatar user__avatar"
+          height="54"
+          src="img/avatar-max.jpg"
+          width="54"
+        />
+      </div>
+      <span
+        className="reviews__user-name"
+      >
+        Konstantin
+      </span>
+    </div>
+    <div
+      className="reviews__info"
+    >
+      <div
+        className="reviews__rating rating"
+      >
+        <div
+          className="reviews__stars rating__stars"
+        >
+          <span
+            style={
+              Object {
+                "width": "80%",
+              }
+            }
+          />
+          <span
+            className="visually-hidden"
+          >
+            Rating
+          </span>
+        </div>
+      </div>
+      <p
+        className="reviews__text"
+      >
+        some information about offer, some information about offer
+      </p>
+      <time
+        className="reviews__time"
+        dateTime="2019-04-24"
+      >
+        April 2019
+      </time>
+    </div>
+  </li>
+  <li
+    className="reviews__item"
+  >
+    <div
+      className="reviews__user user"
+    >
+      <div
+        className="reviews__avatar-wrapper user__avatar-wrapper"
+      >
+        <img
+          alt="Reviews avatar"
+          className="reviews__avatar user__avatar"
+          height="54"
+          src="img/avatar-max.jpg"
+          width="54"
+        />
+      </div>
+      <span
+        className="reviews__user-name"
+      >
+        Kostya
+      </span>
+    </div>
+    <div
+      className="reviews__info"
+    >
+      <div
+        className="reviews__rating rating"
+      >
+        <div
+          className="reviews__stars rating__stars"
+        >
+          <span
+            style={
+              Object {
+                "width": "60%",
+              }
+            }
+          />
+          <span
+            className="visually-hidden"
+          >
+            Rating
+          </span>
+        </div>
+      </div>
+      <p
+        className="reviews__text"
+      >
+        some information about offer, some information about offer
+      </p>
+      <time
+        className="reviews__time"
+        dateTime="2017-05-26"
+      >
+        May 2017
+      </time>
+    </div>
+  </li>
+</ul>
+`;

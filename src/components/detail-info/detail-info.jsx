@@ -2,6 +2,7 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import ReviewsList from "../reviews-list/reviews-list.jsx";
 import {withRouter} from 'react-router-dom';
+import Map from "../map/map.jsx";
 
 class DetailInfo extends PureComponent {
   constructor(props) {
@@ -10,7 +11,8 @@ class DetailInfo extends PureComponent {
   }
 
   render() {
-    const {location: {state: offer}} = this.props;
+    const {location: {state: offer, otherOffers}} = this.props;
+    const nearOffers = otherOffers.filter((otherOffer) => otherOffer.id !== offer.id);
     const premium = <div className="property__mark">
       <span>Premium</span>
     </div>;
@@ -195,7 +197,11 @@ class DetailInfo extends PureComponent {
                 </section>
               </div>
             </div>
-            <section className="property__map map"/>
+            <section className="property__map map">
+              <Map
+                offers={nearOffers}
+              />
+            </section>
           </section>
           <div className="container">
             <section className="near-places places">

@@ -37,6 +37,7 @@ const createOffer = (index) => {
   const holderName = getRandomElement(holderNames);
 
   return {
+    id: index,
     img: `img/apartment-0${getRandomNumber(1, 3)}.jpg`,
     photos: [
       `img/apartment-0${getRandomNumber(1, 3)}.jpg`,
@@ -81,14 +82,12 @@ const createOffer = (index) => {
         rating: parseFloat(`${getRandomNumber(2, 4)}.${getRandomNumber(0, 9)}`),
         name: `Konstantin`,
         date: `2019-04-24`,
-        id: 1,
       },
       {
         text: `some information about offer, some information about offer`,
         rating: parseFloat(`${getRandomNumber(2, 4)}.${getRandomNumber(0, 9)}`),
         name: `Kostya`,
         date: `2017-05-26`,
-        id: 2,
       },
     ],
   };

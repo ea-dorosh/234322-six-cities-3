@@ -10,7 +10,7 @@ class PlaceCard extends PureComponent {
 
 
   render() {
-    const {offer, handleCardHover} = this.props;
+    const {offer, handleCardHover, onPlaceNameHeaderClick, otherOffers} = this.props;
     const premium = <div className="place-card__mark">
       <span>Premium</span>
     </div>;
@@ -42,9 +42,9 @@ class PlaceCard extends PureComponent {
       >
         {offer.isPremium ? premium : null}
         <div className="cities__image-wrapper place-card__image-wrapper">
-          <a href="#">
+          <Link to={{pathname: `/offer`, state: offer, otherOffers}}>
             <img className="place-card__image" src={offer.img} width="260" height="200" alt="Place image"/>
-          </a>
+          </Link>
         </div>
         <div className="place-card__info">
           <div className="place-card__price-wrapper">
@@ -66,8 +66,12 @@ class PlaceCard extends PureComponent {
             </div>
           </div>
           <h2
-            className="place-card__name">
-            <Link to={{pathname: `/offer`, state: offer}}>{offer.name}</Link>
+            className="place-card__name"
+            onClick={() => {
+              onPlaceNameHeaderClick(offer);
+            }}
+          >
+            {offer.name}
           </h2>
           <p className="place-card__type">{offer.type}</p>
         </div>

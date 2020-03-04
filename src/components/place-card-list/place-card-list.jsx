@@ -31,6 +31,7 @@ class PlaceCardList extends PureComponent {
             offer={it}
             onPlaceNameHeaderClick={onPlaceNameHeaderClick}
             handleCardHover={this._handleCardHover}
+            otherOffers={offers}
           />
         ))}
       </div>
