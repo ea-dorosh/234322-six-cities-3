@@ -78,12 +78,14 @@ const createOffer = (index) => {
     },
     reviews: [
       {
+        id: getRandomNumber(1, 10000),
         text: `some information about offer, some information about offer`,
         rating: parseFloat(`${getRandomNumber(2, 4)}.${getRandomNumber(0, 9)}`),
         name: `Konstantin`,
         date: `2019-04-24`,
       },
       {
+        id: getRandomNumber(1, 10000),
         text: `some information about offer, some information about offer`,
         rating: parseFloat(`${getRandomNumber(2, 4)}.${getRandomNumber(0, 9)}`),
         name: `Kostya`,
