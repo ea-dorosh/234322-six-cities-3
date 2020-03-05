@@ -21,7 +21,7 @@ class PlaceCardList extends PureComponent {
   }
 
   render() {
-    const {offers, onPlaceNameHeaderClick, listClass} = this.props;
+    const {offers, listClass} = this.props;
 
     return (
       <div className={`${listClass === `cities` ? `cities__places-list tabs__content` : `near-places__list`} places__list`}>
@@ -29,7 +29,6 @@ class PlaceCardList extends PureComponent {
           <PlaceCard
             key={index}
             offer={it}
-            onPlaceNameHeaderClick={onPlaceNameHeaderClick}
             handleCardHover={this._handleCardHover}
             otherOffers={offers}
             cardClass={listClass}
@@ -42,7 +41,6 @@ class PlaceCardList extends PureComponent {
 
 PlaceCardList.propTypes = {
   offers: PropTypes.array.isRequired,
-  onPlaceNameHeaderClick: PropTypes.func,
   listClass: PropTypes.string,
 };
 

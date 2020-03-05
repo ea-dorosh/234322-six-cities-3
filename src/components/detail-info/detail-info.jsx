@@ -12,7 +12,7 @@ class DetailInfo extends PureComponent {
   }
 
   render() {
-    const {location: {state: offer, otherOffers}} = this.props;
+    const {location: {state: {offer, otherOffers}}} = this.props;
     const nearOffers = otherOffers.filter((otherOffer) => otherOffer.id !== offer.id);
     const premium = <div className="property__mark">
       <span>Premium</span>

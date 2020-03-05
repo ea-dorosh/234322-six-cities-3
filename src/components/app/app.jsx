@@ -11,14 +11,6 @@ class App extends PureComponent {
     this.state = {
       detailInfo: null
     };
-
-    this._placeNameHeaderHandler = this._placeNameHeaderHandler.bind(this);
-  }
-
-  _placeNameHeaderHandler(detailInfo) {
-    this.setState({
-      detailInfo
-    });
   }
 
   _renderMain() {
@@ -27,7 +19,6 @@ class App extends PureComponent {
     return (
       <Main
         advertsCount = {advertsCount}
-        onPlaceNameHeaderClick = {this._placeNameHeaderHandler}
         offers = {offers}
       />
     );
@@ -35,10 +26,6 @@ class App extends PureComponent {
 
   render() {
     const {offers} = this.props;
-
-    // if (this.state.detailInfo) {
-    //   return <DetailInfo offer={this.state.detailInfo} />;
-    // }
 
     return (
       <BrowserRouter>

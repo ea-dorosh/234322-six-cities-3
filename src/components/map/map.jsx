@@ -21,7 +21,7 @@ class Map extends PureComponent {
     const city = AMSTERDAM;
     const icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
-      iconSize: [30, 30]
+      iconSize: [27, 39]
     });
 
     const zoom = 12;
@@ -32,6 +32,8 @@ class Map extends PureComponent {
       marker: true
     });
     map.setView(city, zoom);
+
+    this.leafletMap = map;
 
     leaflet
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
@@ -49,12 +51,23 @@ class Map extends PureComponent {
     if (activeOffer) {
       const iconActive = leaflet.icon({
         iconUrl: `img/pin-active.svg`,
-        iconSize: [30, 30]
+        iconSize: [27, 39]
       });
 
       leaflet
         .marker([activeOffer.coords.x, activeOffer.coords.y], {iconActive})
         .addTo(map);
+    }
+  }
+
+  componentWillUnmount() {
+
+    if (this.leafletMap) {
+      this.leafletMap.eachLayer(function (layer) {
+        layer.remove();
+      });
+      this.leafletMap.remove();
+      this.leafletMap = null;
     }
   }
 }
