@@ -8,6 +8,7 @@ it(`Should Map render correctly`, () => {
   const tree = renderer
     .create(<Map
       offers={offersMock}
+      activeOffer={}
     />)
     .toJSON();
 

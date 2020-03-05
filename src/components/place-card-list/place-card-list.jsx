@@ -21,10 +21,10 @@ class PlaceCardList extends PureComponent {
   }
 
   render() {
-    const {offers, onPlaceNameHeaderClick} = this.props;
+    const {offers, onPlaceNameHeaderClick, listClass} = this.props;
 
     return (
-      <div className="cities__places-list places__list tabs__content">
+      <div className={`${listClass === `cities` ? `cities__places-list tabs__content` : `near-places__list`} places__list`}>
         {offers.map((it, index) => (
           <PlaceCard
             key={index}
@@ -32,6 +32,7 @@ class PlaceCardList extends PureComponent {
             onPlaceNameHeaderClick={onPlaceNameHeaderClick}
             handleCardHover={this._handleCardHover}
             otherOffers={offers}
+            cardClass={listClass}
           />
         ))}
       </div>
@@ -41,7 +42,8 @@ class PlaceCardList extends PureComponent {
 
 PlaceCardList.propTypes = {
   offers: PropTypes.array.isRequired,
-  onPlaceNameHeaderClick: PropTypes.func.isRequired,
+  onPlaceNameHeaderClick: PropTypes.func,
+  listClass: PropTypes.string,
 };
 
 export default PlaceCardList;

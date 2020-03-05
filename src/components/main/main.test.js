@@ -10,6 +10,7 @@ it(`Should Main render correctly`, () => {
       advertsCount={15}
       offers={offersMock}
       onPlaceNameHeaderClick={()=>{}}
+      classNames={`string of classes`}
     />)
     .toJSON();
 

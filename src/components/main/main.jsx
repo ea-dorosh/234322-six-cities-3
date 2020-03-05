@@ -93,6 +93,7 @@ const Main = (props) => {
               <PlaceCardList
                 offers={offers}
                 onPlaceNameHeaderClick={onPlaceNameHeaderClick}
+                listClass={`cities`}
               />
             </section>
             <div className="cities__right-section">
