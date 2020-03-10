@@ -19,7 +19,16 @@ const ReviewsList = (props) => {
 };
 
 ReviewsList.propTypes = {
-  reviews: PropTypes.array.isRequired,
+  reviews: PropTypes.arrayOf(
+      PropTypes.shape(
+          {
+            rating: PropTypes.number.isRequired,
+            name: PropTypes.string.isRequired,
+            text: PropTypes.string.isRequired,
+            date: PropTypes.string.isRequired,
+          }
+      )
+  ),
 };
 
 

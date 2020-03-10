@@ -98,7 +98,7 @@ exports[`Should ReviewsList render correctly 1`] = `
           <span
             style={
               Object {
-                "width": "60%",
+                "width": "100%",
               }
             }
           />

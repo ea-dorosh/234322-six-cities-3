@@ -9,13 +9,6 @@ class Map extends PureComponent {
     super(props);
   }
 
-  render() {
-
-    return (
-      <div id="map" style={{height: `100%`}}/>
-    );
-  }
-
   componentDidMount() {
     const {offers, activeOffer} = this.props;
     const city = AMSTERDAM;
@@ -55,7 +48,7 @@ class Map extends PureComponent {
       });
 
       leaflet
-        .marker([activeOffer.coords.x, activeOffer.coords.y], {iconActive})
+        .marker([activeOffer.coords.x, activeOffer.coords.y], {icon: iconActive})
         .addTo(map);
     }
   }
@@ -69,6 +62,13 @@ class Map extends PureComponent {
       this.leafletMap.remove();
       this.leafletMap = null;
     }
+  }
+
+  render() {
+
+    return (
+      <div id="map" style={{height: `100%`}}/>
+    );
   }
 }
 
