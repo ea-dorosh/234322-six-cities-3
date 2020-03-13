@@ -2,7 +2,6 @@ import React, {PureComponent} from "react";
 import leaflet from "leaflet";
 import PropTypes from "prop-types";
 
-const AMSTERDAM = [52.38333, 4.9];
 
 class Map extends PureComponent {
   constructor(props) {
@@ -11,13 +10,13 @@ class Map extends PureComponent {
 
   componentDidMount() {
     const {offers, activeOffer} = this.props;
-    const city = AMSTERDAM;
+    const city = [offers[0].city.location.latitude, offers[0].city.location.longitude];
     const icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
       iconSize: [27, 39]
     });
 
-    const zoom = 12;
+    const zoom = offers[0].city.location.zoom;
     const map = leaflet.map(`map`, {
       center: city,
       zoom,
@@ -37,7 +36,7 @@ class Map extends PureComponent {
     offers.map((offer) => {
 
       leaflet
-        .marker([offer.coords.x, offer.coords.y], {icon})
+        .marker([offer.location.latitude, offer.location.longitude], {icon})
         .addTo(map);
     });
 
@@ -48,7 +47,7 @@ class Map extends PureComponent {
       });
 
       leaflet
-        .marker([activeOffer.coords.x, activeOffer.coords.y], {icon: iconActive})
+        .marker([activeOffer.location.latitude, activeOffer.location.longitude], {icon: iconActive})
         .addTo(map);
     }
   }
@@ -75,16 +74,19 @@ class Map extends PureComponent {
 Map.propTypes = {
   offers: PropTypes.arrayOf(
       PropTypes.shape({
-        coords: PropTypes.shape({
-          x: PropTypes.number.isRequired,
-          y: PropTypes.number.isRequired
+        city: PropTypes.shape({
+          location: PropTypes.shape({
+            latitude: PropTypes.number.isRequired,
+            longitude: PropTypes.number.isRequired,
+            zoom: PropTypes.number.isRequired
+          })
         })
       })
   ).isRequired,
   activeOffer: PropTypes.shape({
-    coords: PropTypes.shape({
-      x: PropTypes.number.isRequired,
-      y: PropTypes.number.isRequired
+    location: PropTypes.shape({
+      latitude: PropTypes.number.isRequired,
+      longitude: PropTypes.number.isRequired
     })
   }),
 };
