@@ -4,10 +4,13 @@ import Adapter from "enzyme-adapter-react-16";
 import PlaceCardList from "./place-card-list.jsx";
 import {offersMock} from "../../mocks/offers_for_test";
 import {MemoryRouter as Router} from 'react-router-dom';
+import {getCities} from "../../utils";
 
 Enzyme.configure({
   adapter: new Adapter(),
 });
+
+const cities = getCities(offersMock);
 
 it(`Should change state when offer onHover`, () => {
 
@@ -15,6 +18,7 @@ it(`Should change state when offer onHover`, () => {
       <Router>
         <PlaceCardList
           offers = {offersMock}
+          activeCity={cities[0]}
         />
       </Router>
   );

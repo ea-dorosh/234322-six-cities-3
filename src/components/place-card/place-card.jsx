@@ -10,7 +10,7 @@ class PlaceCard extends PureComponent {
 
 
   render() {
-    const {offer, handleCardHover, otherOffers, cardClass} = this.props;
+    const {offer, handleCardHover, otherOffers, cardClass, activeCity} = this.props;
     const premium = <div className="place-card__mark">
       <span>Premium</span>
     </div>;
@@ -42,7 +42,7 @@ class PlaceCard extends PureComponent {
       >
         {offer.isPremium ? premium : null}
         <div className={`${cardClass === `cities` ? `cities` : `near-places`}__image-wrapper place-card__image-wrapper`}>
-          <Link to={{pathname: `/offer`, state: {offer, otherOffers}}}>
+          <Link to={{pathname: `/offer`, state: {offer, otherOffers, activeCity}}}>
             <img className="place-card__image" src={offer.img} width="260" height="200" alt="Place image"/>
           </Link>
         </div>
@@ -87,6 +87,14 @@ PlaceCard.propTypes = {
   handleCardHover: PropTypes.func.isRequired,
   cardClass: PropTypes.string,
   otherOffers: PropTypes.array.isRequired,
+  activeCity: PropTypes.shape({
+    location: PropTypes.shape({
+      latitude: PropTypes.number.isRequired,
+      longitude: PropTypes.number.isRequired,
+      zoom: PropTypes.number.isRequired
+    }),
+    name: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default PlaceCard;

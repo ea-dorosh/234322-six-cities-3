@@ -21,7 +21,7 @@ class PlaceCardList extends PureComponent {
   }
 
   render() {
-    const {offers, listClass} = this.props;
+    const {offers, listClass, activeCity} = this.props;
 
     return (
       <div className={`${listClass === `cities` ? `cities__places-list tabs__content` : `near-places__list`} places__list`}>
@@ -32,6 +32,7 @@ class PlaceCardList extends PureComponent {
             handleCardHover={this._handleCardHover}
             otherOffers={offers}
             cardClass={listClass}
+            activeCity={activeCity}
           />
         ))}
       </div>
@@ -42,6 +43,14 @@ class PlaceCardList extends PureComponent {
 PlaceCardList.propTypes = {
   offers: PropTypes.array.isRequired,
   listClass: PropTypes.string,
+  activeCity: PropTypes.shape({
+    location: PropTypes.shape({
+      latitude: PropTypes.number.isRequired,
+      longitude: PropTypes.number.isRequired,
+      zoom: PropTypes.number.isRequired
+    }),
+    name: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default PlaceCardList;

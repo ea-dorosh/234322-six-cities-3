@@ -8,15 +8,17 @@ class Map extends PureComponent {
     super(props);
   }
 
-  componentDidMount() {
-    const {offers, activeOffer} = this.props;
-    const city = [offers[0].city.location.latitude, offers[0].city.location.longitude];
+  createMap() {
+    const {offers, activeCity, activeOffer} = this.props;
+
+    const city = [activeCity.location.latitude, activeCity.location.longitude];
+
     const icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
       iconSize: [27, 39]
     });
 
-    const zoom = offers[0].city.location.zoom;
+    const zoom = activeCity.location.zoom;
     const map = leaflet.map(`map`, {
       center: city,
       zoom,
@@ -52,6 +54,21 @@ class Map extends PureComponent {
     }
   }
 
+  componentDidMount() {
+    this.createMap();
+  }
+
+  componentDidUpdate() {
+    if (this.leafletMap) {
+      this.leafletMap.eachLayer(function (layer) {
+        layer.remove();
+      });
+      this.leafletMap.remove();
+
+      this.createMap();
+    }
+  }
+
   componentWillUnmount() {
 
     if (this.leafletMap) {
@@ -71,6 +88,7 @@ class Map extends PureComponent {
   }
 }
 
+
 Map.propTypes = {
   offers: PropTypes.arrayOf(
       PropTypes.shape({
@@ -79,7 +97,8 @@ Map.propTypes = {
             latitude: PropTypes.number.isRequired,
             longitude: PropTypes.number.isRequired,
             zoom: PropTypes.number.isRequired
-          })
+          }),
+          name: PropTypes.string.isRequired,
         })
       })
   ).isRequired,
@@ -89,6 +108,14 @@ Map.propTypes = {
       longitude: PropTypes.number.isRequired
     })
   }),
+  activeCity: PropTypes.shape({
+    location: PropTypes.shape({
+      latitude: PropTypes.number.isRequired,
+      longitude: PropTypes.number.isRequired,
+      zoom: PropTypes.number.isRequired
+    }),
+    name: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 

@@ -12,7 +12,7 @@ class DetailInfo extends PureComponent {
   }
 
   render() {
-    const {location: {state: {offer, otherOffers}}} = this.props;
+    const {location: {state: {offer, otherOffers, activeCity}}} = this.props;
     const nearOffers = otherOffers.filter((otherOffer) => otherOffer.id !== offer.id);
     const premium = <div className="property__mark">
       <span>Premium</span>
@@ -201,6 +201,7 @@ class DetailInfo extends PureComponent {
             <section className="property__map map">
               <Map
                 offers={nearOffers}
+                activeCity={activeCity}
                 activeOffer={offer}
               />
             </section>
