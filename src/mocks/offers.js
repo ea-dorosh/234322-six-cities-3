@@ -9,6 +9,10 @@ const offersNames = [
   `Beautiful & luxurious apartment at great location`,
   `Nice, cozy, wood and stone place`,
   `Wood and stone place`,
+  `Nice, cozy, warm big bed apartment`,
+  `Beautiful & luxurious apartment at great location`,
+  `Nice, cozy, wood and stone place`,
+  `Wood and stone place`,
   `Nice, cozy, warm big bed apartment`
 ];
 
