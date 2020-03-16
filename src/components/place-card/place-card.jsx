@@ -1,5 +1,6 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
+import {Link} from 'react-router-dom';
 
 class PlaceCard extends PureComponent {
   constructor(props) {
@@ -9,7 +10,7 @@ class PlaceCard extends PureComponent {
 
 
   render() {
-    const {offer, onPlaceNameHeaderClick, handleCardHover} = this.props;
+    const {offer, handleCardHover, otherOffers, cardClass} = this.props;
     const premium = <div className="place-card__mark">
       <span>Premium</span>
     </div>;
@@ -31,7 +32,7 @@ class PlaceCard extends PureComponent {
 
     return (
       <article
-        className="cities__place-card place-card"
+        className={`${cardClass === `cities` ? `cities__place-card` : `near-places__card`} place-card`}
         onMouseEnter={() => {
           handleCardHover(offer);
         }}
@@ -40,10 +41,10 @@ class PlaceCard extends PureComponent {
         }}
       >
         {offer.isPremium ? premium : null}
-        <div className="cities__image-wrapper place-card__image-wrapper">
-          <a href="#">
+        <div className={`${cardClass === `cities` ? `cities` : `near-places`}__image-wrapper place-card__image-wrapper`}>
+          <Link to={{pathname: `/offer`, state: {offer, otherOffers}}}>
             <img className="place-card__image" src={offer.img} width="260" height="200" alt="Place image"/>
-          </a>
+          </Link>
         </div>
         <div className="place-card__info">
           <div className="place-card__price-wrapper">
@@ -64,12 +65,8 @@ class PlaceCard extends PureComponent {
               <span className="visually-hidden">Rating</span>
             </div>
           </div>
-          <h2
-            onClick={() => {
-              onPlaceNameHeaderClick(offer);
-            }}
-            className="place-card__name">
-            <a href="#">{offer.name}</a>
+          <h2 className="place-card__name">
+            {offer.name}
           </h2>
           <p className="place-card__type">{offer.type}</p>
         </div>
@@ -88,7 +85,8 @@ PlaceCard.propTypes = {
     rating: PropTypes.number.isRequired,
   }).isRequired,
   handleCardHover: PropTypes.func.isRequired,
-  onPlaceNameHeaderClick: PropTypes.func.isRequired,
+  cardClass: PropTypes.string,
+  otherOffers: PropTypes.array.isRequired,
 };
 
 export default PlaceCard;

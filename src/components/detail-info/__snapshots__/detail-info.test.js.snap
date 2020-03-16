@@ -263,7 +263,7 @@ exports[`Should DetailInfo render correctly 1`] = `
               <span
                 className="reviews__amount"
               >
-                1
+                2
               </span>
             </h2>
             <ul
@@ -289,7 +289,7 @@ exports[`Should DetailInfo render correctly 1`] = `
                   <span
                     className="reviews__user-name"
                   >
-                    Max
+                    Konstantin
                   </span>
                 </div>
                 <div
@@ -302,6 +302,13 @@ exports[`Should DetailInfo render correctly 1`] = `
                       className="reviews__stars rating__stars"
                     >
                       <span
+                        style={
+                          Object {
+                            "width": "60%",
+                          }
+                        }
+                      />
+                      <span
                         className="visually-hidden"
                       >
                         Rating
@@ -311,13 +318,72 @@ exports[`Should DetailInfo render correctly 1`] = `
                   <p
                     className="reviews__text"
                   >
-                    A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
+                    some information about offer, some information about offer
                   </p>
                   <time
                     className="reviews__time"
                     dateTime="2019-04-24"
                   >
                     April 2019
+                  </time>
+                </div>
+              </li>
+              <li
+                className="reviews__item"
+              >
+                <div
+                  className="reviews__user user"
+                >
+                  <div
+                    className="reviews__avatar-wrapper user__avatar-wrapper"
+                  >
+                    <img
+                      alt="Reviews avatar"
+                      className="reviews__avatar user__avatar"
+                      height="54"
+                      src="img/avatar-max.jpg"
+                      width="54"
+                    />
+                  </div>
+                  <span
+                    className="reviews__user-name"
+                  >
+                    Kostya
+                  </span>
+                </div>
+                <div
+                  className="reviews__info"
+                >
+                  <div
+                    className="reviews__rating rating"
+                  >
+                    <div
+                      className="reviews__stars rating__stars"
+                    >
+                      <span
+                        style={
+                          Object {
+                            "width": "100%",
+                          }
+                        }
+                      />
+                      <span
+                        className="visually-hidden"
+                      >
+                        Rating
+                      </span>
+                    </div>
+                  </div>
+                  <p
+                    className="reviews__text"
+                  >
+                    some information about offer, some information about offer
+                  </p>
+                  <time
+                    className="reviews__time"
+                    dateTime="2017-05-26"
+                  >
+                    May 2017
                   </time>
                 </div>
               </li>
@@ -487,7 +553,16 @@ exports[`Should DetailInfo render correctly 1`] = `
       </div>
       <section
         className="property__map map"
-      />
+      >
+        <div
+          id="map"
+          style={
+            Object {
+              "height": "100%",
+            }
+          }
+        />
+      </section>
     </section>
     <div
       className="container"
@@ -505,18 +580,28 @@ exports[`Should DetailInfo render correctly 1`] = `
         >
           <article
             className="near-places__card place-card"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
           >
+            <div
+              className="place-card__mark"
+            >
+              <span>
+                Premium
+              </span>
+            </div>
             <div
               className="near-places__image-wrapper place-card__image-wrapper"
             >
               <a
-                href="#"
+                href="/offer"
+                onClick={[Function]}
               >
                 <img
                   alt="Place image"
                   className="place-card__image"
                   height="200"
-                  src="img/room.jpg"
+                  src="url path-1 string"
                   width="260"
                 />
               </a>
@@ -533,94 +618,8 @@ exports[`Should DetailInfo render correctly 1`] = `
                   <b
                     className="place-card__price-value"
                   >
-                    €80
-                  </b>
-                  <span
-                    className="place-card__price-text"
-                  >
-                    / night
-                  </span>
-                </div>
-                <button
-                  className="place-card__bookmark-button place-card__bookmark-button--active button"
-                  type="button"
-                >
-                  <svg
-                    className="place-card__bookmark-icon"
-                    height="19"
-                    width="18"
-                  >
-                    <use
-                      xlinkHref="#icon-bookmark"
-                    />
-                  </svg>
-                  <span
-                    className="visually-hidden"
-                  >
-                    In bookmarks
-                  </span>
-                </button>
-              </div>
-              <div
-                className="place-card__rating rating"
-              >
-                <div
-                  className="place-card__stars rating__stars"
-                >
-                  <span
-                    className="visually-hidden"
-                  >
-                    Rating
-                  </span>
-                </div>
-              </div>
-              <h2
-                className="place-card__name"
-              >
-                <a
-                  href="#"
-                >
-                  Wood and stone place
-                </a>
-              </h2>
-              <p
-                className="place-card__type"
-              >
-                Private room
-              </p>
-            </div>
-          </article>
-          <article
-            className="near-places__card place-card"
-          >
-            <div
-              className="near-places__image-wrapper place-card__image-wrapper"
-            >
-              <a
-                href="#"
-              >
-                <img
-                  alt="Place image"
-                  className="place-card__image"
-                  height="200"
-                  src="img/apartment-02.jpg"
-                  width="260"
-                />
-              </a>
-            </div>
-            <div
-              className="place-card__info"
-            >
-              <div
-                className="place-card__price-wrapper"
-              >
-                <div
-                  className="place-card__price"
-                >
-                  <b
-                    className="place-card__price-value"
-                  >
-                    €132
+                    €
+                    50
                   </b>
                   <span
                     className="place-card__price-text"
@@ -655,92 +654,12 @@ exports[`Should DetailInfo render correctly 1`] = `
                   className="place-card__stars rating__stars"
                 >
                   <span
-                    className="visually-hidden"
-                  >
-                    Rating
-                  </span>
-                </div>
-              </div>
-              <h2
-                className="place-card__name"
-              >
-                <a
-                  href="#"
-                >
-                  Canal View Prinsengracht
-                </a>
-              </h2>
-              <p
-                className="place-card__type"
-              >
-                Apartment
-              </p>
-            </div>
-          </article>
-          <article
-            className="near-places__card place-card"
-          >
-            <div
-              className="near-places__image-wrapper place-card__image-wrapper"
-            >
-              <a
-                href="#"
-              >
-                <img
-                  alt="Place image"
-                  className="place-card__image"
-                  height="200"
-                  src="img/apartment-03.jpg"
-                  width="260"
-                />
-              </a>
-            </div>
-            <div
-              className="place-card__info"
-            >
-              <div
-                className="place-card__price-wrapper"
-              >
-                <div
-                  className="place-card__price"
-                >
-                  <b
-                    className="place-card__price-value"
-                  >
-                    €180
-                  </b>
-                  <span
-                    className="place-card__price-text"
-                  >
-                    / night
-                  </span>
-                </div>
-                <button
-                  className="place-card__bookmark-button button"
-                  type="button"
-                >
-                  <svg
-                    className="place-card__bookmark-icon"
-                    height="19"
-                    width="18"
-                  >
-                    <use
-                      xlinkHref="#icon-bookmark"
-                    />
-                  </svg>
-                  <span
-                    className="visually-hidden"
-                  >
-                    To bookmarks
-                  </span>
-                </button>
-              </div>
-              <div
-                className="place-card__rating rating"
-              >
-                <div
-                  className="place-card__stars rating__stars"
-                >
+                    style={
+                      Object {
+                        "width": "80%",
+                      }
+                    }
+                  />
                   <span
                     className="visually-hidden"
                   >
@@ -751,16 +670,12 @@ exports[`Should DetailInfo render correctly 1`] = `
               <h2
                 className="place-card__name"
               >
-                <a
-                  href="#"
-                >
-                  Nice, cozy, warm big bed apartment
-                </a>
+                apartment-1 name string
               </h2>
               <p
                 className="place-card__type"
               >
-                Apartment
+                string
               </p>
             </div>
           </article>

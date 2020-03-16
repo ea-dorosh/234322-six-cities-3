@@ -222,7 +222,7 @@ exports[`Should App render correctly 1`] = `
             </ul>
           </form>
           <div
-            className="cities__places-list places__list tabs__content"
+            className="cities__places-list tabs__content places__list"
           >
             <article
               className="cities__place-card place-card"
@@ -240,7 +240,8 @@ exports[`Should App render correctly 1`] = `
                 className="cities__image-wrapper place-card__image-wrapper"
               >
                 <a
-                  href="#"
+                  href="/offer"
+                  onClick={[Function]}
                 >
                   <img
                     alt="Place image"
@@ -314,13 +315,8 @@ exports[`Should App render correctly 1`] = `
                 </div>
                 <h2
                   className="place-card__name"
-                  onClick={[Function]}
                 >
-                  <a
-                    href="#"
-                  >
-                    apartment-1 name string
-                  </a>
+                  apartment-1 name string
                 </h2>
                 <p
                   className="place-card__type"
@@ -345,7 +341,8 @@ exports[`Should App render correctly 1`] = `
                 className="cities__image-wrapper place-card__image-wrapper"
               >
                 <a
-                  href="#"
+                  href="/offer"
+                  onClick={[Function]}
                 >
                   <img
                     alt="Place image"
@@ -419,13 +416,8 @@ exports[`Should App render correctly 1`] = `
                 </div>
                 <h2
                   className="place-card__name"
-                  onClick={[Function]}
                 >
-                  <a
-                    href="#"
-                  >
-                    apartment-1 name string
-                  </a>
+                  apartment-1 name string
                 </h2>
                 <p
                   className="place-card__type"

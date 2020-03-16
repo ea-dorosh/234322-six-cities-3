@@ -5,7 +5,7 @@ import Map from "../map/map.jsx";
 
 
 const Main = (props) => {
-  const {advertsCount, offers, onPlaceNameHeaderClick} = props;
+  const {advertsCount, offers} = props;
 
   return (
     <div className="page page--gray page--main">
@@ -92,13 +92,15 @@ const Main = (props) => {
               </form>
               <PlaceCardList
                 offers={offers}
-                onPlaceNameHeaderClick={onPlaceNameHeaderClick}
+                listClass={`cities`}
               />
             </section>
             <div className="cities__right-section">
-              <Map
-                offers={offers}
-              />
+              <section className="cities__map map">
+                <Map
+                  offers={offers}
+                />
+              </section>
             </div>
           </div>
         </div>
@@ -110,7 +112,6 @@ const Main = (props) => {
 Main.propTypes = {
   advertsCount: PropTypes.number.isRequired,
   offers: PropTypes.array.isRequired,
-  onPlaceNameHeaderClick: PropTypes.func.isRequired,
 };
 
 

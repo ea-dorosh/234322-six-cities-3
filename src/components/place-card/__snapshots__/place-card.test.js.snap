@@ -2,7 +2,7 @@
 
 exports[`Should PlaceCard render correctly 1`] = `
 <article
-  className="cities__place-card place-card"
+  className="near-places__card place-card"
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
 >
@@ -14,10 +14,11 @@ exports[`Should PlaceCard render correctly 1`] = `
     </span>
   </div>
   <div
-    className="cities__image-wrapper place-card__image-wrapper"
+    className="near-places__image-wrapper place-card__image-wrapper"
   >
     <a
-      href="#"
+      href="/offer"
+      onClick={[Function]}
     >
       <img
         alt="Place image"
@@ -91,13 +92,8 @@ exports[`Should PlaceCard render correctly 1`] = `
     </div>
     <h2
       className="place-card__name"
-      onClick={[Function]}
     >
-      <a
-        href="#"
-      >
-        apartment-1 name string
-      </a>
+      apartment-1 name string
     </h2>
     <p
       className="place-card__type"
