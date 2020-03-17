@@ -20,9 +20,16 @@ export const getOffersByCity = (array, city) => {
   return array.filter((item) => item.city.name === city);
 };
 
+
 function filterUniqueByProperty(objects, prop) {
   return objects.filter((obj, i, self) =>
     i === self.findIndex((x) => x[prop] === obj[prop])
   );
 }
 
+export const SortType = {
+  POPULAR: `popular`,
+  PRICE_TO_HIGH: `to high`,
+  PRICE_TO_LOW: `to low`,
+  TOP_RATED: `top rated`
+};

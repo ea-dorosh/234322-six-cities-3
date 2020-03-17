@@ -18,6 +18,8 @@ class App extends PureComponent {
       cities,
       activeCity,
       handleCityClick,
+      handleOffersSort,
+      sortType,
     } = this.props;
 
     return (
@@ -27,6 +29,8 @@ class App extends PureComponent {
         activeCity={activeCity}
         advertsCount={offers.length}
         handleCityClick={handleCityClick}
+        handleOffersSort={handleOffersSort}
+        sortType={sortType}
       />
     );
   }
@@ -68,6 +72,7 @@ const mapStateToProps = (state) => {
     cities: state.cities,
     activeCity: state.activeCity,
     offers: state.offers,
+    sortType: state.sortType,
   };
 };
 
@@ -76,6 +81,10 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.changeCity(activeCity));
     dispatch(ActionCreator.getOffers(activeCity.name));
   },
+
+  handleOffersSort(sortType) {
+    dispatch(ActionCreator.sortOffers(sortType));
+  }
 });
 
 export {App};
