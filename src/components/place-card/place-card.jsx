@@ -42,8 +42,8 @@ class PlaceCard extends PureComponent {
       >
         {offer.isPremium ? premium : null}
         <div className={`${cardClass === `cities` ? `cities` : `near-places`}__image-wrapper place-card__image-wrapper`}>
-          <Link to={{pathname: `/offer`, state: {offer, otherOffers, activeCity}}}>
-            <img className="place-card__image" src={offer.img} width="260" height="200" alt="Place image"/>
+          <Link to={`/offer/${offer.id}`}>
+            <img className="place-card__image" src={`/${offer.img}`} width="260" height="200" alt="Place image"/>
           </Link>
         </div>
         <div className="place-card__info">

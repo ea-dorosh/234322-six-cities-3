@@ -4,6 +4,8 @@ import PlaceCardList from "../place-card-list/place-card-list.jsx";
 import Map from "../map/map.jsx";
 import LocationsList from "../locations-list/location-list.jsx";
 import SortOptions from "../sort-options/sort-options.jsx";
+import {ActionCreator} from "../../reducer/reducer";
+import {connect} from "react-redux";
 
 
 const Main = (props) => {
@@ -96,5 +98,31 @@ Main.propTypes = {
 };
 
 
-export default Main;
+const mapStateToProps = (state) => {
+  return {
+    cities: state.cities,
+    activeCity: state.activeCity,
+    offers: state.offers,
+    sortType: state.sortType,
+    marker: state.marker
+  };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  handleCityClick(activeCity) {
+    dispatch(ActionCreator.changeCity(activeCity));
+    dispatch(ActionCreator.getOffers(activeCity.name));
+  },
+
+  handleOffersSort(sortType) {
+    dispatch(ActionCreator.sortOffers(sortType));
+  },
+
+  handleOfferHover(offer) {
+    dispatch(ActionCreator.highlightMarker(offer));
+  },
+});
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main);
 
