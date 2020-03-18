@@ -119,49 +119,37 @@ exports[`Should Main render correctly 1`] = `
             >
               Sort by
             </span>
-            <span
+            <select
               className="places__sorting-type"
-              tabIndex="0"
+              id="places-sorting"
+              onChange={[Function]}
+              value="popular"
             >
-              Popular
-              <svg
-                className="places__sorting-arrow"
-                height="4"
-                width="7"
-              >
-                <use
-                  xlinkHref="#icon-arrow-select"
-                />
-              </svg>
-            </span>
-            <ul
-              className="places__options places__options--custom places__options--opened"
-            >
-              <li
-                className="places__option places__option--active"
-                tabIndex="0"
+              <option
+                className="places__option"
+                value="popular"
               >
                 Popular
-              </li>
-              <li
+              </option>
+              <option
                 className="places__option"
-                tabIndex="0"
+                value="to-high"
               >
                 Price: low to high
-              </li>
-              <li
+              </option>
+              <option
                 className="places__option"
-                tabIndex="0"
+                value="to-low"
               >
                 Price: high to low
-              </li>
-              <li
+              </option>
+              <option
                 className="places__option"
-                tabIndex="0"
+                value="top-rated"
               >
                 Top rated first
-              </li>
-            </ul>
+              </option>
+            </select>
           </form>
           <div
             className="cities__places-list tabs__content places__list"

@@ -7,7 +7,7 @@ import SortOptions from "../sort-options/sort-options.jsx";
 
 
 const Main = (props) => {
-  const {cities, activeCity, handleCityClick, offers, advertsCount, handleOffersSort, sortType} = props;
+  const {cities, activeCity, handleCityClick, offers, advertsCount, handleOffersSort, sortType, marker, handleOfferHover} = props;
 
   return (
     <div className="page page--gray page--main">
@@ -59,12 +59,14 @@ const Main = (props) => {
                 listClass={`cities`}
                 activeCity={activeCity}
                 sortType={sortType}
+                handleOfferHover={handleOfferHover}
               />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
                 <Map
                   offers={offers}
+                  marker={marker}
                   activeCity={activeCity}
                 />
               </section>
@@ -89,6 +91,8 @@ Main.propTypes = {
     name: PropTypes.string.isRequired,
   }).isRequired,
   handleCityClick: PropTypes.func.isRequired,
+  handleOffersSort: PropTypes.func.isRequired,
+  sortType: PropTypes.string.isRequired,
 };
 
 

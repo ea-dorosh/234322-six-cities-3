@@ -6,51 +6,71 @@ import PropTypes from "prop-types";
 class Map extends PureComponent {
   constructor(props) {
     super(props);
-  }
 
-  createMap() {
-    const {offers, activeCity, activeOffer} = this.props;
+    this.map = null;
 
-    const city = [activeCity.location.latitude, activeCity.location.longitude];
-
-    const icon = leaflet.icon({
+    this.icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
       iconSize: [27, 39]
     });
 
+    this.iconActive = leaflet.icon({
+      iconUrl: `img/pin-active.svg`,
+      iconSize: [27, 39]
+    });
+
+    this._highlightMarker = this._highlightMarker.bind(this);
+  }
+
+  _highlightMarker(offer) {
+
+    leaflet
+      .marker([offer.location.latitude, offer.location.longitude], {icon: this.iconActive})
+      .addTo(this.map);
+  }
+
+
+  createMap() {
+    const {offers, activeCity, activeOffer, marker} = this.props;
+
+
+    const city = [activeCity.location.latitude, activeCity.location.longitude];
+
+
     const zoom = activeCity.location.zoom;
-    const map = leaflet.map(`map`, {
+
+    this.map = leaflet.map(`map`, {
       center: city,
       zoom,
       zoomControl: false,
       marker: true
     });
-    map.setView(city, zoom);
 
-    this.leafletMap = map;
+    this.map.setView(city, zoom);
+
+    this.leafletMap = this.map;
 
     leaflet
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
         attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
       })
-      .addTo(map);
+      .addTo(this.map);
 
     offers.map((offer) => {
 
       leaflet
-        .marker([offer.location.latitude, offer.location.longitude], {icon})
-        .addTo(map);
+        .marker([offer.location.latitude, offer.location.longitude], {icon: this.icon})
+        .addTo(this.map);
     });
 
     if (activeOffer) {
-      const iconActive = leaflet.icon({
-        iconUrl: `img/pin-active.svg`,
-        iconSize: [27, 39]
-      });
-
       leaflet
-        .marker([activeOffer.location.latitude, activeOffer.location.longitude], {icon: iconActive})
-        .addTo(map);
+        .marker([activeOffer.location.latitude, activeOffer.location.longitude], {icon: this.iconActive})
+        .addTo(this.map);
+    }
+
+    if (marker) {
+      this._highlightMarker(marker);
     }
   }
 

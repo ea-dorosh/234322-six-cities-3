@@ -20,6 +20,8 @@ class App extends PureComponent {
       handleCityClick,
       handleOffersSort,
       sortType,
+      marker,
+      handleOfferHover
     } = this.props;
 
     return (
@@ -31,6 +33,8 @@ class App extends PureComponent {
         handleCityClick={handleCityClick}
         handleOffersSort={handleOffersSort}
         sortType={sortType}
+        marker={marker}
+        handleOfferHover={handleOfferHover}
       />
     );
   }
@@ -65,6 +69,8 @@ App.propTypes = {
   }).isRequired,
   offers: PropTypes.array.isRequired,
   handleCityClick: PropTypes.func.isRequired,
+  handleOffersSort: PropTypes.func.isRequired,
+  sortType: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -73,6 +79,7 @@ const mapStateToProps = (state) => {
     activeCity: state.activeCity,
     offers: state.offers,
     sortType: state.sortType,
+    marker: state.marker
   };
 };
 
@@ -84,7 +91,11 @@ const mapDispatchToProps = (dispatch) => ({
 
   handleOffersSort(sortType) {
     dispatch(ActionCreator.sortOffers(sortType));
-  }
+  },
+
+  handleOfferHover(offer) {
+    dispatch(ActionCreator.highlightMarker(offer));
+  },
 });
 
 export {App};

@@ -10,7 +10,7 @@ class PlaceCard extends PureComponent {
 
 
   render() {
-    const {offer, handleCardHover, otherOffers, cardClass, activeCity} = this.props;
+    const {offer, otherOffers, cardClass, activeCity, handleOfferHover} = this.props;
     const premium = <div className="place-card__mark">
       <span>Premium</span>
     </div>;
@@ -34,10 +34,10 @@ class PlaceCard extends PureComponent {
       <article
         className={`${cardClass === `cities` ? `cities__place-card` : `near-places__card`} place-card`}
         onMouseEnter={() => {
-          handleCardHover(offer);
+          handleOfferHover(offer);
         }}
         onMouseLeave={() => {
-          handleCardHover(null);
+          handleOfferHover(null);
         }}
       >
         {offer.isPremium ? premium : null}

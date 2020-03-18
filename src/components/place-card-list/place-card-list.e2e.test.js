@@ -2,7 +2,7 @@ import React from "react";
 import Enzyme, {mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import PlaceCardList from "./place-card-list.jsx";
-import {offersMock} from "../../mocks/offers_for_test";
+import {offersMock, SortTypeMock} from "../../mocks/offers_for_test";
 import {MemoryRouter as Router} from 'react-router-dom';
 import {getCities} from "../../utils";
 
@@ -19,6 +19,7 @@ it(`Should change state when offer onHover`, () => {
         <PlaceCardList
           offers = {offersMock}
           activeCity={cities[0]}
+          sortType={SortTypeMock.POPULAR}
         />
       </Router>
   );

@@ -8,39 +8,24 @@ class PlaceCardList extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = {
-      activeOffer: null
-    };
-
-    this._handleCardHover = this._handleCardHover.bind(this);
     this._getSortedOffers = this._getSortedOffers.bind(this);
   }
 
   _getSortedOffers(offers, sortType) {
     switch (sortType) {
       case SortType.PRICE_TO_LOW:
-        console.log(1)
         return offers.slice().sort((a, b) => b.price - a.price);
       case SortType.PRICE_TO_HIGH:
-        console.log(2)
         return offers.slice().sort((a, b) => a.price - b.price);
       case SortType.TOP_RATED:
-        console.log(3)
         return offers.slice().sort((a, b) => b.rating - a.rating);
     }
     return offers;
   }
 
-  _handleCardHover(activeOffer) {
-    this.setState({
-      activeOffer
-    });
-  }
-
   render() {
 
-    const {offers, listClass, activeCity, sortType} = this.props;
-    // console.log(sortType)
+    const {offers, listClass, activeCity, sortType, handleOfferHover} = this.props;
     const sortedOffers = this._getSortedOffers(offers, sortType);
 
     return (
@@ -49,7 +34,7 @@ class PlaceCardList extends PureComponent {
           <PlaceCard
             key={index}
             offer={it}
-            handleCardHover={this._handleCardHover}
+            handleOfferHover={handleOfferHover}
             otherOffers={offers}
             cardClass={listClass}
             activeCity={activeCity}
@@ -71,6 +56,7 @@ PlaceCardList.propTypes = {
     }),
     name: PropTypes.string.isRequired,
   }).isRequired,
+  sortType: PropTypes.string.isRequired,
 };
 
 export default PlaceCardList;

@@ -148,4 +148,11 @@ const offerMock = {
   ],
 };
 
-export {offersMock, offerMock};
+const SortTypeMock = {
+  POPULAR: `popular`,
+  PRICE_TO_HIGH: `to-high`,
+  PRICE_TO_LOW: `to-low`,
+  TOP_RATED: `top-rated`
+};
+
+export {offersMock, offerMock, SortTypeMock};
