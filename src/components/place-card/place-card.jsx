@@ -1,8 +1,7 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {Link} from 'react-router-dom';
-import {ActionCreator} from "../../reducer/reducer";
-import {connect} from "react-redux";
+import {CITIES} from "../../utils.js";
 
 class PlaceCard extends PureComponent {
   constructor(props) {
@@ -23,7 +22,7 @@ class PlaceCard extends PureComponent {
 
     return (
       <article
-        className={`${cardClass === `cities` ? `cities__place-card` : `near-places__card`} place-card`}
+        className={`${cardClass === CITIES ? `cities__place-card` : `near-places__card`} place-card`}
         onMouseEnter={() => {
           handleOfferHover(offer);
         }}
@@ -32,7 +31,7 @@ class PlaceCard extends PureComponent {
         }}
       >
         {offer.isPremium ? premium : null}
-        <div className={`${cardClass === `cities` ? `cities` : `near-places`}__image-wrapper place-card__image-wrapper`}>
+        <div className={`${cardClass === CITIES ? CITIES : `near-places`}__image-wrapper place-card__image-wrapper`}>
           {/* eslint-disable-next-line react/prop-types */}
           <Link to={`/offer/${offer.id}`}>
             <img className="place-card__image" src={`/${offer.img}`} width="260" height="200" alt="Place image"/>
@@ -81,16 +80,4 @@ PlaceCard.propTypes = {
 };
 
 
-const mapStateToProps = () => {
-
-};
-
-const mapDispatchToProps = (dispatch) => ({
-
-  handleOfferHover(offer) {
-    dispatch(ActionCreator.highlightMarker(offer));
-  },
-});
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(PlaceCard);
+export default PlaceCard;

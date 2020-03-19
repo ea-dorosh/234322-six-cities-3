@@ -31,6 +31,7 @@ class Map extends PureComponent {
 
 
   createMap() {
+    // eslint-disable-next-line react/prop-types
     const {offers, activeCity, activeOffer, marker} = this.props;
 
     const city = [activeCity.location.latitude, activeCity.location.longitude];

@@ -5,6 +5,7 @@ import {SortType} from "../../utils.js";
 import {connect} from "react-redux";
 import {createSelector} from "reselect";
 import {CITIES} from "../../utils.js";
+import {ActionCreator} from "../../reducer/reducer";
 
 
 class PlaceCardList extends PureComponent {
@@ -16,7 +17,7 @@ class PlaceCardList extends PureComponent {
   render() {
 
     // eslint-disable-next-line react/prop-types
-    const {offers, listClass, nearOffers} = this.props;
+    const {offers, listClass, nearOffers, handleOfferHover} = this.props;
 
     const array = nearOffers ? nearOffers : offers;
 
@@ -27,6 +28,7 @@ class PlaceCardList extends PureComponent {
             key={index}
             offer={it}
             cardClass={listClass}
+            handleOfferHover={handleOfferHover}
           />
         ))}
       </div>
@@ -69,4 +71,11 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(PlaceCardList);
+const mapDispatchToProps = (dispatch) => ({
+
+  handleOfferHover(offer) {
+    dispatch(ActionCreator.highlightMarker(offer));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PlaceCardList);

@@ -257,7 +257,7 @@ const findNearOffers = createSelector([
   selectOffers,
   (state, id) => id
 ],
-(offers, id) => offers.filter((otherOffer) => {return otherOffer.id !== id})
+(offers, id) => offers.filter((otherOffer) => otherOffer.id !== id)
 );
 
 const mapStateToProps = (state, ownProps) => {

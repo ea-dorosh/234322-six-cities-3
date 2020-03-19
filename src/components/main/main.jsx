@@ -4,18 +4,15 @@ import PlaceCardList from "../place-card-list/place-card-list.jsx";
 import Map from "../map/map.jsx";
 import LocationsList from "../locations-list/location-list.jsx";
 import SortOptions from "../sort-options/sort-options.jsx";
-import {ActionCreator} from "../../reducer/reducer";
 import {connect} from "react-redux";
 import {CITIES} from "../../utils.js";
 
 
 const Main = (props) => {
   const {
-    // cities,
     activeCity,
     offers,
-    handleOffersSort,
-    sortType,
+    // eslint-disable-next-line react/prop-types
     marker,
   } = props;
 
@@ -58,14 +55,9 @@ const Main = (props) => {
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{advertsCount} places to stay in {activeCity.name}</b>
-              <SortOptions
-                handleOffersSort={handleOffersSort}
-                sortType={sortType}
-              />
+              <SortOptions/>
               <PlaceCardList
-                // offers={offers}
                 listClass={CITIES}
-                // sortType={sortType}
               />
             </section>
             <div className="cities__right-section">
@@ -85,42 +77,28 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  offers: PropTypes.array.isRequired,
-  cities: PropTypes.array.isRequired,
+  offers: PropTypes.array,
   activeCity: PropTypes.shape({
     location: PropTypes.shape({
-      latitude: PropTypes.number.isRequired,
-      longitude: PropTypes.number.isRequired,
-      zoom: PropTypes.number.isRequired
+      latitude: PropTypes.number,
+      longitude: PropTypes.number,
+      zoom: PropTypes.number
     }),
-    name: PropTypes.string.isRequired,
+    name: PropTypes.string,
   }).isRequired,
-  handleOffersSort: PropTypes.func.isRequired,
-  sortType: PropTypes.string.isRequired,
+  handleOffersSort: PropTypes.func,
+  sortType: PropTypes.string,
 };
 
 
 const mapStateToProps = (state) => {
   return {
-    cities: state.cities,
     activeCity: state.activeCity,
     offers: state.offers,
-    sortType: state.sortType,
     marker: state.marker
   };
 };
 
-const mapDispatchToProps = (dispatch) => ({
 
-  handleOffersSort(sortType) {
-    dispatch(ActionCreator.sortOffers(sortType));
-  },
-
-  handleOfferHover(offer) {
-    dispatch(ActionCreator.highlightMarker(offer));
-  },
-});
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
+export default connect(mapStateToProps)(Main);
 
