@@ -229,7 +229,7 @@ class DetailInfo extends PureComponent {
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
               <PlaceCardList
-                offers={nearOffers}
+                nearOffers={nearOffers}
               />
             </section>
           </div>
@@ -254,21 +254,20 @@ const selectOfferById = createSelector([
 );
 
 const findNearOffers = createSelector([
-  selectOffers
+  selectOffers,
+  (state, id) => id
 ],
-  offers.filter((otherOffer) => otherOffer.id !== offerId)
+(offers, id) => offers.filter((otherOffer) => {return otherOffer.id !== id})
 );
 
 const mapStateToProps = (state, ownProps) => {
 
   const offerId = Number(ownProps.match.params.id);
 
-
   return {
     offer: selectOfferById(state, offerId),
     activeCity: state.activeCity,
-    // nearOffers: state.offers.filter((otherOffer) => otherOffer.id !== offerId),
-    nearOffers: findNearOffers(offers),
+    nearOffers: findNearOffers(state, offerId),
   };
 };
 

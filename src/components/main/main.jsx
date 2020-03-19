@@ -6,10 +6,20 @@ import LocationsList from "../locations-list/location-list.jsx";
 import SortOptions from "../sort-options/sort-options.jsx";
 import {ActionCreator} from "../../reducer/reducer";
 import {connect} from "react-redux";
+import {CITIES} from "../../utils.js";
 
 
 const Main = (props) => {
-  const {cities, activeCity, handleCityClick, offers, advertsCount, handleOffersSort, sortType, marker, handleOfferHover} = props;
+  const {
+    // cities,
+    activeCity,
+    offers,
+    handleOffersSort,
+    sortType,
+    marker,
+  } = props;
+
+  const advertsCount = offers.length;
 
   return (
     <div className="page page--gray page--main">
@@ -40,28 +50,22 @@ const Main = (props) => {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <LocationsList
-              cities={cities}
-              activeCity={activeCity}
-              handleCityClick={handleCityClick}
-            />
+            <LocationsList/>
           </section>
         </div>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{advertsCount} places to stay in Amsterdam</b>
+              <b className="places__found">{advertsCount} places to stay in {activeCity.name}</b>
               <SortOptions
                 handleOffersSort={handleOffersSort}
                 sortType={sortType}
               />
               <PlaceCardList
-                offers={offers}
-                listClass={`cities`}
-                activeCity={activeCity}
-                sortType={sortType}
-                handleOfferHover={handleOfferHover}
+                // offers={offers}
+                listClass={CITIES}
+                // sortType={sortType}
               />
             </section>
             <div className="cities__right-section">
@@ -81,7 +85,6 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  advertsCount: PropTypes.number.isRequired,
   offers: PropTypes.array.isRequired,
   cities: PropTypes.array.isRequired,
   activeCity: PropTypes.shape({
@@ -92,7 +95,6 @@ Main.propTypes = {
     }),
     name: PropTypes.string.isRequired,
   }).isRequired,
-  handleCityClick: PropTypes.func.isRequired,
   handleOffersSort: PropTypes.func.isRequired,
   sortType: PropTypes.string.isRequired,
 };
@@ -109,10 +111,6 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  handleCityClick(activeCity) {
-    dispatch(ActionCreator.changeCity(activeCity));
-    dispatch(ActionCreator.getOffers(activeCity.name));
-  },
 
   handleOffersSort(sortType) {
     dispatch(ActionCreator.sortOffers(sortType));

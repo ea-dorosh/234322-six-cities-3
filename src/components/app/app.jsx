@@ -1,10 +1,10 @@
 import React, {PureComponent} from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import Main from "../main/main.jsx";
 import DetailInfo from "../detail-info/detail-info.jsx";
-import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer/reducer.js";
+// import {connect} from "react-redux";
+// import {ActionCreator} from "../../reducer/reducer.js";
 
 class App extends PureComponent {
   constructor(props) {
@@ -30,21 +30,21 @@ class App extends PureComponent {
   }
 }
 
-App.propTypes = {
-  cities: PropTypes.array.isRequired,
-  activeCity: PropTypes.shape({
-    location: PropTypes.shape({
-      latitude: PropTypes.number.isRequired,
-      longitude: PropTypes.number.isRequired,
-      zoom: PropTypes.number.isRequired
-    }),
-    name: PropTypes.string.isRequired,
-  }).isRequired,
-  offers: PropTypes.array.isRequired,
-  handleCityClick: PropTypes.func.isRequired,
-  handleOffersSort: PropTypes.func.isRequired,
-  sortType: PropTypes.string.isRequired,
-};
+// App.propTypes = {
+//   cities: PropTypes.array.isRequired,
+//   activeCity: PropTypes.shape({
+//     location: PropTypes.shape({
+//       latitude: PropTypes.number.isRequired,
+//       longitude: PropTypes.number.isRequired,
+//       zoom: PropTypes.number.isRequired
+//     }),
+//     name: PropTypes.string.isRequired,
+//   }).isRequired,
+//   offers: PropTypes.array.isRequired,
+//   handleCityClick: PropTypes.func.isRequired,
+//   handleOffersSort: PropTypes.func.isRequired,
+//   sortType: PropTypes.string.isRequired,
+// };
 //
 // const mapStateToProps = (state) => {
 //   return {

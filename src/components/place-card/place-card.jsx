@@ -1,6 +1,8 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {Link} from 'react-router-dom';
+import {ActionCreator} from "../../reducer/reducer";
+import {connect} from "react-redux";
 
 class PlaceCard extends PureComponent {
   constructor(props) {
@@ -10,25 +12,14 @@ class PlaceCard extends PureComponent {
 
 
   render() {
-    const {offer, otherOffers, cardClass, activeCity, handleOfferHover} = this.props;
+    const {offer, cardClass, handleOfferHover} = this.props;
     const premium = <div className="place-card__mark">
       <span>Premium</span>
     </div>;
 
-    let ratingStar = Math.round(offer.rating);
-
-    switch (ratingStar) {
-      case 1 : ratingStar = 20;
-        break;
-      case 2 : ratingStar = 40;
-        break;
-      case 3 : ratingStar = 60;
-        break;
-      case 4 : ratingStar = 80;
-        break;
-      case 5 : ratingStar = 100;
-        break;
-    }
+    const ratingToStarMap = {1: 20, 2: 40, 3: 60, 4: 80, 5: 100};
+    const ratingToStar = (rating) => ratingToStarMap[Math.round(rating)] || Math.round(rating);
+    const rating = ratingToStar(offer.rating);
 
     return (
       <article
@@ -42,6 +33,7 @@ class PlaceCard extends PureComponent {
       >
         {offer.isPremium ? premium : null}
         <div className={`${cardClass === `cities` ? `cities` : `near-places`}__image-wrapper place-card__image-wrapper`}>
+          {/* eslint-disable-next-line react/prop-types */}
           <Link to={`/offer/${offer.id}`}>
             <img className="place-card__image" src={`/${offer.img}`} width="260" height="200" alt="Place image"/>
           </Link>
@@ -61,7 +53,7 @@ class PlaceCard extends PureComponent {
           </div>
           <div className="place-card__rating rating">
             <div className="place-card__stars rating__stars">
-              <span style={{width: ratingStar + `%`}}/>
+              <span style={{width: rating + `%`}}/>
               <span className="visually-hidden">Rating</span>
             </div>
           </div>
@@ -84,17 +76,21 @@ PlaceCard.propTypes = {
     type: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
   }).isRequired,
-  handleCardHover: PropTypes.func.isRequired,
+  handleOfferHover: PropTypes.func.isRequired,
   cardClass: PropTypes.string,
-  otherOffers: PropTypes.array.isRequired,
-  activeCity: PropTypes.shape({
-    location: PropTypes.shape({
-      latitude: PropTypes.number.isRequired,
-      longitude: PropTypes.number.isRequired,
-      zoom: PropTypes.number.isRequired
-    }),
-    name: PropTypes.string.isRequired,
-  }).isRequired,
 };
 
-export default PlaceCard;
+
+const mapStateToProps = () => {
+
+};
+
+const mapDispatchToProps = (dispatch) => ({
+
+  handleOfferHover(offer) {
+    dispatch(ActionCreator.highlightMarker(offer));
+  },
+});
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(PlaceCard);

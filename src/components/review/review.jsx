@@ -55,7 +55,7 @@ class Review extends PureComponent {
           <p className="reviews__text">
             {text}
           </p>
-          <time className="reviews__time" dateTime={date}>{`${this.dateStamp(date)}`}</time>
+          <time className="reviews__time" dateTime={date}>{this.dateStamp(date)}</time>
         </div>
       </li>
     );

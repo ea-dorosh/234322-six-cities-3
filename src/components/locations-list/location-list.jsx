@@ -1,19 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import LocationsListItem from "../locations-list-item/location-list-item.jsx";
+import {connect} from "react-redux";
 
 const LocationsList = (props) => {
-  const {cities, activeCity, handleCityClick} = props;
+  const {cities} = props;
 
   return (
     <ul className="locations__list tabs__list">
-      {cities.map((city, i) => (
-        <li key={i} className="locations__item">
-          <a className={`locations__item-link tabs__item ${activeCity.name === city.name ? ` tabs__item--active` : ``}`}
-            onClick={() => handleCityClick(city)}
-            href="#">
-            <span>{city.name}</span>
-          </a>
-        </li>
+      {cities.map((city) => (
+        <LocationsListItem
+          key={city.name}
+          city={city}
+        />
       ))}
     </ul>
   );
@@ -21,15 +20,14 @@ const LocationsList = (props) => {
 
 LocationsList.propTypes = {
   cities: PropTypes.array.isRequired,
-  activeCity: PropTypes.shape({
-    location: PropTypes.shape({
-      latitude: PropTypes.number.isRequired,
-      longitude: PropTypes.number.isRequired,
-      zoom: PropTypes.number.isRequired
-    }),
-    name: PropTypes.string.isRequired,
-  }).isRequired,
-  handleCityClick: PropTypes.func.isRequired,
 };
 
-export default LocationsList;
+
+const mapStateToProps = (state) => {
+  return {
+    cities: state.cities,
+  };
+};
+
+
+export default connect(mapStateToProps)(LocationsList);

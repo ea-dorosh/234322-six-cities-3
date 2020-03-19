@@ -10,12 +10,12 @@ class Map extends PureComponent {
     this.map = null;
 
     this.icon = leaflet.icon({
-      iconUrl: `img/pin.svg`,
+      iconUrl: `/img/pin.svg`,
       iconSize: [27, 39]
     });
 
     this.iconActive = leaflet.icon({
-      iconUrl: `img/pin-active.svg`,
+      iconUrl: `/img/pin-active.svg`,
       iconSize: [27, 39]
     });
 
@@ -32,7 +32,6 @@ class Map extends PureComponent {
 
   createMap() {
     const {offers, activeCity, activeOffer, marker} = this.props;
-
 
     const city = [activeCity.location.latitude, activeCity.location.longitude];
 
