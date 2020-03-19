@@ -1,5 +1,6 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
+import {ratingToStar} from "../../utils.js";
 
 
 class Review extends PureComponent {
@@ -19,20 +20,8 @@ class Review extends PureComponent {
   render() {
     const {rating, name, text, date} = this.props.review;
 
-    let ratingStar = Math.round(rating);
-
-    switch (ratingStar) {
-      case 1 : ratingStar = 20;
-        break;
-      case 2 : ratingStar = 40;
-        break;
-      case 3 : ratingStar = 60;
-        break;
-      case 4 : ratingStar = 80;
-        break;
-      case 5 : ratingStar = 100;
-        break;
-    }
+    // eslint-disable-next-line react/prop-types
+    const ratingReview = ratingToStar(rating);
 
     return (
       <li className="reviews__item">
@@ -48,7 +37,7 @@ class Review extends PureComponent {
         <div className="reviews__info">
           <div className="reviews__rating rating">
             <div className="reviews__stars rating__stars">
-              <span style={{width: ratingStar + `%`}}/>
+              <span style={{width: ratingReview + `%`}}/>
               <span className="visually-hidden">Rating</span>
             </div>
           </div>

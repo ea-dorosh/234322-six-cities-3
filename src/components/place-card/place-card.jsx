@@ -1,7 +1,7 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {Link} from 'react-router-dom';
-import {CITIES} from "../../utils.js";
+import {CITIES, ratingToStar} from "../../utils.js";
 
 class PlaceCard extends PureComponent {
   constructor(props) {
@@ -16,8 +16,6 @@ class PlaceCard extends PureComponent {
       <span>Premium</span>
     </div>;
 
-    const ratingToStarMap = {1: 20, 2: 40, 3: 60, 4: 80, 5: 100};
-    const ratingToStar = (rating) => ratingToStarMap[Math.round(rating)] || Math.round(rating);
     const rating = ratingToStar(offer.rating);
 
     return (

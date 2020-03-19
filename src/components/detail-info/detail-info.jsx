@@ -6,6 +6,7 @@ import Map from "../map/map.jsx";
 import PlaceCardList from "../place-card-list/place-card-list.jsx";
 import {connect} from "react-redux";
 import {createSelector} from "reselect";
+import {ratingToStar} from "../../utils.js";
 
 class DetailInfo extends PureComponent {
   constructor(props) {
@@ -22,20 +23,7 @@ class DetailInfo extends PureComponent {
     </div>;
 
     // eslint-disable-next-line react/prop-types
-    let ratingStar = Math.round(offer.rating);
-
-    switch (ratingStar) {
-      case 1 : ratingStar = 20;
-        break;
-      case 2 : ratingStar = 40;
-        break;
-      case 3 : ratingStar = 60;
-        break;
-      case 4 : ratingStar = 80;
-        break;
-      case 5 : ratingStar = 100;
-        break;
-    }
+    const rating = ratingToStar(offer.rating)
 
     // eslint-disable-next-line react/prop-types
     const avatarClasses = `property__avatar-wrapper user__avatar-wrapper ${offer.holder.isSuper ? `property__avatar-wrapper--pro` : null}`;
@@ -97,7 +85,7 @@ class DetailInfo extends PureComponent {
                 </div>
                 <div className="property__rating rating">
                   <div className="property__stars rating__stars">
-                    <span style={{width: ratingStar + `%`}}/>
+                    <span style={{width: rating + `%`}}/>
                     <span className="visually-hidden">Rating</span>
                   </div>
                   {/* eslint-disable-next-line react/prop-types */}

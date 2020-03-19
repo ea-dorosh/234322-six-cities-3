@@ -35,3 +35,6 @@ export const SortType = {
 };
 
 export const CITIES = `cities`;
+
+const ratingToStarMap = {1: 20, 2: 40, 3: 60, 4: 80, 5: 100};
+export const ratingToStar = (rating) => ratingToStarMap[Math.round(rating)] || Math.round(rating);
