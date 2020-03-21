@@ -1,9 +1,12 @@
 import React, {PureComponent} from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import ReviewsList from "../reviews-list/reviews-list.jsx";
 import {withRouter} from 'react-router-dom';
 import Map from "../map/map.jsx";
 import PlaceCardList from "../place-card-list/place-card-list.jsx";
+import {connect} from "react-redux";
+import {createSelector} from "reselect";
+import {ratingToStar} from "../../utils.js";
 
 class DetailInfo extends PureComponent {
   constructor(props) {
@@ -12,27 +15,17 @@ class DetailInfo extends PureComponent {
   }
 
   render() {
-    const {location: {state: {offer, otherOffers}}} = this.props;
-    const nearOffers = otherOffers.filter((otherOffer) => otherOffer.id !== offer.id);
+    // eslint-disable-next-line react/prop-types
+    const {offer, nearOffers, activeCity} = this.props;
+
     const premium = <div className="property__mark">
       <span>Premium</span>
     </div>;
 
-    let ratingStar = Math.round(offer.rating);
+    // eslint-disable-next-line react/prop-types
+    const rating = ratingToStar(offer.rating);
 
-    switch (ratingStar) {
-      case 1 : ratingStar = 20;
-        break;
-      case 2 : ratingStar = 40;
-        break;
-      case 3 : ratingStar = 60;
-        break;
-      case 4 : ratingStar = 80;
-        break;
-      case 5 : ratingStar = 100;
-        break;
-    }
-
+    // eslint-disable-next-line react/prop-types
     const avatarClasses = `property__avatar-wrapper user__avatar-wrapper ${offer.holder.isSuper ? `property__avatar-wrapper--pro` : null}`;
 
     return (
@@ -42,7 +35,7 @@ class DetailInfo extends PureComponent {
             <div className="header__wrapper">
               <div className="header__left">
                 <a className="header__logo-link" href="main.html">
-                  <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
+                  <img className="header__logo" src="/img/logo.svg" alt="6 cities logo" width="81" height="41"/>
                 </a>
               </div>
               <nav className="header__nav">
@@ -63,11 +56,12 @@ class DetailInfo extends PureComponent {
           <section className="property">
             <div className="property__gallery-container container">
               <div className="property__gallery">
+                {/* eslint-disable-next-line react/prop-types */}
                 {offer.photos.map((it, index) => (
                   <div className="property__image-wrapper" key={index}>
                     <img
                       className="property__image"
-                      src={it}
+                      src={`/${it}`}
                       alt="Photo studio"/>
                   </div>
                 ))}
@@ -75,9 +69,11 @@ class DetailInfo extends PureComponent {
             </div>
             <div className="property__container container">
               <div className="property__wrapper">
+                {/* eslint-disable-next-line react/prop-types */}
                 {offer.isPremium ? premium : null}
                 <div className="property__name-wrapper">
                   <h1 className="property__name">
+                    {/* eslint-disable-next-line react/prop-types */}
                     {offer.name}
                   </h1>
                   <button className="property__bookmark-button button" type="button">
@@ -89,29 +85,35 @@ class DetailInfo extends PureComponent {
                 </div>
                 <div className="property__rating rating">
                   <div className="property__stars rating__stars">
-                    <span style={{width: ratingStar + `%`}}/>
+                    <span style={{width: rating + `%`}}/>
                     <span className="visually-hidden">Rating</span>
                   </div>
+                  {/* eslint-disable-next-line react/prop-types */}
                   <span className="property__rating-value rating__value">{offer.rating}</span>
                 </div>
                 <ul className="property__features">
                   <li className="property__feature property__feature--entire">
+                    {/* eslint-disable-next-line react/prop-types */}
                     {offer.type}
                   </li>
                   <li className="property__feature property__feature--bedrooms">
+                    {/* eslint-disable-next-line react/prop-types */}
                     {offer.bedRoomQuantity} Bedrooms
                   </li>
                   <li className="property__feature property__feature--adults">
+                    {/* eslint-disable-next-line react/prop-types */}
                     Max {offer.maxGuestQuantity} adults
                   </li>
                 </ul>
                 <div className="property__price">
+                  {/* eslint-disable-next-line react/prop-types */}
                   <b className="property__price-value">&euro;{offer.price}</b>
                   <span className="property__price-text">&nbsp;night</span>
                 </div>
                 <div className="property__inside">
                   <h2 className="property__inside-title">What&apos;s inside</h2>
                   <ul className="property__inside-list">
+                    {/* eslint-disable-next-line react/prop-types */}
                     {offer.details.map((it, index) => (
                       <li className="property__inside-item" key={index}>
                         {it}
@@ -123,22 +125,27 @@ class DetailInfo extends PureComponent {
                   <h2 className="property__host-title">Meet the host</h2>
                   <div className="property__host-user user">
                     <div className={avatarClasses}>
-                      <img className="property__avatar user__avatar" src={offer.holder.img} width="74" height="74"
+                      {/* eslint-disable-next-line react/prop-types */}
+                      <img className="property__avatar user__avatar" src={`/${offer.holder.img}`} width="74" height="74"
                         alt="Host avatar"/>
                     </div>
                     <span className="property__user-name">
+                      {/* eslint-disable-next-line react/prop-types */}
                       {offer.holder.holderName}
                     </span>
                   </div>
                   <div className="property__description">
                     <p className="property__text">
+                      {/* eslint-disable-next-line react/prop-types */}
                       {offer.description}
                     </p>
                   </div>
                 </div>
                 <section className="property__reviews reviews">
+                  {/* eslint-disable-next-line react/prop-types */}
                   <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{offer.reviews.length}</span></h2>
                   <ReviewsList
+                    /* eslint-disable-next-line react/prop-types */
                     reviews={offer.reviews}
                   />
                   <form className="reviews__form form" action="#" method="post">
@@ -201,6 +208,7 @@ class DetailInfo extends PureComponent {
             <section className="property__map map">
               <Map
                 offers={nearOffers}
+                activeCity={activeCity}
                 activeOffer={offer}
               />
             </section>
@@ -219,9 +227,36 @@ class DetailInfo extends PureComponent {
   }
 }
 
-DetailInfo.propTypes = {
-  location: PropTypes.object
+// DetailInfo.propTypes = {
+//   location: PropTypes.object
+// };
+
+function selectOffers(state) {
+  return state.offers;
+}
+
+const selectOfferById = createSelector([
+  selectOffers,
+  (state, id) => id
+], (offers, id) => offers.find((offer) => offer.id === id)
+);
+
+const findNearOffers = createSelector([
+  selectOffers,
+  (state, id) => id
+],
+(offers, id) => offers.filter((otherOffer) => otherOffer.id !== id)
+);
+
+const mapStateToProps = (state, ownProps) => {
+
+  const offerId = Number(ownProps.match.params.id);
+
+  return {
+    offer: selectOfferById(state, offerId),
+    activeCity: state.activeCity,
+    nearOffers: findNearOffers(state, offerId),
+  };
 };
 
-
-export default withRouter(DetailInfo);
+export default withRouter(connect(mapStateToProps)(DetailInfo));

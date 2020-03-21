@@ -1,37 +1,28 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import PlaceCard from "../place-card/place-card.jsx";
+import {CITIES} from "../../utils.js";
 
 
 class PlaceCardList extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = {
-      activeOffer: null
-    };
-
-    this._handleCardHover = this._handleCardHover.bind(this);
-  }
-
-  _handleCardHover(activeOffer) {
-    this.setState({
-      activeOffer
-    });
   }
 
   render() {
-    const {offers, listClass} = this.props;
+
+    // eslint-disable-next-line react/prop-types
+    const {offers, listClass, handleOfferHover} = this.props;
 
     return (
-      <div className={`${listClass === `cities` ? `cities__places-list tabs__content` : `near-places__list`} places__list`}>
-        {offers.map((it, index) => (
+      <div className={`${listClass === CITIES ? `cities__places-list tabs__content` : `near-places__list`} places__list`}>
+        {offers.map((offer, index) => (
           <PlaceCard
             key={index}
-            offer={it}
-            handleCardHover={this._handleCardHover}
-            otherOffers={offers}
+            offer={offer}
             cardClass={listClass}
+            handleOfferHover={handleOfferHover}
           />
         ))}
       </div>
@@ -42,6 +33,8 @@ class PlaceCardList extends PureComponent {
 PlaceCardList.propTypes = {
   offers: PropTypes.array.isRequired,
   listClass: PropTypes.string,
+  sortType: PropTypes.string,
 };
+
 
 export default PlaceCardList;

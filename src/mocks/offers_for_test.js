@@ -2,6 +2,14 @@ import {getRandomNumber} from "../utils";
 
 const offersMock = [
   {
+    city: {
+      location: {
+        latitude: 52.38333,
+        longitude: 4.9,
+        zoom: 12
+      },
+      name: `City`,
+    },
     id: 1,
     img: `url path-1 string`,
     photos: [`path-1 string`, `path-2 string`],
@@ -19,9 +27,10 @@ const offersMock = [
       img: `path sting`,
       isSuper: true,
     },
-    coords: {
-      x: 42.3909553943508,
-      y: 42.3909553943508
+    location: {
+      latitude: 42.3909553943508,
+      longitude: 42.3909553943508,
+      zoom: 8
     },
     reviews: [
       {
@@ -41,6 +50,14 @@ const offersMock = [
     ],
   },
   {
+    city: {
+      location: {
+        latitude: 52.38333,
+        longitude: 4.9,
+        zoom: 12
+      },
+      name: `City`,
+    },
     id: 2,
     img: `url path-1 string`,
     photos: [`path-1 string`, `path-2 string`],
@@ -58,9 +75,10 @@ const offersMock = [
       img: `path sting`,
       isSuper: true,
     },
-    coords: {
-      x: 42.3909553943508,
-      y: 42.3909553943508
+    location: {
+      latitude: 42.3909553943508,
+      longitude: 42.3909553943508,
+      zoom: 8
     },
     reviews: [
       {
@@ -82,6 +100,14 @@ const offersMock = [
 ];
 
 const offerMock = {
+  city: {
+    location: {
+      latitude: 52.38333,
+      longitude: 4.9,
+      zoom: 12
+    },
+    name: `City`,
+  },
   id: 1,
   img: `url path-1 string`,
   photos: [`path-1 string`, `path-2 string`],
@@ -99,9 +125,10 @@ const offerMock = {
     img: `path sting`,
     isSuper: true,
   },
-  coords: {
-    x: 42.3909553943508,
-    y: 42.3909553943508
+  location: {
+    latitude: 42.3909553943508,
+    longitude: 42.3909553943508,
+    zoom: 8
   },
   reviews: [
     {
@@ -121,4 +148,11 @@ const offerMock = {
   ],
 };
 
-export {offersMock, offerMock};
+const SortTypeMock = {
+  POPULAR: `popular`,
+  PRICE_TO_HIGH: `to-high`,
+  PRICE_TO_LOW: `to-low`,
+  TOP_RATED: `top-rated`
+};
+
+export {offersMock, offerMock, SortTypeMock};

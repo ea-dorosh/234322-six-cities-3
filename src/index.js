@@ -1,21 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/app/app.jsx";
-import {createOffers} from "./mocks/offers.js";
+import {createStore} from 'redux';
+import {Provider} from 'react-redux';
+import {reducer} from "./reducer/reducer.js";
 
-const OFFERS_QUANTITY = 4;
 
-const Settings = {
-  ADVERTS_COUNT: OFFERS_QUANTITY
-};
-
-const offers = createOffers(OFFERS_QUANTITY);
+const store = createStore(
+    reducer,
+    window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
+);
 
 ReactDOM.render(
-    <App
-      advertsCount = {Settings.ADVERTS_COUNT}
-      offers = {offers}
-    />,
+    <Provider store={store}>
+      <App />
+    </Provider>,
     document.querySelector(`#root`)
 );
 

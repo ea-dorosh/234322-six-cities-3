@@ -1,49 +1,49 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {Link} from 'react-router-dom';
+import {CITIES, ratingToStar} from "../../utils.js";
 
 class PlaceCard extends PureComponent {
   constructor(props) {
     super(props);
 
+    this._handleOfferHover = this._handleOfferHover.bind(this);
+  }
+
+
+  _handleOfferHover() {
+    if (this.props.handleOfferHover) {
+      // eslint-disable-next-line react/prop-types
+      this.props.handleOfferHover(this.props.offer);
+    }
   }
 
 
   render() {
-    const {offer, handleCardHover, otherOffers, cardClass} = this.props;
+    const {offer, cardClass, handleOfferHover} = this.props;
+
+
     const premium = <div className="place-card__mark">
       <span>Premium</span>
     </div>;
 
-    let ratingStar = Math.round(offer.rating);
-
-    switch (ratingStar) {
-      case 1 : ratingStar = 20;
-        break;
-      case 2 : ratingStar = 40;
-        break;
-      case 3 : ratingStar = 60;
-        break;
-      case 4 : ratingStar = 80;
-        break;
-      case 5 : ratingStar = 100;
-        break;
-    }
+    const rating = ratingToStar(offer.rating);
 
     return (
       <article
-        className={`${cardClass === `cities` ? `cities__place-card` : `near-places__card`} place-card`}
-        onMouseEnter={() => {
-          handleCardHover(offer);
-        }}
+        className={`${cardClass === CITIES ? `cities__place-card` : `near-places__card`} place-card`}
+        onMouseEnter={this._handleOfferHover}
         onMouseLeave={() => {
-          handleCardHover(null);
+          if (handleOfferHover) {
+            handleOfferHover(null);
+          }
         }}
       >
         {offer.isPremium ? premium : null}
-        <div className={`${cardClass === `cities` ? `cities` : `near-places`}__image-wrapper place-card__image-wrapper`}>
-          <Link to={{pathname: `/offer`, state: {offer, otherOffers}}}>
-            <img className="place-card__image" src={offer.img} width="260" height="200" alt="Place image"/>
+        <div className={`${cardClass === CITIES ? CITIES : `near-places`}__image-wrapper place-card__image-wrapper`}>
+          {/* eslint-disable-next-line react/prop-types */}
+          <Link to={`/offer/${offer.id}`}>
+            <img className="place-card__image" src={`/${offer.img}`} width="260" height="200" alt="Place image"/>
           </Link>
         </div>
         <div className="place-card__info">
@@ -61,7 +61,7 @@ class PlaceCard extends PureComponent {
           </div>
           <div className="place-card__rating rating">
             <div className="place-card__stars rating__stars">
-              <span style={{width: ratingStar + `%`}}/>
+              <span style={{width: rating + `%`}}/>
               <span className="visually-hidden">Rating</span>
             </div>
           </div>
@@ -84,9 +84,9 @@ PlaceCard.propTypes = {
     type: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
   }).isRequired,
-  handleCardHover: PropTypes.func.isRequired,
+  handleOfferHover: PropTypes.func,
   cardClass: PropTypes.string,
-  otherOffers: PropTypes.array.isRequired,
 };
+
 
 export default PlaceCard;

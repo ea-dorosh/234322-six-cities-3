@@ -1,11 +1,12 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
+import {ratingToStar} from "../../utils.js";
 
 
 class Review extends PureComponent {
   constructor(props) {
     super(props);
-    this.dateStamp = this.dateStamp.bind(this);
+
   }
 
   dateStamp(date) {
@@ -19,26 +20,14 @@ class Review extends PureComponent {
   render() {
     const {rating, name, text, date} = this.props.review;
 
-    let ratingStar = Math.round(rating);
-
-    switch (ratingStar) {
-      case 1 : ratingStar = 20;
-        break;
-      case 2 : ratingStar = 40;
-        break;
-      case 3 : ratingStar = 60;
-        break;
-      case 4 : ratingStar = 80;
-        break;
-      case 5 : ratingStar = 100;
-        break;
-    }
+    // eslint-disable-next-line react/prop-types
+    const ratingReview = ratingToStar(rating);
 
     return (
       <li className="reviews__item">
         <div className="reviews__user user">
           <div className="reviews__avatar-wrapper user__avatar-wrapper">
-            <img className="reviews__avatar user__avatar" src="img/avatar-max.jpg" width="54" height="54"
+            <img className="reviews__avatar user__avatar" src="/img/avatar-max.jpg" width="54" height="54"
               alt="Reviews avatar"/>
           </div>
           <span className="reviews__user-name">
@@ -48,14 +37,14 @@ class Review extends PureComponent {
         <div className="reviews__info">
           <div className="reviews__rating rating">
             <div className="reviews__stars rating__stars">
-              <span style={{width: ratingStar + `%`}}/>
+              <span style={{width: ratingReview + `%`}}/>
               <span className="visually-hidden">Rating</span>
             </div>
           </div>
           <p className="reviews__text">
             {text}
           </p>
-          <time className="reviews__time" dateTime={date}>{`${this.dateStamp(date)}`}</time>
+          <time className="reviews__time" dateTime={date}>{this.dateStamp(date)}</time>
         </div>
       </li>
     );

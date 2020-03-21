@@ -9,6 +9,10 @@ const offersNames = [
   `Beautiful & luxurious apartment at great location`,
   `Nice, cozy, wood and stone place`,
   `Wood and stone place`,
+  `Nice, cozy, warm big bed apartment`,
+  `Beautiful & luxurious apartment at great location`,
+  `Nice, cozy, wood and stone place`,
+  `Wood and stone place`,
   `Nice, cozy, warm big bed apartment`
 ];
 
@@ -28,15 +32,28 @@ const offersCords = [
   [52.3909553943508, 4.85309666406198],
   [52.369553943508, 4.85309666406198],
   [52.3909553943508, 4.929309666406198],
-  [52.3809553943508, 4.939309666406198]
+  [52.3809553943508, 4.939309666406198],
+  [48.8588377121212, 2.2770203121212],
+  [48.8688377212121, 2.3170203212121],
+  [48.8788377131313, 2.3270203131313],
+  [48.8888377313131, 2.2770203313131]
 ];
 
-const createOffer = (index) => {
+const createOffer = (index, city) => {
   const bedRoomQuantity = getRandomNumber(1, 6);
   const maxGuestQuantity = bedRoomQuantity * 2;
   const holderName = getRandomElement(holderNames);
 
+
   return {
+    city: {
+      location: {
+        latitude: city === `Amsterdam` ? 52.38333 : 48.8588377,
+        longitude: city === `Amsterdam` ? 4.9 : 2.2770203,
+        zoom: 12
+      },
+      name: city,
+    },
     id: index,
     img: `img/apartment-0${getRandomNumber(1, 3)}.jpg`,
     photos: [
@@ -72,9 +89,10 @@ const createOffer = (index) => {
       img: `img/avatar-${holderName.toLowerCase()}.jpg`,
       isSuper: !(index % 2),
     },
-    coords: {
-      x: offersCords[index][0],
-      y: offersCords[index][1],
+    location: {
+      latitude: offersCords[index][0],
+      longitude: offersCords[index][1],
+      zoom: 8
     },
     reviews: [
       {
@@ -99,7 +117,8 @@ const createOffers = (amount) => {
   const offers = [];
 
   for (let i = 0; i < amount; i++) {
-    const offer = createOffer(i);
+    let cityName = i <= 3 ? `Amsterdam` : `Paris`;
+    const offer = createOffer(i, cityName);
 
     offers.push(offer);
   }
