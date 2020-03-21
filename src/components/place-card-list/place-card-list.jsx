@@ -60,14 +60,14 @@ function getSortedOffers(offers, sortType) {
 
 const sortOffersBySortType = createSelector([
   selectOffers,
-  (state, sortType) => sortType
+  (state) => state.sortType
 ], (offers, sortType) => getSortedOffers(offers, sortType)
 );
 
 
 const mapStateToProps = (state) => {
   return {
-    offers: sortOffersBySortType(state, state.sortType),
+    offers: sortOffersBySortType(state),
   };
 };
 

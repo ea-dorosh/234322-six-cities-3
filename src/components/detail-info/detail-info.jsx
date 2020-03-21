@@ -23,7 +23,7 @@ class DetailInfo extends PureComponent {
     </div>;
 
     // eslint-disable-next-line react/prop-types
-    const rating = ratingToStar(offer.rating)
+    const rating = ratingToStar(offer.rating);
 
     // eslint-disable-next-line react/prop-types
     const avatarClasses = `property__avatar-wrapper user__avatar-wrapper ${offer.holder.isSuper ? `property__avatar-wrapper--pro` : null}`;

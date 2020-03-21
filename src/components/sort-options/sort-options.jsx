@@ -16,9 +16,11 @@ class SortOptions extends PureComponent {
   }
 
   _handleSortTypeClick() {
-    this.setState({
-      isOpened: !this.state.isOpened,
-    });
+    this.setState(
+        (state) => ({
+          isOpened: !state.isOpened,
+        })
+    );
   }
 
   render() {
@@ -29,9 +31,7 @@ class SortOptions extends PureComponent {
       <form className="places__sorting" action="#" method="get">
         <span className="places__sorting-caption">Sort by</span>
         <span className="places__sorting-type" tabIndex="0"
-          onClick={() => {
-            this._handleSortTypeClick();
-          }}>
+          onClick={this._handleSortTypeClick}>
           {sortType}
           <svg className="places__sorting-arrow" width="7" height="4">
             <use xlinkHref="#icon-arrow-select"/>

@@ -12,20 +12,16 @@ export const extend = (a, b) => {
 
 export const getCities = (array) => {
   const cities = array.map((item) => item.city);
+  const citiesByName = cities.reduce((acc, city) => {
+    acc[city.name] = city; return acc;
+  }, {});
 
-  return filterUniqueByProperty(cities, `name`);
+  return Object.values(citiesByName);
 };
 
 export const getOffersByCity = (array, city) => {
   return array.filter((item) => item.city.name === city);
 };
-
-
-function filterUniqueByProperty(objects, prop) {
-  return objects.filter((obj, i, self) =>
-    i === self.findIndex((x) => x[prop] === obj[prop])
-  );
-}
 
 export const SortType = {
   POPULAR: `Popular`,

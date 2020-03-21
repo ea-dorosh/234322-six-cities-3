@@ -12,7 +12,7 @@ const initialState = {
   cities,
   activeCity: cities[0],
   offers: getOffersByCity(offers, cities[0].name),
-  sortType: `popular`,
+  sortType: `Popular`,
   marker: null,
 };
 
