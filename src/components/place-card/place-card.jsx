@@ -7,6 +7,13 @@ class PlaceCard extends PureComponent {
   constructor(props) {
     super(props);
 
+    this._handleOfferHover = this._handleOfferHover.bind(this);
+  }
+
+
+  _handleOfferHover() {
+  // eslint-disable-next-line react/prop-types
+    this.props.handleOfferHover(this.props.offer);
   }
 
 
@@ -21,9 +28,7 @@ class PlaceCard extends PureComponent {
     return (
       <article
         className={`${cardClass === CITIES ? `cities__place-card` : `near-places__card`} place-card`}
-        onMouseEnter={() => {
-          handleOfferHover(offer);
-        }}
+        onMouseEnter={this._handleOfferHover}
         onMouseLeave={() => {
           handleOfferHover(null);
         }}

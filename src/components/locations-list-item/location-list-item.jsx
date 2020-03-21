@@ -7,17 +7,24 @@ class LocationsListItem extends PureComponent {
   constructor(props) {
     super(props);
 
+    this._handleCityClick = this._handleCityClick.bind(this);
+  }
+
+
+  _handleCityClick() {
+    // eslint-disable-next-line react/prop-types
+    this.props.handleCityClick(this.props.city);
   }
 
   render() {
-    // eslint-disable-next-line react/prop-types
-    const {city, activeCity, handleCityClick} = this.props;
+    // eslint-disable-next-line react/prop-types,no-unused-vars
+    const {city, activeCity} = this.props;
 
     return (
       <li className="locations__item">
         {/* eslint-disable-next-line react/prop-types */}
         <a className={`locations__item-link tabs__item ${activeCity.name === city.name ? ` tabs__item--active` : ``}`}
-          onClick={() => handleCityClick(city)}
+          onClick={this._handleCityClick}
           href="#">
           {/* eslint-disable-next-line react/prop-types */}
           <span>{city.name}</span>
