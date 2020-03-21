@@ -32,7 +32,7 @@ class Map extends PureComponent {
 
   createMap() {
     // eslint-disable-next-line react/prop-types
-    const {offers, activeCity, activeOffer, marker} = this.props;
+    const {offers, activeCity, activeOffer} = this.props;
 
     const city = [activeCity.location.latitude, activeCity.location.longitude];
 
@@ -68,10 +68,6 @@ class Map extends PureComponent {
         .marker([activeOffer.location.latitude, activeOffer.location.longitude], {icon: this.iconActive})
         .addTo(this.map);
     }
-
-    if (marker) {
-      this._highlightMarker(marker);
-    }
   }
 
   componentDidMount() {
@@ -79,6 +75,8 @@ class Map extends PureComponent {
   }
 
   componentDidUpdate() {
+    // eslint-disable-next-line react/prop-types
+    const {marker} = this.props;
     if (this.leafletMap) {
       this.leafletMap.eachLayer(function (layer) {
         layer.remove();
@@ -86,6 +84,9 @@ class Map extends PureComponent {
       this.leafletMap.remove();
 
       this.createMap();
+      if (marker) {
+        this._highlightMarker(marker);
+      }
     }
   }
 
