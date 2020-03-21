@@ -6,7 +6,7 @@ import {ratingToStar} from "../../utils.js";
 class Review extends PureComponent {
   constructor(props) {
     super(props);
-    this.dateStamp = this.dateStamp.bind(this);
+
   }
 
   dateStamp(date) {

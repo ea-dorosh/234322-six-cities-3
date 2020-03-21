@@ -5,43 +5,27 @@ import {ActionCreator} from "../../reducer/reducer";
 import {connect} from "react-redux";
 
 class SortOptions extends PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      isOpened: false,
-    };
-
-    this._handleSortTypeClick = this._handleSortTypeClick.bind(this);
-  }
-
-  _handleSortTypeClick() {
-    this.setState(
-        (state) => ({
-          isOpened: !state.isOpened,
-        })
-    );
-  }
 
   render() {
 
-    const {handleOffersSort, sortType} = this.props;
+    // eslint-disable-next-line react/prop-types
+    const {handleOffersSort, sortType, isOpened, handleToggleClick} = this.props;
 
     return (
       <form className="places__sorting" action="#" method="get">
         <span className="places__sorting-caption">Sort by</span>
         <span className="places__sorting-type" tabIndex="0"
-          onClick={this._handleSortTypeClick}>
+          onClick={handleToggleClick}>
           {sortType}
           <svg className="places__sorting-arrow" width="7" height="4">
             <use xlinkHref="#icon-arrow-select"/>
           </svg>
         </span>
-        <ul className={`places__options places__options--custom ${this.state.isOpened ? `places__options--opened` : null}`}>
+        <ul className={`places__options places__options--custom ${isOpened ? `places__options--opened` : null}`}>
           {Object.values(SortType).map((item, i) => (
             <li key={i} onClick={() => {
               handleOffersSort(item);
-              this._handleSortTypeClick();
+              handleToggleClick();
             }}
             className={`places__option ${item === sortType ? `places__option--active` : ``}`}
             tabIndex="0">

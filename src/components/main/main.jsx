@@ -6,7 +6,7 @@ import LocationsList from "../locations-list/location-list.jsx";
 import SortOptions from "../sort-options/sort-options.jsx";
 import {connect} from "react-redux";
 import {CITIES} from "../../utils.js";
-
+import withActiveItem from "../../hocs/withActiveItem/withActiveItem.jsx";
 
 const Main = (props) => {
   const {
@@ -15,6 +15,8 @@ const Main = (props) => {
     // eslint-disable-next-line react/prop-types
     marker,
   } = props;
+
+  const SortOptionsHoc = withActiveItem(SortOptions);
 
   const advertsCount = offers.length;
 
@@ -55,7 +57,7 @@ const Main = (props) => {
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{advertsCount} places to stay in {activeCity.name}</b>
-              <SortOptions/>
+              <SortOptionsHoc/>
               <PlaceCardList
                 listClass={CITIES}
               />
