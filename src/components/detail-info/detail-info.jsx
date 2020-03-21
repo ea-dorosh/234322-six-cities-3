@@ -217,7 +217,7 @@ class DetailInfo extends PureComponent {
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
               <PlaceCardList
-                nearOffers={nearOffers}
+                offers={nearOffers}
               />
             </section>
           </div>

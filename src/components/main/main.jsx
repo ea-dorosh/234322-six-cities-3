@@ -5,15 +5,17 @@ import Map from "../map/map.jsx";
 import LocationsList from "../locations-list/location-list.jsx";
 import SortOptions from "../sort-options/sort-options.jsx";
 import {connect} from "react-redux";
-import {CITIES} from "../../utils.js";
+import {CITIES, SortType} from "../../utils.js";
+import {ActionCreator} from "../../reducer/reducer.js";
 import withActiveItem from "../../hocs/withActiveItem/withActiveItem.jsx";
+import {createSelector} from "reselect";
 
 const Main = (props) => {
   const {
     activeCity,
     offers,
     // eslint-disable-next-line react/prop-types
-    marker,
+    marker, handleOfferHover,
   } = props;
 
   const SortOptionsHoc = withActiveItem(SortOptions);
@@ -59,6 +61,8 @@ const Main = (props) => {
               <b className="places__found">{advertsCount} places to stay in {activeCity.name}</b>
               <SortOptionsHoc/>
               <PlaceCardList
+                offers={offers}
+                handleOfferHover={handleOfferHover}
                 listClass={CITIES}
               />
             </section>
@@ -92,15 +96,43 @@ Main.propTypes = {
   sortType: PropTypes.string,
 };
 
+function selectOffers(state) {
+  return state.offers;
+}
+
+function getSortedOffers(offers, sortType) {
+  switch (sortType) {
+    case SortType.PRICE_TO_LOW:
+      return offers.slice().sort((a, b) => b.price - a.price);
+    case SortType.PRICE_TO_HIGH:
+      return offers.slice().sort((a, b) => a.price - b.price);
+    case SortType.TOP_RATED:
+      return offers.slice().sort((a, b) => b.rating - a.rating);
+  }
+  return offers;
+}
+
+const sortOffersBySortType = createSelector([
+  selectOffers,
+  (state) => state.sortType
+], (offers, sortType) => getSortedOffers(offers, sortType)
+);
 
 const mapStateToProps = (state) => {
   return {
     activeCity: state.activeCity,
-    offers: state.offers,
+    offers: sortOffersBySortType(state),
     marker: state.marker
   };
 };
 
+const mapDispatchToProps = (dispatch) => ({
 
-export default connect(mapStateToProps)(Main);
+  handleOfferHover(offer) {
+    dispatch(ActionCreator.highlightMarker(offer));
+  }
+});
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main);
 

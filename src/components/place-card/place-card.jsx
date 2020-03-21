@@ -12,13 +12,17 @@ class PlaceCard extends PureComponent {
 
 
   _handleOfferHover() {
-  // eslint-disable-next-line react/prop-types
-    this.props.handleOfferHover(this.props.offer);
+    if (this.props.handleOfferHover) {
+      // eslint-disable-next-line react/prop-types
+      this.props.handleOfferHover(this.props.offer);
+    }
   }
 
 
   render() {
     const {offer, cardClass, handleOfferHover} = this.props;
+
+
     const premium = <div className="place-card__mark">
       <span>Premium</span>
     </div>;
@@ -30,7 +34,9 @@ class PlaceCard extends PureComponent {
         className={`${cardClass === CITIES ? `cities__place-card` : `near-places__card`} place-card`}
         onMouseEnter={this._handleOfferHover}
         onMouseLeave={() => {
-          handleOfferHover(null);
+          if (handleOfferHover) {
+            handleOfferHover(null);
+          }
         }}
       >
         {offer.isPremium ? premium : null}
@@ -78,7 +84,7 @@ PlaceCard.propTypes = {
     type: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
   }).isRequired,
-  handleOfferHover: PropTypes.func.isRequired,
+  handleOfferHover: PropTypes.func,
   cardClass: PropTypes.string,
 };
 

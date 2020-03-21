@@ -1,11 +1,7 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import PlaceCard from "../place-card/place-card.jsx";
-import {SortType} from "../../utils.js";
-import {connect} from "react-redux";
-import {createSelector} from "reselect";
 import {CITIES} from "../../utils.js";
-import {ActionCreator} from "../../reducer/reducer";
 
 
 class PlaceCardList extends PureComponent {
@@ -17,16 +13,14 @@ class PlaceCardList extends PureComponent {
   render() {
 
     // eslint-disable-next-line react/prop-types
-    const {offers, listClass, nearOffers, handleOfferHover} = this.props;
-
-    const array = nearOffers ? nearOffers : offers;
+    const {offers, listClass, handleOfferHover} = this.props;
 
     return (
       <div className={`${listClass === CITIES ? `cities__places-list tabs__content` : `near-places__list`} places__list`}>
-        {array.map((it, index) => (
+        {offers.map((offer, index) => (
           <PlaceCard
             key={index}
-            offer={it}
+            offer={offer}
             cardClass={listClass}
             handleOfferHover={handleOfferHover}
           />
@@ -42,40 +36,5 @@ PlaceCardList.propTypes = {
   sortType: PropTypes.string,
 };
 
-function selectOffers(state) {
-  return state.offers;
-}
 
-function getSortedOffers(offers, sortType) {
-  switch (sortType) {
-    case SortType.PRICE_TO_LOW:
-      return offers.slice().sort((a, b) => b.price - a.price);
-    case SortType.PRICE_TO_HIGH:
-      return offers.slice().sort((a, b) => a.price - b.price);
-    case SortType.TOP_RATED:
-      return offers.slice().sort((a, b) => b.rating - a.rating);
-  }
-  return offers;
-}
-
-const sortOffersBySortType = createSelector([
-  selectOffers,
-  (state) => state.sortType
-], (offers, sortType) => getSortedOffers(offers, sortType)
-);
-
-
-const mapStateToProps = (state) => {
-  return {
-    offers: sortOffersBySortType(state),
-  };
-};
-
-const mapDispatchToProps = (dispatch) => ({
-
-  handleOfferHover(offer) {
-    dispatch(ActionCreator.highlightMarker(offer));
-  },
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(PlaceCardList);
+export default PlaceCardList;
