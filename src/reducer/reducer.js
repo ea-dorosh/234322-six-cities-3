@@ -8,6 +8,18 @@ const offers = createOffers(OFFERS_QUANTITY);
 
 const cities = getCities(offers);
 
+const emptyCity = {
+  location: {
+    latitude: 52.38333,
+    longitude: 4.9,
+    zoom: 12
+  },
+  name: `Munich`,
+};
+
+cities.push(emptyCity);
+
+
 const initialState = {
   cities,
   activeCity: cities[0],
