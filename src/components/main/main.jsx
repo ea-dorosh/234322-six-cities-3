@@ -7,7 +7,6 @@ import SortOptions from "../sort-options/sort-options.jsx";
 import {connect} from "react-redux";
 import {CITIES, SortType} from "../../utils.js";
 import {ActionCreator} from "../../reducer/reducer.js";
-import withActiveItem from "../../hocs/withActiveItem/withActiveItem.jsx";
 import {createSelector} from "reselect";
 import MainEmpty from "../main-empty/main-emty.jsx";
 
@@ -19,8 +18,6 @@ const Main = (props) => {
     // eslint-disable-next-line react/prop-types
     marker, handleOfferHover,
   } = props;
-
-  const SortOptionsHoc = withActiveItem(SortOptions);
 
   const advertsCount = offers.length;
 
@@ -49,7 +46,7 @@ const Main = (props) => {
         </div>
       </header>
 
-      <main className={`page__main page__main--index ${ offers.length ? `` : `page__main--index-empty` }`}>
+      <main className={`page__main page__main--index ${ advertsCount ? `` : `page__main--index-empty` }`}>
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
@@ -57,12 +54,12 @@ const Main = (props) => {
           </section>
         </div>
         <div className="cities">
-          { offers.length ?
+          { advertsCount ?
             <div className="cities__places-container container">
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
                 <b className="places__found">{advertsCount} places to stay in {activeCity.name}</b>
-                <SortOptionsHoc/>
+                <SortOptions/>
                 <PlaceCardList
                   offers={offers}
                   handleOfferHover={handleOfferHover}
