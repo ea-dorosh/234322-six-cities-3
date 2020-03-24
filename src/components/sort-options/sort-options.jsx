@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import {SortType} from "../../utils.js";
 import {ActionCreator} from "../../reducer/reducer";
 import {connect} from "react-redux";
+import withActiveItem from "../../hocs/withActiveItem/withActiveItem.jsx";
 
 class SortOptions extends PureComponent {
 
@@ -59,4 +60,4 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(SortOptions);
+export default withActiveItem(connect(mapStateToProps, mapDispatchToProps)(SortOptions));
