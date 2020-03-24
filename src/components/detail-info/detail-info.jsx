@@ -7,6 +7,7 @@ import PlaceCardList from "../place-card-list/place-card-list.jsx";
 import {connect} from "react-redux";
 import {createSelector} from "reselect";
 import {ratingToStar} from "../../utils.js";
+import {getActiveCity, selectOffers} from "../../reducer/offers/selectors";
 
 class DetailInfo extends PureComponent {
   constructor(props) {
@@ -231,9 +232,6 @@ class DetailInfo extends PureComponent {
 //   location: PropTypes.object
 // };
 
-function selectOffers(state) {
-  return state.offers;
-}
 
 const selectOfferById = createSelector([
   selectOffers,
@@ -254,7 +252,7 @@ const mapStateToProps = (state, ownProps) => {
 
   return {
     offer: selectOfferById(state, offerId),
-    activeCity: state.activeCity,
+    activeCity: getActiveCity(state),
     nearOffers: findNearOffers(state, offerId),
   };
 };

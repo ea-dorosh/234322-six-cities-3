@@ -1,7 +1,8 @@
 import React, {PureComponent} from 'react';
 // import PropTypes from 'prop-types';
-import {ActionCreator} from "../../reducer/reducer";
+import {ActionCreator} from "../../reducer/offers/offers.js";
 import {connect} from "react-redux";
+import {getActiveCity} from "../../reducer/offers/selectors";
 
 class LocationsListItem extends PureComponent {
   constructor(props) {
@@ -34,23 +35,9 @@ class LocationsListItem extends PureComponent {
   }
 }
 
-
-// LocationsListItem.propTypes = {
-//   // cities: PropTypes.array.isRequired,
-//   // activeCity: PropTypes.shape({
-//   //   location: PropTypes.shape({
-//   //     latitude: PropTypes.number.isRequired,
-//   //     longitude: PropTypes.number.isRequired,
-//   //     zoom: PropTypes.number.isRequired
-//   //   }),
-//   //   name: PropTypes.string.isRequired,
-//   // }).isRequired,
-//   // handleCityClick: PropTypes.func.isRequired,
-// };
-
 const mapStateToProps = (state) => {
   return {
-    activeCity: state.activeCity,
+    activeCity: getActiveCity(state),
   };
 };
 
@@ -64,3 +51,16 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LocationsListItem);
+
+// LocationsListItem.propTypes = {
+//   // cities: PropTypes.array.isRequired,
+//   // activeCity: PropTypes.shape({
+//   //   location: PropTypes.shape({
+//   //     latitude: PropTypes.number.isRequired,
+//   //     longitude: PropTypes.number.isRequired,
+//   //     zoom: PropTypes.number.isRequired
+//   //   }),
+//   //   name: PropTypes.string.isRequired,
+//   // }).isRequired,
+//   // handleCityClick: PropTypes.func.isRequired,
+// };
