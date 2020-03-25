@@ -1,9 +1,10 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {SortType} from "../../utils.js";
-import {ActionCreator} from "../../reducer/reducer";
+import {ActionCreator} from "../../reducer/main/main.js";
 import {connect} from "react-redux";
 import withActiveItem from "../../hocs/withActiveItem/withActiveItem.jsx";
+import {getSortType} from "../../reducer/main/selectors";
 
 class SortOptions extends PureComponent {
 
@@ -47,7 +48,7 @@ SortOptions.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    sortType: state.sortType,
+    sortType: getSortType(state),
   };
 };
 

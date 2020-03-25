@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import LocationsListItem from "../locations-list-item/location-list-item.jsx";
 import {connect} from "react-redux";
+import {getCitiesList} from "../../reducer/offers/selectors";
 
 const LocationsList = (props) => {
   const {cities} = props;
@@ -25,7 +26,7 @@ LocationsList.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    cities: state.cities,
+    cities: getCitiesList(state),
   };
 };
 
