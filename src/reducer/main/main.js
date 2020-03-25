@@ -1,4 +1,4 @@
-import {extend, getOffersByCity} from '../../utils.js';
+import {extend} from '../../utils.js';
 
 
 const initialState = {
@@ -8,21 +8,11 @@ const initialState = {
 
 
 const ActionType = {
-  // CHANGE_CITY: `CHANGE_CITY`,
-  // GET_OFFERS: `GET_OFFERS`,
   SORT_OFFERS: `SORT_OFFERS`,
   HIGHLIGHT_MARKER: `HIGHLIGHT_MARKER`,
 };
 
 const ActionCreator = {
-  // changeCity: (city) => ({
-  //   type: ActionType.CHANGE_CITY,
-  //   payload: city,
-  // }),
-  // getOffers: (data) => ({
-  //   type: ActionType.GET_OFFERS,
-  //   payload: data,
-  // }),
   sortOffers: (sortType) => ({
     type: ActionType.SORT_OFFERS,
     payload: sortType,
@@ -35,11 +25,6 @@ const ActionCreator = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    // case ActionType.CHANGE_CITY:
-    //   return extend(state, {activeCity: action.payload});
-    //
-    // case ActionType.GET_OFFERS:
-    //   return extend(state, {offers: getOffersByCity(offers, action.payload)});
 
     case ActionType.SORT_OFFERS:
       return extend(state, {sortType: action.payload});

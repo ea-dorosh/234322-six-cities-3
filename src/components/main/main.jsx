@@ -5,9 +5,8 @@ import Map from "../map/map.jsx";
 import LocationsList from "../locations-list/location-list.jsx";
 import SortOptions from "../sort-options/sort-options.jsx";
 import {connect} from "react-redux";
-import {CITIES, SortType} from "../../utils.js";
+import {CITIES} from "../../utils.js";
 import {ActionCreator} from "../../reducer/main/main.js";
-import {createSelector} from "reselect";
 import MainEmpty from "../main-empty/main-emty.jsx";
 import {getMarker} from "../../reducer/main/selectors.js";
 import {selectOffers, getActiveCity} from "../../reducer/offers/selectors.js";
@@ -20,8 +19,6 @@ const Main = (props) => {
     // eslint-disable-next-line react/prop-types
     marker, handleOfferHover,
   } = props;
-
-  console.log(props)
 
   const advertsCount = offers.length;
 
@@ -105,27 +102,6 @@ Main.propTypes = {
   sortType: PropTypes.string,
 };
 
-// function selectOffers(state) {
-//   return state.offers;
-// }
-
-// function getSortedOffers(offers, sortType) {
-//   switch (sortType) {
-//     case SortType.PRICE_TO_LOW:
-//       return offers.slice().sort((a, b) => b.price - a.price);
-//     case SortType.PRICE_TO_HIGH:
-//       return offers.slice().sort((a, b) => a.price - b.price);
-//     case SortType.TOP_RATED:
-//       return offers.slice().sort((a, b) => b.rating - a.rating);
-//   }
-//   return offers;
-// }
-//
-// const sortOffersBySortType = createSelector([
-//   selectOffers,
-//   (state) => state.MAIN.sortType
-// ], (offers, sortType) => getSortedOffers(offers, sortType)
-// );
 
 const mapStateToProps = (state) => {
   return {

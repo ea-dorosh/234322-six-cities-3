@@ -43,7 +43,7 @@ class PlaceCard extends PureComponent {
         <div className={`${cardClass === CITIES ? CITIES : `near-places`}__image-wrapper place-card__image-wrapper`}>
           {/* eslint-disable-next-line react/prop-types */}
           <Link to={`/offer/${offer.id}`}>
-            <img className="place-card__image" src={`/${offer.img}`} width="260" height="200" alt="Place image"/>
+            <img className="place-card__image" src={`/${offer.preview_image}`} width="260" height="200" alt="Place image"/>
           </Link>
         </div>
         <div className="place-card__info">
@@ -80,7 +80,7 @@ PlaceCard.propTypes = {
     isPremium: PropTypes.bool.isRequired,
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
-    img: PropTypes.string.isRequired,
+    preview_image: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
   }).isRequired,
