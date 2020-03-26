@@ -10,10 +10,16 @@ import {ActionCreator} from "../../reducer/main/main.js";
 import MainEmpty from "../main-empty/main-emty.jsx";
 import {getMarker} from "../../reducer/main/selectors.js";
 import {selectOffers, getActiveCity} from "../../reducer/offers/selectors.js";
+import {getAuthorizationStatus} from "../../reducer/user/selectors";
+import {Operation as UserOperation} from "../../reducer/user/user";
+import {AuthorizationStatus} from "../../reducer/user/user.js";
+import {Link} from 'react-router-dom';
 
 
 const Main = (props) => {
   const {
+    // eslint-disable-next-line react/prop-types
+    authorizationStatus,
     activeCity,
     offers,
     // eslint-disable-next-line react/prop-types
@@ -35,11 +41,15 @@ const Main = (props) => {
             <nav className="header__nav">
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#">
+                  <Link
+                    to={`/dev-auth`}
+                    className="header__nav-link header__nav-link--profile" href="#">
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                  </a>
+                    <span className="header__user-name user__name">
+                      {authorizationStatus === AuthorizationStatus.NO_AUTH ? `Sign in` : `Oliver.conner@gmail.com`}
+                    </span>
+                  </Link>
                 </li>
               </ul>
             </nav>
@@ -105,6 +115,7 @@ Main.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
+    authorizationStatus: getAuthorizationStatus(state),
     activeCity: getActiveCity(state),
     offers: selectOffers(state),
     marker: getMarker(state)
@@ -112,6 +123,9 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
+  login(authData) {
+    dispatch(UserOperation.login(authData));
+  },
 
   handleOfferHover(offer) {
     dispatch(ActionCreator.highlightMarker(offer));

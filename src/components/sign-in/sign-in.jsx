@@ -1,6 +1,8 @@
-import React, {PureComponent} from "react";
+import React, {PureComponent, createRef} from "react";
 // import PropTypes from "prop-types";
 import {connect} from "react-redux";
+import {Operation as UserOperation} from "../../reducer/user/user";
+import {AuthorizationStatus} from "../../reducer/user/user.js";
 
 
 class SignIn extends PureComponent {
@@ -15,11 +17,11 @@ class SignIn extends PureComponent {
 
   handleSubmit(evt) {
     // eslint-disable-next-line react/prop-types
-    const {onSubmit} = this.props;
+    const {login} = this.props;
 
     evt.preventDefault();
 
-    onSubmit({
+    login({
       login: this.loginRef.current.value,
       password: this.passwordRef.current.value,
     });
@@ -56,7 +58,11 @@ class SignIn extends PureComponent {
           <div className="page__login-container container">
             <section className="login">
               <h1 className="login__title">Sign in</h1>
-              <form className="login__form form" action="#" method="post">
+              <form
+                className="login__form form"
+                action="#"
+                method="post"
+                onSubmit={this.handleSubmit}>
                 <div className="login__input-wrapper form__input-wrapper">
                   <label className="visually-hidden">E-mail</label>
                   <input className="login__input form__input" type="email" name="email" placeholder="Email" required="" ref={this.loginRef}/>
@@ -83,22 +89,19 @@ class SignIn extends PureComponent {
   }
 }
 
-// SignIn.propTypes = {
-//   handleOffersSort: PropTypes.func.isRequired,
-//   sortType: PropTypes.string.isRequired,
-// };
-
-
 const mapStateToProps = (state) => {
   return {
-
+    state
   };
 };
 
+// eslint-disable-next-line no-unused-vars
 const mapDispatchToProps = (dispatch) => ({
-
-
+  login(authData) {
+    dispatch(UserOperation.login(authData));
+  },
 });
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
+// export default SignIn;

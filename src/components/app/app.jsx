@@ -4,8 +4,6 @@ import {BrowserRouter, Route, Switch} from "react-router-dom";
 import Main from "../main/main.jsx";
 import DetailInfo from "../detail-info/detail-info.jsx";
 import {connect} from "react-redux";
-import {AuthorizationStatus} from "../../reducer/user/user.js";
-import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
 import {Operation as UserOperation} from "../../reducer/user/user.js";
 import SignIn from "../sign-in/sign-in.jsx";
 
@@ -19,7 +17,7 @@ class App extends PureComponent {
   _renderApplication() {
 
     // eslint-disable-next-line react/prop-types
-    const {load, error, authorizationStatus, login} = this.props;
+    const {load, error} = this.props;
 
     if (!load) {
       return (
@@ -54,7 +52,7 @@ class App extends PureComponent {
           <Route path="/offer/:id">
             <DetailInfo/>
           </Route>
-          <Route exact path="/dev-auth">
+          <Route path="/dev-auth">
             <SignIn
               onSubmit={() => {}}
             />
@@ -67,18 +65,19 @@ class App extends PureComponent {
 
 // export default App;
 
+
 const mapStateToProps = (state) => {
   return {
-    authorizationStatus: getAuthorizationStatus(state),
     load: state.OFFERS.load,
     error: state.OFFERS.error,
   };
 };
 
+// eslint-disable-next-line no-unused-vars
 const mapDispatchToProps = (dispatch) => ({
-  login(authData) {
-    dispatch(UserOperation.login(authData));
-  },
+  // login(authData) {
+  //   dispatch(UserOperation.login(authData));
+  // },
 });
 
 
