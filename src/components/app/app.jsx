@@ -4,7 +4,6 @@ import {BrowserRouter, Route, Switch} from "react-router-dom";
 import Main from "../main/main.jsx";
 import DetailInfo from "../detail-info/detail-info.jsx";
 import {connect} from "react-redux";
-import {Operation as UserOperation} from "../../reducer/user/user.js";
 import SignIn from "../sign-in/sign-in.jsx";
 
 
@@ -62,7 +61,6 @@ class App extends PureComponent {
     );
   }
 }
-
 
 
 const mapStateToProps = (state) => {

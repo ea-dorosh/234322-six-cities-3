@@ -80,6 +80,7 @@ PlaceCard.propTypes = {
     isPremium: PropTypes.bool.isRequired,
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
+    // eslint-disable-next-line camelcase
     preview_image: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,

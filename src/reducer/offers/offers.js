@@ -1,24 +1,5 @@
 import {extend, getCities} from "../../utils.js";
-import {createOffers} from "../../mocks/offers";
-import {getOffersByCity} from "../../utils";
 
-
-// const OFFERS_QUANTITY = 8;
-
-// const offersMock = createOffers(OFFERS_QUANTITY);
-//
-// const citiesMock = getCities(offersMock);
-//
-// const emptyCity = {
-//   location: {
-//     latitude: 52.38333,
-//     longitude: 4.9,
-//     zoom: 12
-//   },
-//   name: `Munich`,
-// };
-//
-// cities.push(emptyCity);
 
 const initialState = {
   load: null,
