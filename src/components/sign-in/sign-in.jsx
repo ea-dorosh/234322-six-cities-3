@@ -2,7 +2,7 @@ import React, {PureComponent, createRef} from "react";
 // import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Operation as UserOperation} from "../../reducer/user/user";
-// import {AuthorizationStatus} from "../../reducer/user/user.js";
+import {AuthorizationStatus} from "../../reducer/user/user.js";
 
 
 class SignIn extends PureComponent {
