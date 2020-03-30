@@ -8,6 +8,7 @@ import {connect} from "react-redux";
 import {createSelector} from "reselect";
 import {ratingToStar} from "../../utils.js";
 import {getActiveCity, selectOffers} from "../../reducer/offers/selectors";
+import HeaderUser from "../header-user/header-user.jsx";
 
 class DetailInfo extends PureComponent {
   constructor(props) {
@@ -18,7 +19,6 @@ class DetailInfo extends PureComponent {
   render() {
     // eslint-disable-next-line react/prop-types
     const {offer, nearOffers, activeCity} = this.props;
-    console.log(offer.holder.holderName)
 
     const premium = <div className="property__mark">
       <span>Premium</span>
@@ -41,15 +41,7 @@ class DetailInfo extends PureComponent {
                 </a>
               </div>
               <nav className="header__nav">
-                <ul className="header__nav-list">
-                  <li className="header__nav-item user">
-                    <a className="header__nav-link header__nav-link--profile" href="#">
-                      <div className="header__avatar-wrapper user__avatar-wrapper">
-                      </div>
-                      <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    </a>
-                  </li>
-                </ul>
+                <HeaderUser/>
               </nav>
             </div>
           </div>
