@@ -66,16 +66,9 @@ class App extends PureComponent {
 const mapStateToProps = (state) => {
   return {
     load: state.OFFERS.load,
-    error: state.OFFERS.error,
+    error: state.OFFERS.error
   };
 };
 
-// eslint-disable-next-line no-unused-vars
-const mapDispatchToProps = (dispatch) => ({
-  // login(authData) {
-  //   dispatch(UserOperation.login(authData));
-  // },
-});
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps)(App);

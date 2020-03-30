@@ -1,4 +1,4 @@
-import {extend, getCities} from "../../utils.js";
+import {extend, getCities, prepareData} from "../../utils.js";
 
 
 const initialState = {
@@ -34,7 +34,8 @@ const Operation = {
   download: () => (dispatch, getState, api) => {
     return api.get(`/hotels`)
       .then((response) => {
-        dispatch(ActionCreator.loadOffers(response.data));
+        const data = prepareData(response.data);
+        dispatch(ActionCreator.loadOffers(data));
       })
       .catch((err) => {
         throw err;
@@ -45,6 +46,7 @@ const Operation = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.LOAD_OFFERS:
+      // console.log(action.payload)
       const cities = getCities(action.payload);
 
       return extend(state, {
@@ -65,3 +67,4 @@ const reducer = (state = initialState, action) => {
 };
 
 export {reducer, Operation, ActionType, ActionCreator};
+
