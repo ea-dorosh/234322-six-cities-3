@@ -19,8 +19,8 @@ class CommentForm extends PureComponent {
     super(props);
 
     this.state = {
-      reviewMark: null,
-      reviewText: null,
+      rating: null,
+      comment: null,
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -30,14 +30,14 @@ class CommentForm extends PureComponent {
 
   reviewHandle(evt) {
     this.setState({
-      reviewText: evt.target.value
+      comment: evt.target.value
     }
     );
   }
 
   ratingHandle(evt) {
     this.setState({
-      reviewMark: evt.target.value
+      rating: evt.target.value
     }
     );
   }
@@ -45,13 +45,13 @@ class CommentForm extends PureComponent {
   handleSubmit(evt) {
     // eslint-disable-next-line react/prop-types
     const {onReviewSubmit, id} = this.props;
-
     evt.preventDefault();
 
     onReviewSubmit(this.state, id);
   }
 
   render() {
+
     return (
       <form
         className="reviews__form form"
