@@ -23,7 +23,7 @@ const Main = (props) => {
     activeCity,
     offers,
     // eslint-disable-next-line react/prop-types
-    marker, handleOfferHover,
+    marker, handleOfferHover, userProperties
   } = props;
 
   const advertsCount = offers.length;
@@ -41,15 +41,25 @@ const Main = (props) => {
             <nav className="header__nav">
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
-                  <Link
-                    to={`/dev-auth`}
-                    className="header__nav-link header__nav-link--profile" href="#">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    <span className="header__user-name user__name">
-                      {authorizationStatus === AuthorizationStatus.NO_AUTH ? `Sign in` : `Oliver.conner@gmail.com`}
-                    </span>
-                  </Link>
+                  {authorizationStatus === AuthorizationStatus.NO_AUTH ?
+                    <Link
+                      to={`/dev-auth`}
+                      className="header__nav-link header__nav-link--profile" href="#">
+                      <div className="header__avatar-wrapper user__avatar-wrapper">
+                      </div>
+                      <span className="header__user-name user__name">Sign in</span>
+                    </Link>
+                    :
+                    <a
+                      className="header__nav-link header__nav-link--profile" href="#">
+                      <div className="header__avatar-wrapper user__avatar-wrapper">
+                      </div>
+                      <span className="header__user-name user__name">
+                        {/* eslint-disable-next-line react/prop-types */}
+                        {userProperties.email}
+                      </span>
+                    </a>
+                  }
                 </li>
               </ul>
             </nav>
@@ -118,7 +128,8 @@ const mapStateToProps = (state) => {
     authorizationStatus: getAuthorizationStatus(state),
     activeCity: getActiveCity(state),
     offers: selectOffers(state),
-    marker: getMarker(state)
+    marker: getMarker(state),
+    userProperties: state.USER.userProperties,
   };
 };
 

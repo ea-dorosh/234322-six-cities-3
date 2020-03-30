@@ -18,6 +18,7 @@ class DetailInfo extends PureComponent {
   render() {
     // eslint-disable-next-line react/prop-types
     const {offer, nearOffers, activeCity} = this.props;
+    console.log(offer.holder.holderName)
 
     const premium = <div className="property__mark">
       <span>Premium</span>
@@ -57,14 +58,17 @@ class DetailInfo extends PureComponent {
           <section className="property">
             <div className="property__gallery-container container">
               <div className="property__gallery">
-                {/* eslint-disable-next-line react/prop-types */}
+                {/* eslint-disable-next-line react/prop-types*/}
                 {offer.photos.map((it, index) => (
-                  <div className="property__image-wrapper" key={index}>
-                    <img
-                      className="property__image"
-                      src={`/${it}`}
-                      alt="Photo studio"/>
-                  </div>
+                  index < 6 ?
+                    <div className="property__image-wrapper" key={index}>
+                      <img
+                        className="property__image"
+                        src={`${it}`}
+                        alt="Photo studio"/>
+                    </div>
+                    :
+                    null
                 ))}
               </div>
             </div>
