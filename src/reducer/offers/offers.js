@@ -46,7 +46,6 @@ const Operation = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.LOAD_OFFERS:
-      // console.log(action.payload)
       const cities = getCities(action.payload);
 
       return extend(state, {

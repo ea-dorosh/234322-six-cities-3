@@ -1,68 +1,120 @@
-import React from 'react';
-// import PropTypes from 'prop-types';
+import React, {PureComponent} from 'react';
+import {connect} from "react-redux";
+import {getLoadingStatus} from "../../reducer/review/selectors.js";
+import {Operation as ReviewOperation} from "../../reducer/review/review.js";
 
-const CommentForm = () => {
+const RatingValues = [5, 4, 3, 2, 1];
 
-  return (
-    <form className="reviews__form form" action="#" method="post">
-      <label className="reviews__label form__label" htmlFor="review">Your review</label>
-      <div className="reviews__rating-form form__rating">
-        <input className="form__rating-input visually-hidden" name="rating" value="5" id="5-stars"
-          type="radio"/>
-        <label htmlFor="5-stars" className="reviews__rating-label form__rating-label" title="perfect">
-          <svg className="form__star-image" width="37" height="33">
-            <use xlinkHref="#icon-star"/>
-          </svg>
-        </label>
+const TextRating = new Map([
+  [1, `terribly`],
+  [2, `badly`],
+  [3, `not bad`],
+  [4, `good`],
+  [5, `perfect`]
+]);
 
-        <input className="form__rating-input visually-hidden" name="rating" value="4" id="4-stars"
-          type="radio"/>
-        <label htmlFor="4-stars" className="reviews__rating-label form__rating-label" title="good">
-          <svg className="form__star-image" width="37" height="33">
-            <use xlinkHref="#icon-star"/>
-          </svg>
-        </label>
 
-        <input className="form__rating-input visually-hidden" name="rating" value="3" id="3-stars"
-          type="radio"/>
-        <label htmlFor="3-stars" className="reviews__rating-label form__rating-label" title="not bad">
-          <svg className="form__star-image" width="37" height="33">
-            <use xlinkHref="#icon-star"/>
-          </svg>
-        </label>
+class CommentForm extends PureComponent {
+  constructor(props) {
+    super(props);
 
-        <input className="form__rating-input visually-hidden" name="rating" value="2" id="2-stars"
-          type="radio"/>
-        <label htmlFor="2-stars" className="reviews__rating-label form__rating-label" title="badly">
-          <svg className="form__star-image" width="37" height="33">
-            <use xlinkHref="#icon-star"/>
-          </svg>
-        </label>
+    this.state = {
+      reviewMark: null,
+      reviewText: null,
+    };
 
-        <input className="form__rating-input visually-hidden" name="rating" value="1" id="1-star"
-          type="radio"/>
-        <label htmlFor="1-star" className="reviews__rating-label form__rating-label"
-          title="terribly">
-          <svg className="form__star-image" width="37" height="33">
-            <use xlinkHref="#icon-star"/>
-          </svg>
-        </label>
-      </div>
-      <textarea className="reviews__textarea form__textarea" id="review" name="review"
-        placeholder="Tell how was your stay, what you like and what can be improved"/>
-      <div className="reviews__button-wrapper">
-        <p className="reviews__help">
-          To submit review please make sure to set <span className="reviews__star">rating</span> and describe
-          your stay with at least <b className="reviews__text-amount">50 characters</b>.
-        </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled="">Submit</button>
-      </div>
-    </form>
-  );
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.ratingHandle = this.ratingHandle.bind(this);
+    this.reviewHandle = this.reviewHandle.bind(this);
+  }
+
+  reviewHandle(evt) {
+    this.setState({
+      reviewText: evt.target.value
+    }
+    );
+  }
+
+  ratingHandle(evt) {
+    this.setState({
+      reviewMark: evt.target.value
+    }
+    );
+  }
+
+  handleSubmit(evt) {
+    // eslint-disable-next-line react/prop-types
+    const {onReviewSubmit, id} = this.props;
+
+    evt.preventDefault();
+
+    onReviewSubmit(this.state, id);
+  }
+
+  render() {
+    return (
+      <form
+        className="reviews__form form"
+        action="#"
+        method="post"
+        onSubmit={this.handleSubmit}
+        onChange={this.target}
+      >
+        <label className="reviews__label form__label" htmlFor="review">Your review</label>
+        <div className="reviews__rating-form form__rating">
+          {RatingValues.map((ratingValue) => (
+            <React.Fragment key={ratingValue}>
+              <input
+                className="form__rating-input visually-hidden"
+                name="rating"
+                value={ratingValue}
+                id={`${ratingValue}-stars`}
+                type="radio"
+                onChange={this.ratingHandle}
+              />
+              <label
+                htmlFor={`${ratingValue}-stars`}
+                className="reviews__rating-label form__rating-label"
+                title={TextRating.get(ratingValue)}
+              >
+                <svg className="form__star-image" width={37} height={33}>
+                  <use xlinkHref="#icon-star" />
+                </svg>
+              </label>
+            </React.Fragment>
+          ))}
+        </div>
+        <textarea className="reviews__textarea form__textarea"
+          id="review"
+          name="review"
+          placeholder="Tell how was your stay, what you like and what can be improved"
+          onChange={this.reviewHandle}
+        />
+        <div className="reviews__button-wrapper">
+          <p className="reviews__help">
+            To submit review please make sure to set <span className="reviews__star">rating</span> and describe
+            your stay with at least <b className="reviews__text-amount">50 characters</b>.
+          </p>
+          <button className="reviews__submit form__submit button" type="submit" disabled="">Submit</button>
+        </div>
+      </form>
+    );
+  }
+}
+
+
+const mapStateToProps = (state) => {
+
+  return {
+    loadingStatus: getLoadingStatus(state),
+  };
 };
 
-// LocationsList.propTypes = {
-//   cities: PropTypes.array.isRequired,
-// };
+const mapDispatchToProps = (dispatch) => ({
 
-export default CommentForm;
+  onReviewSubmit(reviewData, id) {
+    dispatch(ReviewOperation.postReview(reviewData, id));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CommentForm);

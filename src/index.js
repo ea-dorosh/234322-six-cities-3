@@ -6,7 +6,7 @@ import {Provider} from 'react-redux';
 import thunk from "redux-thunk";
 import reducer from "./reducer/reducer.js";
 import {createAPI} from "./api";
-import {Operation, ActionCreator as ActionCreatorOffers} from "./reducer/offers/offers.js";
+import {Operation as OffersOperation, ActionCreator as ActionCreatorOffers} from "./reducer/offers/offers.js";
 import {Operation as UserOperation, ActionCreator as ActionCreatorUser, AuthorizationStatus} from "./reducer/user/user.js";
 import {composeWithDevTools} from "redux-devtools-extension";
 
@@ -28,7 +28,7 @@ const store = createStore(
     )
 );
 
-store.dispatch(Operation.download());
+store.dispatch(OffersOperation.download());
 store.dispatch(UserOperation.checkAuth());
 
 ReactDOM.render(

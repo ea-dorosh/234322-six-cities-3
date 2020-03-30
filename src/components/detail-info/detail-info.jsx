@@ -146,7 +146,13 @@ class DetailInfo extends PureComponent {
                     /* eslint-disable-next-line react/prop-types */
                     reviews={offer.reviews}
                   />
-                  { userProperties ? <CommentForm/> : null }
+                  { userProperties ?
+                    <CommentForm
+                      /* eslint-disable-next-line react/prop-types */
+                      id={offer.id}
+                    />
+                    :
+                    null }
                 </section>
               </div>
             </div>
