@@ -4,6 +4,7 @@ import {BrowserRouter, Route, Switch} from "react-router-dom";
 import Main from "../main/main.jsx";
 import DetailInfo from "../detail-info/detail-info.jsx";
 import {connect} from "react-redux";
+import SignIn from "../sign-in/sign-in.jsx";
 
 
 class App extends PureComponent {
@@ -50,18 +51,22 @@ class App extends PureComponent {
           <Route path="/offer/:id">
             <DetailInfo/>
           </Route>
+          <Route path="/dev-auth">
+            <SignIn
+              onSubmit={() => {}}
+            />
+          </Route>
         </Switch>
       </BrowserRouter>
     );
   }
 }
 
-// export default App;
 
 const mapStateToProps = (state) => {
   return {
     load: state.OFFERS.load,
-    error: state.OFFERS.error,
+    error: state.OFFERS.error
   };
 };
 

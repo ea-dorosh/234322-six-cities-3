@@ -1,24 +1,5 @@
-import {extend, getCities} from "../../utils.js";
-import {createOffers} from "../../mocks/offers";
-import {getOffersByCity} from "../../utils";
+import {extend, getCities, prepareData} from "../../utils.js";
 
-
-// const OFFERS_QUANTITY = 8;
-
-// const offersMock = createOffers(OFFERS_QUANTITY);
-//
-// const citiesMock = getCities(offersMock);
-//
-// const emptyCity = {
-//   location: {
-//     latitude: 52.38333,
-//     longitude: 4.9,
-//     zoom: 12
-//   },
-//   name: `Munich`,
-// };
-//
-// cities.push(emptyCity);
 
 const initialState = {
   load: null,
@@ -53,7 +34,8 @@ const Operation = {
   download: () => (dispatch, getState, api) => {
     return api.get(`/hotels`)
       .then((response) => {
-        dispatch(ActionCreator.loadOffers(response.data));
+        const data = prepareData(response.data);
+        dispatch(ActionCreator.loadOffers(data));
       })
       .catch((err) => {
         throw err;
@@ -64,6 +46,7 @@ const Operation = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.LOAD_OFFERS:
+      // console.log(action.payload)
       const cities = getCities(action.payload);
 
       return extend(state, {
@@ -84,3 +67,4 @@ const reducer = (state = initialState, action) => {
 };
 
 export {reducer, Operation, ActionType, ActionCreator};
+

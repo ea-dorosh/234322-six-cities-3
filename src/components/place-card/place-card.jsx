@@ -1,5 +1,5 @@
 import React, {PureComponent} from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import {Link} from 'react-router-dom';
 import {CITIES, ratingToStar} from "../../utils.js";
 
@@ -12,6 +12,7 @@ class PlaceCard extends PureComponent {
 
 
   _handleOfferHover() {
+    // eslint-disable-next-line react/prop-types
     if (this.props.handleOfferHover) {
       // eslint-disable-next-line react/prop-types
       this.props.handleOfferHover(this.props.offer);
@@ -20,6 +21,7 @@ class PlaceCard extends PureComponent {
 
 
   render() {
+    // eslint-disable-next-line react/prop-types
     const {offer, cardClass, handleOfferHover} = this.props;
 
 
@@ -27,6 +29,7 @@ class PlaceCard extends PureComponent {
       <span>Premium</span>
     </div>;
 
+    // eslint-disable-next-line react/prop-types
     const rating = ratingToStar(offer.rating);
 
     return (
@@ -39,16 +42,19 @@ class PlaceCard extends PureComponent {
           }
         }}
       >
+        {/* eslint-disable-next-line react/prop-types */}
         {offer.isPremium ? premium : null}
         <div className={`${cardClass === CITIES ? CITIES : `near-places`}__image-wrapper place-card__image-wrapper`}>
           {/* eslint-disable-next-line react/prop-types */}
           <Link to={`/offer/${offer.id}`}>
-            <img className="place-card__image" src={`/${offer.preview_image}`} width="260" height="200" alt="Place image"/>
+            {/* eslint-disable-next-line react/prop-types */}
+            <img className="place-card__image" src={`${offer.img}`} width="260" height="200" alt="Place image"/>
           </Link>
         </div>
         <div className="place-card__info">
           <div className="place-card__price-wrapper">
             <div className="place-card__price">
+              {/* eslint-disable-next-line react/prop-types */}
               <b className="place-card__price-value">&euro;{offer.price}</b>
               <span className="place-card__price-text">&#47;&nbsp;night</span>
             </div>
@@ -66,8 +72,10 @@ class PlaceCard extends PureComponent {
             </div>
           </div>
           <h2 className="place-card__name">
+            {/* eslint-disable-next-line react/prop-types */}
             {offer.name}
           </h2>
+          {/* eslint-disable-next-line react/prop-types */}
           <p className="place-card__type">{offer.type}</p>
         </div>
       </article>
@@ -75,18 +83,19 @@ class PlaceCard extends PureComponent {
   }
 }
 
-PlaceCard.propTypes = {
-  offer: PropTypes.shape({
-    isPremium: PropTypes.bool.isRequired,
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    preview_image: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-  }).isRequired,
-  handleOfferHover: PropTypes.func,
-  cardClass: PropTypes.string,
-};
+// PlaceCard.propTypes = {
+//   offer: PropTypes.shape({
+//     isPremium: PropTypes.bool.isRequired,
+//     name: PropTypes.string.isRequired,
+//     price: PropTypes.number.isRequired,
+//     // eslint-disable-next-line camelcase
+//     preview_image: PropTypes.string.isRequired,
+//     type: PropTypes.string.isRequired,
+//     rating: PropTypes.number.isRequired,
+//   }).isRequired,
+//   handleOfferHover: PropTypes.func,
+//   cardClass: PropTypes.string,
+// };
 
 
 export default PlaceCard;

@@ -45,7 +45,6 @@ const mapDispatchToProps = (dispatch) => ({
 
   handleCityClick(activeCity) {
     dispatch(ActionCreator.changeCity(activeCity));
-    dispatch(ActionCreator.getOffers(activeCity.name));
   },
 
 });

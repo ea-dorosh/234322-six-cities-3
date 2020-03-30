@@ -10,6 +10,8 @@ import {ActionCreator} from "../../reducer/main/main.js";
 import MainEmpty from "../main-empty/main-emty.jsx";
 import {getMarker} from "../../reducer/main/selectors.js";
 import {selectOffers, getActiveCity} from "../../reducer/offers/selectors.js";
+import {Operation as UserOperation} from "../../reducer/user/user";
+import HeaderUser from "../header-user/header-user.jsx";
 
 
 const Main = (props) => {
@@ -17,7 +19,7 @@ const Main = (props) => {
     activeCity,
     offers,
     // eslint-disable-next-line react/prop-types
-    marker, handleOfferHover,
+    marker, handleOfferHover
   } = props;
 
   const advertsCount = offers.length;
@@ -33,15 +35,7 @@ const Main = (props) => {
               </a>
             </div>
             <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                  </a>
-                </li>
-              </ul>
+              <HeaderUser/>
             </nav>
           </div>
         </div>
@@ -107,11 +101,14 @@ const mapStateToProps = (state) => {
   return {
     activeCity: getActiveCity(state),
     offers: selectOffers(state),
-    marker: getMarker(state)
+    marker: getMarker(state),
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
+  login(authData) {
+    dispatch(UserOperation.login(authData));
+  },
 
   handleOfferHover(offer) {
     dispatch(ActionCreator.highlightMarker(offer));
