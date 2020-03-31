@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import {connect} from "react-redux";
 import {getLoadingStatus} from "../../reducer/review/selectors.js";
-import {Operation as ReviewOperation} from "../../reducer/review/review.js";
+import {Operation as ReviewOperation, ActionCreator, LoadingStatus} from "../../reducer/review/review.js";
 
 const RatingValues = [5, 4, 3, 2, 1];
 
@@ -20,8 +20,9 @@ class CommentForm extends PureComponent {
 
     this.state = {
       rating: null,
-      comment: null,
+      comment: ``,
     };
+
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.ratingHandle = this.ratingHandle.bind(this);
@@ -33,6 +34,7 @@ class CommentForm extends PureComponent {
       comment: evt.target.value
     }
     );
+
   }
 
   ratingHandle(evt) {
@@ -50,7 +52,18 @@ class CommentForm extends PureComponent {
     onReviewSubmit(this.state, id);
   }
 
+  componentDidUpdate() {
+    // eslint-disable-next-line react/prop-types
+    const {loadingStatus, onLoadingStatusClear} = this.props;
+
+    if (loadingStatus === LoadingStatus.SUCCESS) {
+      onLoadingStatusClear();
+    }
+  }
+
   render() {
+    // eslint-disable-next-line react/prop-types
+    const {loadingStatus} = this.props;
 
     return (
       <form
@@ -70,7 +83,9 @@ class CommentForm extends PureComponent {
                 value={ratingValue}
                 id={`${ratingValue}-stars`}
                 type="radio"
+                disabled={loadingStatus === LoadingStatus.DISABLED}
                 onChange={this.ratingHandle}
+                checked={loadingStatus === LoadingStatus.SUCCESS ? false : null}
               />
               <label
                 htmlFor={`${ratingValue}-stars`}
@@ -88,14 +103,24 @@ class CommentForm extends PureComponent {
           id="review"
           name="review"
           placeholder="Tell how was your stay, what you like and what can be improved"
+          minLength={50}
+          maxLength={300}
+          disabled={loadingStatus === LoadingStatus.DISABLED}
           onChange={this.reviewHandle}
+          value={loadingStatus === LoadingStatus.SUCCESS ? `` : null}
         />
+        {loadingStatus === LoadingStatus.FAILED ? <p style={{background: `red`}}>PLEASE TRY AGAIN</p> : null}
         <div className="reviews__button-wrapper">
           <p className="reviews__help">
             To submit review please make sure to set <span className="reviews__star">rating</span> and describe
             your stay with at least <b className="reviews__text-amount">50 characters</b>.
           </p>
-          <button className="reviews__submit form__submit button" type="submit" disabled="">Submit</button>
+          <button
+            className="reviews__submit form__submit button"
+            type="submit"
+            disabled={!(this.state.comment.length > 50 && this.state.comment.length < 300 && this.state.rating)}
+          >
+            Submit</button>
         </div>
       </form>
     );
@@ -114,6 +139,10 @@ const mapDispatchToProps = (dispatch) => ({
 
   onReviewSubmit(reviewData, id) {
     dispatch(ReviewOperation.postReview(reviewData, id));
+  },
+
+  onLoadingStatusClear() {
+    dispatch(ActionCreator.changeLoadingStatus(``));
   },
 });
 
