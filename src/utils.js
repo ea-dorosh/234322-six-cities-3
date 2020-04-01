@@ -87,6 +87,15 @@ export const SortType = {
   TOP_RATED: `Top rated first`
 };
 
+export const AppRoute = {
+  offer(id) {
+    return `/offer/:${id}`;
+  },
+  LOGIN: `/dev-auth`,
+  FAVORITE: `/favorites`,
+  ROOT: `/`,
+};
+
 export const CITIES = `cities`;
 
 const ratingToStarMap = {1: 20, 2: 40, 3: 60, 4: 80, 5: 100};

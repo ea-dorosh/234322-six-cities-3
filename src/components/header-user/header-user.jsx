@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import {AuthorizationStatus} from "../../reducer/user/user";
 import {Link} from "react-router-dom";
 import {getAuthorizationStatus} from "../../reducer/user/selectors";
+import {AppRoute} from "../../utils.js";
 
 
 class HeaderUser extends PureComponent {
@@ -22,22 +23,23 @@ class HeaderUser extends PureComponent {
         <li className="header__nav-item user">
           {authorizationStatus === AuthorizationStatus.NO_AUTH ?
             <Link
-              to={`/dev-auth`}
-              className="header__nav-link header__nav-link--profile" href="#">
+              to={AppRoute.LOGIN}
+              className="header__nav-link header__nav-link--profile">
               <div className="header__avatar-wrapper user__avatar-wrapper">
               </div>
               <span className="header__user-name user__name">Sign in</span>
             </Link>
             :
-            <a
-              className="header__nav-link header__nav-link--profile" href="#">
+            <Link
+              to={AppRoute.FAVORITE}
+              className="header__nav-link header__nav-link--profile">
               <div className="header__avatar-wrapper user__avatar-wrapper">
               </div>
               <span className="header__user-name user__name">
                 {/* eslint-disable-next-line react/prop-types */}
                 {userProperties.email}
               </span>
-            </a>
+            </Link>
           }
         </li>
       </ul>

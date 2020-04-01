@@ -1,7 +1,7 @@
 import React, {PureComponent} from "react";
 // import PropTypes from "prop-types";
 import {Link} from 'react-router-dom';
-import {CITIES, ratingToStar} from "../../utils.js";
+import {AppRoute, CITIES, ratingToStar} from "../../utils.js";
 
 class PlaceCard extends PureComponent {
   constructor(props) {
@@ -46,7 +46,7 @@ class PlaceCard extends PureComponent {
         {offer.isPremium ? premium : null}
         <div className={`${cardClass === CITIES ? CITIES : `near-places`}__image-wrapper place-card__image-wrapper`}>
           {/* eslint-disable-next-line react/prop-types */}
-          <Link to={`/offer/${offer.id}`}>
+          <Link to={AppRoute.offer(offer.id)}>
             {/* eslint-disable-next-line react/prop-types */}
             <img className="place-card__image" src={`${offer.img}`} width="260" height="200" alt="Place image"/>
           </Link>

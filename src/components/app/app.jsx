@@ -1,10 +1,11 @@
 import React, {PureComponent} from "react";
 // import PropTypes from "prop-types";
-import {BrowserRouter, Route, Switch} from "react-router-dom";
+import {Router, Route, Switch} from "react-router-dom";
 import Main from "../main/main.jsx";
 import DetailInfo from "../detail-info/detail-info.jsx";
 import {connect} from "react-redux";
 import SignIn from "../sign-in/sign-in.jsx";
+import {AppRoute} from "../../utils.js";
 
 
 class App extends PureComponent {
@@ -43,21 +44,19 @@ class App extends PureComponent {
   render() {
 
     return (
-      <BrowserRouter>
+      <Router>
         <Switch>
-          <Route exact path="/">
-            {this._renderApplication()}
+          <Route exact path={AppRoute.ROOT}>
+            <Main/>
           </Route>
           <Route path="/offer/:id">
             <DetailInfo/>
           </Route>
-          <Route path="/dev-auth">
-            <SignIn
-              onSubmit={() => {}}
-            />
+          <Route exact path={AppRoute.LOGIN}>
+            <SignIn/>
           </Route>
         </Switch>
-      </BrowserRouter>
+      </Router>
     );
   }
 }

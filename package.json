@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "axios": "latest",
+    "history": "4.10.1",
     "jest-jasmine2": "latest",
     "leaflet": "1.6.0",
     "prop-types": "15.7.2",
