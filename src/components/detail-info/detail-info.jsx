@@ -7,19 +7,51 @@ import PlaceCardList from "../place-card-list/place-card-list.jsx";
 import {connect} from "react-redux";
 import {createSelector} from "reselect";
 import {ratingToStar} from "../../utils.js";
-import {getActiveCity, selectOffers} from "../../reducer/offers/selectors";
 import HeaderUser from "../header-user/header-user.jsx";
 import CommentForm from "../comment-form/comment-form.jsx";
+import {Operation as ReviewOperation} from "../../reducer/review/review.js";
+import {Operation as OffersOperation} from "../../reducer/offers/offers.js";
+import {getActiveCity, selectOffers, getNearOffers, getLoadStatus, getError} from "../../reducer/offers/selectors";
+import {getUserProperties} from "../../reducer/user/selectors";
+import {getReviews} from "../../reducer/review/selectors";
+import withLoad from "../../hocs/withLoad/withLoad.jsx";
+
 
 class DetailInfo extends PureComponent {
   constructor(props) {
     super(props);
 
+    this.loadData = this.loadData.bind(this);
+  }
+
+  loadData() {
+    // eslint-disable-next-line react/prop-types
+    const {downloadNear, downloadReviews, offer} = this.props;
+
+    // eslint-disable-next-line react/prop-types
+    downloadNear(offer.id);
+    // eslint-disable-next-line react/prop-types
+    downloadReviews(offer.id);
+  }
+
+  componentDidMount() {
+    this.loadData();
+  }
+
+  // eslint-disable-next-line no-unused-vars
+  componentDidUpdate(prevProps) {
+    // console.log(prevProps.offerReviews !== this.props.offerReviews)
+
+    // if (prevProps.offerReviews !== this.props.offerReviews) {
+    //   this.loadData();
+    // }
+    // prevProps.nearOffers !== this.props.nearOffers
   }
 
   render() {
     // eslint-disable-next-line react/prop-types
-    const {offer, nearOffers, activeCity, userProperties} = this.props;
+    const {offer, userProperties, offerReviews, nearOffers, activeCity,
+    } = this.props;
 
     const premium = <div className="property__mark">
       <span>Premium</span>
@@ -125,7 +157,7 @@ class DetailInfo extends PureComponent {
                     <div className={avatarClasses}>
                       {/* eslint-disable-next-line react/prop-types */}
                       <img className="property__avatar user__avatar" src={`/${offer.holder.img}`} width="74" height="74"
-                        alt="Host avatar"/>
+                           alt="Host avatar"/>
                     </div>
                     <span className="property__user-name">
                       {/* eslint-disable-next-line react/prop-types */}
@@ -141,10 +173,10 @@ class DetailInfo extends PureComponent {
                 </div>
                 <section className="property__reviews reviews">
                   {/* eslint-disable-next-line react/prop-types */}
-                  <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{offer.reviews.length}</span></h2>
+                  <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{offerReviews.length}</span></h2>
                   <ReviewsList
                     /* eslint-disable-next-line react/prop-types */
-                    reviews={offer.reviews}
+                    reviews={offerReviews}
                   />
                   { userProperties ?
                     <CommentForm
@@ -184,16 +216,9 @@ class DetailInfo extends PureComponent {
 
 
 const selectOfferById = createSelector([
-  selectOffers,
-  (state, id) => id
-], (offers, id) => offers.find((offer) => offer.id === id)
-);
-
-const findNearOffers = createSelector([
-  selectOffers,
-  (state, id) => id
-],
-(offers, id) => offers.filter((otherOffer) => otherOffer.id !== id)
+    selectOffers,
+    (state, id) => id
+  ], (offers, id) => offers.find((offer) => offer.id === id)
 );
 
 const mapStateToProps = (state, ownProps) => {
@@ -203,9 +228,21 @@ const mapStateToProps = (state, ownProps) => {
   return {
     offer: selectOfferById(state, offerId),
     activeCity: getActiveCity(state),
-    nearOffers: findNearOffers(state, offerId),
-    userProperties: state.USER.userProperties,
+    userProperties: getUserProperties(state),
+    offerReviews: getReviews(state),
+    nearOffers: getNearOffers(state),
   };
 };
 
-export default withRouter(connect(mapStateToProps)(DetailInfo));
+const mapDispatchToProps = (dispatch) => ({
+
+  downloadReviews(id) {
+    dispatch(ReviewOperation.getReviews(id));
+  },
+
+  downloadNear(id) {
+    dispatch(OffersOperation.downloadNearOffers(id));
+  }
+});
+
+export default withRouter(withLoad(connect(mapStateToProps, mapDispatchToProps)(DetailInfo), getLoadStatus, getError));

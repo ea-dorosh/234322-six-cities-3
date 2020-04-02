@@ -18,7 +18,8 @@ class Review extends PureComponent {
   }
 
   render() {
-    const {rating, name, text, date} = this.props.review;
+    // eslint-disable-next-line no-unused-vars,react/prop-types
+    const {rating, name, comment, date, id, user} = this.props.review;
 
     // eslint-disable-next-line react/prop-types
     const ratingReview = ratingToStar(rating);
@@ -27,11 +28,13 @@ class Review extends PureComponent {
       <li className="reviews__item">
         <div className="reviews__user user">
           <div className="reviews__avatar-wrapper user__avatar-wrapper">
-            <img className="reviews__avatar user__avatar" src="/img/avatar-max.jpg" width="54" height="54"
+            {/* eslint-disable-next-line react/prop-types */}
+            <img className="reviews__avatar user__avatar" src={user.avatarUrl} width="54" height="54"
               alt="Reviews avatar"/>
           </div>
           <span className="reviews__user-name">
-            {name}
+            {/* eslint-disable-next-line react/prop-types */}
+            {user.name}
           </span>
         </div>
         <div className="reviews__info">
@@ -42,7 +45,7 @@ class Review extends PureComponent {
             </div>
           </div>
           <p className="reviews__text">
-            {text}
+            {comment}
           </p>
           <time className="reviews__time" dateTime={date}>{this.dateStamp(date)}</time>
         </div>
@@ -55,8 +58,7 @@ Review.propTypes = {
   review: PropTypes.shape(
       {
         rating: PropTypes.number.isRequired,
-        name: PropTypes.string.isRequired,
-        text: PropTypes.string.isRequired,
+        comment: PropTypes.string.isRequired,
         date: PropTypes.string.isRequired,
       }
   )

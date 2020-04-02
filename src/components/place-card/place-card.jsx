@@ -71,10 +71,13 @@ class PlaceCard extends PureComponent {
               <span className="visually-hidden">Rating</span>
             </div>
           </div>
-          <h2 className="place-card__name">
-            {/* eslint-disable-next-line react/prop-types */}
-            {offer.name}
-          </h2>
+          {/* eslint-disable-next-line react/prop-types */}
+          <Link to={AppRoute.offer(offer.id)}>
+            <h2 className="place-card__name">
+              {/* eslint-disable-next-line react/prop-types */}
+              {offer.name}
+            </h2>
+          </Link>
           {/* eslint-disable-next-line react/prop-types */}
           <p className="place-card__type">{offer.type}</p>
         </div>

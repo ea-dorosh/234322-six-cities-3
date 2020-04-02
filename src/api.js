@@ -22,6 +22,7 @@ export const createAPI = () => {
   };
 
   const onFail = (err) => {
+
     const {response} = err;
 
     if (response.status === ApiSettings.ERROR.UNAUTHORIZED) {

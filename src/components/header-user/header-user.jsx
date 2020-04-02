@@ -3,7 +3,7 @@ import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 import {AuthorizationStatus} from "../../reducer/user/user";
 import {Link} from "react-router-dom";
-import {getAuthorizationStatus} from "../../reducer/user/selectors";
+import {getAuthorizationStatus, getUserProperties} from "../../reducer/user/selectors";
 import {AppRoute} from "../../utils.js";
 
 
@@ -37,7 +37,7 @@ class HeaderUser extends PureComponent {
               </div>
               <span className="header__user-name user__name">
                 {/* eslint-disable-next-line react/prop-types */}
-                {userProperties.email}
+                {userProperties ? userProperties.email : null}
               </span>
             </Link>
           }
@@ -50,7 +50,7 @@ class HeaderUser extends PureComponent {
 const mapStateToProps = (state) => {
   return {
     authorizationStatus: getAuthorizationStatus(state),
-    userProperties: state.USER.userProperties,
+    userProperties: getUserProperties(state),
   };
 };
 

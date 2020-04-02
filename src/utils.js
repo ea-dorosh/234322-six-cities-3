@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 export const getRandomNumber = (min, max) => {
   return Math.floor(min + Math.random() * (max + 1 - min));
 };
@@ -59,26 +61,30 @@ export const prepareData = (data) => {
         longitude: offer.location.longitude,
         zoom: offer.location.zoom,
       },
-      id: 1,
-      reviews: [
-        {
-          text: `some information about offer, some information about offer`,
-          rating: 3.3,
-          name: `Konstantin`,
-          date: `2019-04-24`,
-          id: 1,
-        },
-        {
-          text: `some information about offer, some information about offer`,
-          rating: 4.5,
-          name: `Kostya`,
-          date: `2017-05-26`,
-          id: 2,
-        },
-      ],
+      id: offer.id,
     }
   ));
 };
+
+export const prepareReview = (reviews) => {
+
+  return reviews.map((review) => (
+    {
+      rating: review.rating,
+      name: review.name,
+      comment: review.comment,
+      date: review.date,
+      id: review.id,
+      user: {
+        avatarUrl: review.user.avatar_url,
+        id: review.user.id,
+        isPro: review.user.is_pro,
+        name: review.user.name,
+      }
+    }
+  ));
+};
+
 
 export const SortType = {
   POPULAR: `Popular`,
@@ -89,9 +95,9 @@ export const SortType = {
 
 export const AppRoute = {
   offer(id) {
-    return `/offer/:${id}`;
+    return `/offer/${id}`;
   },
-  LOGIN: `/dev-auth`,
+  LOGIN: `/login`,
   FAVORITE: `/favorites`,
   ROOT: `/`,
 };
