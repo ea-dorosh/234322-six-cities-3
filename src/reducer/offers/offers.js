@@ -93,7 +93,6 @@ const reducer = (state = initialState, action) => {
       });
 
     case ActionType.REFRESH_OFFERS:
-
       return extend(state, {
         offers: action.payload,
       });

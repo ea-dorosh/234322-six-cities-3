@@ -157,7 +157,7 @@ class DetailInfo extends PureComponent {
                     <div className={avatarClasses}>
                       {/* eslint-disable-next-line react/prop-types */}
                       <img className="property__avatar user__avatar" src={`/${offer.holder.img}`} width="74" height="74"
-                           alt="Host avatar"/>
+                        alt="Host avatar"/>
                     </div>
                     <span className="property__user-name">
                       {/* eslint-disable-next-line react/prop-types */}
@@ -216,9 +216,9 @@ class DetailInfo extends PureComponent {
 
 
 const selectOfferById = createSelector([
-    selectOffers,
-    (state, id) => id
-  ], (offers, id) => offers.find((offer) => offer.id === id)
+  selectOffers,
+  (state, id) => id
+], (offers, id) => offers.find((offer) => offer.id === id)
 );
 
 const mapStateToProps = (state, ownProps) => {
@@ -246,3 +246,5 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default withRouter(withLoad(connect(mapStateToProps, mapDispatchToProps)(DetailInfo), getLoadStatus, getError));
+
+// 1.
