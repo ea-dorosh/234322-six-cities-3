@@ -15,7 +15,7 @@ class SortOptions extends PureComponent {
 
     return (
       <form className="places__sorting" action="#" method="get">
-        <span className="places__sorting-caption">Sort by</span>
+        <span className="places__sorting-caption">Sort by </span>
         <span className="places__sorting-type" tabIndex="0"
           onClick={handleToggleClick}>
           {sortType}

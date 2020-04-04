@@ -2,8 +2,10 @@ import React, {PureComponent, createRef} from "react";
 // import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Operation as UserOperation} from "../../reducer/user/user";
-import {Redirect} from "react-router-dom";
-
+import {Link, Redirect} from "react-router-dom";
+import {AppRoute} from "../../utils";
+import {AuthorizationStatus} from "../../reducer/user/user";
+import {getAuthorizationStatus} from "../../reducer/user/selectors";
 
 class SignIn extends PureComponent {
   constructor(props) {
@@ -28,13 +30,12 @@ class SignIn extends PureComponent {
   }
 
   render() {
-
     // eslint-disable-next-line react/prop-types
-    const {userProperties} = this.props;
+    const {authorizationStatus} = this.props;
 
-    if (userProperties) {
+    if (authorizationStatus === AuthorizationStatus.AUTH) {
       return (
-        <Redirect path="/"/>
+        <Redirect to={AppRoute.ROOT}/>
       );
     }
 
@@ -44,9 +45,9 @@ class SignIn extends PureComponent {
           <div className="container">
             <div className="header__wrapper">
               <div className="header__left">
-                <a className="header__logo-link" href="">
+                <Link to={AppRoute.ROOT} className="header__logo-link">
                   <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -89,7 +90,7 @@ class SignIn extends PureComponent {
 
 const mapStateToProps = (state) => {
   return {
-    userProperties: state.USER.userProperties
+    authorizationStatus: getAuthorizationStatus(state),
   };
 };
 

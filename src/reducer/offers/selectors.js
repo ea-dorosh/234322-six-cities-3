@@ -7,10 +7,21 @@ import {getOffersByCity} from "../../utils";
 
 const NAME_SPACE = NameSpace.OFFERS;
 
+export const getLoadStatus = (state) => {
+  return state[NAME_SPACE].loadingOfferStatus;
+};
+
+export const getNearOffers = (state) => {
+  return state[NAME_SPACE].nearOffers;
+};
+
+export const getError = (state) => {
+  return state[NAME_SPACE].error;
+};
+
 export const getActiveCity = (state) => {
   return state[NAME_SPACE].activeCity;
 };
-
 
 export const getCitiesList = (state) => {
   return state[NAME_SPACE].cities;
@@ -47,4 +58,8 @@ export const sortOffersBySortType = createSelector([
 
 export const selectOffers = (state) => {
   return sortOffersBySortType(state);
+};
+
+export const getFavoriteOffers = (state) => {
+  return state[NAME_SPACE].offers.filter((offer) => (offer.isFavorite));
 };
