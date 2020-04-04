@@ -1,5 +1,4 @@
-import {extend} from '../../utils.js';
-import {prepareReview} from "../../utils";
+import {extend, prepareReview} from '../../utils.js';
 
 const LoadingStatus = {
   DISABLED: `DISABLED`,

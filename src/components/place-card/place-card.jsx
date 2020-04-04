@@ -1,13 +1,20 @@
 import React, {PureComponent} from "react";
 // import PropTypes from "prop-types";
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import {AppRoute, CITIES, ratingToStar} from "../../utils.js";
+import {connect} from "react-redux";
+import {getAuthorizationStatus} from "../../reducer/user/selectors";
+import {AuthorizationStatus} from "../../reducer/user/user.js";
+import {Operation as FavoriteOperation} from "../../reducer/favorites/favorites.js";
+import {Operation as OffersOperation} from "../../reducer/offers/offers.js";
+
 
 class PlaceCard extends PureComponent {
   constructor(props) {
     super(props);
 
     this._handleOfferHover = this._handleOfferHover.bind(this);
+    this._toFavoritesHandler = this._toFavoritesHandler.bind(this);
   }
 
 
@@ -16,6 +23,23 @@ class PlaceCard extends PureComponent {
     if (this.props.handleOfferHover) {
       // eslint-disable-next-line react/prop-types
       this.props.handleOfferHover(this.props.offer);
+    }
+  }
+
+  _toFavoritesHandler() {
+    // eslint-disable-next-line react/prop-types
+    const {history, handleFavoriteStatus, offer} = this.props;
+
+    // eslint-disable-next-line react/prop-types
+    if (this.props.authorizationStatus === AuthorizationStatus.NO_AUTH) {
+      // eslint-disable-next-line react/prop-types
+      history.push(AppRoute.LOGIN);
+
+      // eslint-disable-next-line react/prop-types
+    } else if (this.props.authorizationStatus === AuthorizationStatus.AUTH) {
+      const status = offer.isFavorite ? 0 : 1;
+      // eslint-disable-next-line react/prop-types
+      handleFavoriteStatus(status, this.props.offer.id);
     }
   }
 
@@ -58,7 +82,12 @@ class PlaceCard extends PureComponent {
               <b className="place-card__price-value">&euro;{offer.price}</b>
               <span className="place-card__price-text">&#47;&nbsp;night</span>
             </div>
-            <button className="place-card__bookmark-button button" type="button">
+            <button
+              /* eslint-disable-next-line react/prop-types */
+              className={`place-card__bookmark-button button ${offer.isFavorite ? `place-card__bookmark-button--active` : null}`}
+              type="button"
+              onClick={this._toFavoritesHandler}
+            >
               <svg className="place-card__bookmark-icon" width="18" height="19">
                 <use xlinkHref="#icon-bookmark"/>
               </svg>
@@ -100,5 +129,23 @@ class PlaceCard extends PureComponent {
 //   cardClass: PropTypes.string,
 // };
 
+const mapStateToProps = (state, ownProps) => {
 
-export default PlaceCard;
+  return {
+    authorizationStatus: getAuthorizationStatus(state),
+    history: ownProps.history,
+    favoriteStatus: state.FAVORITE.favoriteStatus,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+
+  handleFavoriteStatus(status, id) {
+    dispatch(FavoriteOperation.addToFavorite(status, id));
+    dispatch(OffersOperation.refreshOffers());
+  }
+
+});
+
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PlaceCard));

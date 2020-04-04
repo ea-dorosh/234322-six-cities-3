@@ -59,3 +59,7 @@ export const sortOffersBySortType = createSelector([
 export const selectOffers = (state) => {
   return sortOffersBySortType(state);
 };
+
+export const getFavoriteOffers = (state) => {
+  return state[NAME_SPACE].offers.filter((offer) => (offer.isFavorite));
+};

@@ -18,6 +18,7 @@ const initialState = {
 
 const ActionType = {
   LOAD_OFFERS: `LOAD_OFFERS`,
+  REFRESH_OFFERS: `REFRESH_OFFERS`,
   CHANGE_CITY: `CHANGE_CITY`,
   GET_ERROR: `GET_ERROR`,
   LOAD_NEAR_OFFERS: `LOAD_NEAR_OFFERS`,
@@ -26,6 +27,10 @@ const ActionType = {
 const ActionCreator = {
   loadOffers: (offers) => ({
     type: ActionType.LOAD_OFFERS,
+    payload: offers
+  }),
+  refresh: (offers) => ({
+    type: ActionType.REFRESH_OFFERS,
     payload: offers
   }),
   changeCity: (city) => ({
@@ -53,6 +58,16 @@ const Operation = {
         throw err;
       });
   },
+  refreshOffers: () => (dispatch, getState, api) => {
+    return api.get(`/hotels`)
+      .then((response) => {
+        const data = prepareData(response.data);
+        dispatch(ActionCreator.refresh(data));
+      })
+      .catch((err) => {
+        throw err;
+      });
+  },
   downloadNearOffers: (id) => (dispatch, getState, api) => {
     return api.get(`/hotels/${id}/nearby`)
       .then((response) => {
@@ -74,7 +89,13 @@ const reducer = (state = initialState, action) => {
         loadingOfferStatus: LoadingOfferStatus.SUCCESS,
         cities,
         offers: action.payload,
-        activeCity: cities[0]
+        activeCity: cities[0],
+      });
+
+    case ActionType.REFRESH_OFFERS:
+
+      return extend(state, {
+        offers: action.payload,
       });
 
     case ActionType.CHANGE_CITY:
