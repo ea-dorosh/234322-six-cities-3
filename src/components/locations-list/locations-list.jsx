@@ -1,17 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import LocationsListItem from "../locations-list-item/location-list-item.jsx";
+import LocationsListItem from "../locations-list-item/locations-list-item.jsx";
 import {connect} from "react-redux";
 import {getCitiesList} from "../../reducer/offers/selectors";
 
-const LocationsList = (props) => {
+export const LocationsList = (props) => {
   const {cities} = props;
 
   return (
     <ul className="locations__list tabs__list">
-      {cities.map((city) => (
+      {cities.map((city, index) => (
         <LocationsListItem
-          key={city.name}
+          key={index}
           city={city}
         />
       ))}

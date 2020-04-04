@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should LocationsListItem render correctly 1`] = `
+<li
+  className="locations__item"
+>
+  <a
+    className="locations__item-link tabs__item  tabs__item--active"
+    href="#"
+    onClick={[Function]}
+  >
+    <span />
+  </a>
+</li>
+`;

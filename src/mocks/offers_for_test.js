@@ -184,5 +184,12 @@ const citiesMock = [
   }
 ];
 
+const userPropertiesMock = {
+  id: 1,
+  email: `ea-dorosh@yandex.ru`,
+  name: `ea-dorosh`,
+  avatarUrl: `/static/avatar/6.jpg`,
+};
 
-export {offersMock, offerMock, SortTypeMock, citiesMock};
+
+export {offersMock, offerMock, SortTypeMock, citiesMock, userPropertiesMock};
