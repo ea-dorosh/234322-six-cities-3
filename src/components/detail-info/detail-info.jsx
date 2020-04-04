@@ -6,13 +6,15 @@ import Map from "../map/map.jsx";
 import PlaceCardList from "../place-card-list/place-card-list.jsx";
 import {connect} from "react-redux";
 import {createSelector} from "reselect";
-import {ratingToStar} from "../../utils.js";
+import {ratingToStar, AppRoute} from "../../utils.js";
 import HeaderUser from "../header-user/header-user.jsx";
 import CommentForm from "../comment-form/comment-form.jsx";
 import {Operation as ReviewOperation} from "../../reducer/review/review.js";
 import {Operation as OffersOperation} from "../../reducer/offers/offers.js";
+import {Operation as FavoriteOperation} from "../../reducer/favorites/favorites";
+import {AuthorizationStatus} from "../../reducer/user/user";
 import {getActiveCity, selectOffers, getNearOffers, getLoadStatus, getError} from "../../reducer/offers/selectors";
-import {getUserProperties} from "../../reducer/user/selectors";
+import {getAuthorizationStatus, getUserProperties} from "../../reducer/user/selectors";
 import {getReviews} from "../../reducer/review/selectors";
 import withLoad from "../../hocs/withLoad/withLoad.jsx";
 
@@ -22,6 +24,24 @@ class DetailInfo extends PureComponent {
     super(props);
 
     this.loadData = this.loadData.bind(this);
+    this._toFavoritesHandler = this._toFavoritesHandler.bind(this);
+  }
+
+  _toFavoritesHandler() {
+    // eslint-disable-next-line react/prop-types
+    const {history, handleFavoriteStatus, offer} = this.props;
+
+    // eslint-disable-next-line react/prop-types
+    if (this.props.authorizationStatus === AuthorizationStatus.NO_AUTH) {
+      // eslint-disable-next-line react/prop-types
+      history.push(AppRoute.LOGIN);
+
+      // eslint-disable-next-line react/prop-types
+    } else if (this.props.authorizationStatus === AuthorizationStatus.AUTH) {
+      const status = offer.isFavorite ? 0 : 1;
+      // eslint-disable-next-line react/prop-types
+      handleFavoriteStatus(status, this.props.offer.id);
+    }
   }
 
   loadData() {
@@ -106,8 +126,12 @@ class DetailInfo extends PureComponent {
                     {/* eslint-disable-next-line react/prop-types */}
                     {offer.name}
                   </h1>
-                  <button className="property__bookmark-button button" type="button">
-                    <svg className="property__bookmark-icon" width="31" height="33">
+                  <button
+                    className={`property__bookmark-button button ${offer.isFavorite ? `property__bookmark-button--active` : null}`}
+                    type="button"
+                    onClick={this._toFavoritesHandler}
+                  >
+                    <svg className="property__bookmark-icon place-card__bookmark-icon" width="31" height="33">
                       <use xlinkHref="#icon-bookmark"/>
                     </svg>
                     <span className="visually-hidden">To bookmarks</span>
@@ -226,6 +250,9 @@ const mapStateToProps = (state, ownProps) => {
   const offerId = Number(ownProps.match.params.id);
 
   return {
+    authorizationStatus: getAuthorizationStatus(state),
+    history: ownProps.history,
+    favoriteStatus: state.FAVORITE.favoriteStatus,
     offer: selectOfferById(state, offerId),
     activeCity: getActiveCity(state),
     userProperties: getUserProperties(state),
@@ -242,6 +269,11 @@ const mapDispatchToProps = (dispatch) => ({
 
   downloadNear(id) {
     dispatch(OffersOperation.downloadNearOffers(id));
+  },
+
+  handleFavoriteStatus(status, id) {
+    dispatch(FavoriteOperation.addToFavorite(status, id));
+    dispatch(OffersOperation.refreshOffers());
   }
 });
 
