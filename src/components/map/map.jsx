@@ -122,7 +122,7 @@ Map.propTypes = {
           name: PropTypes.string.isRequired,
         })
       })
-  ).isRequired,
+  ),
   activeOffer: PropTypes.shape({
     location: PropTypes.shape({
       latitude: PropTypes.number.isRequired,
@@ -135,7 +135,7 @@ Map.propTypes = {
       longitude: PropTypes.number.isRequired,
       zoom: PropTypes.number.isRequired
     }),
-    name: PropTypes.string.isRequired,
+    name: PropTypes.string,
   }).isRequired,
 };
 

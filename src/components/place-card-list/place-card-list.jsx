@@ -31,7 +31,7 @@ class PlaceCardList extends PureComponent {
 }
 
 PlaceCardList.propTypes = {
-  offers: PropTypes.array.isRequired,
+  offers: PropTypes.array,
   listClass: PropTypes.string,
   sortType: PropTypes.string,
 };

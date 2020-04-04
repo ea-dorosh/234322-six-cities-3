@@ -6,7 +6,7 @@ const withLoad = (Component, loadSelector, errorSelector) => connect((state) => 
   loadingOfferStatus: loadSelector(state),
   error: errorSelector(state),
 }))(
-    class WithLoadItem extends PureComponent {
+    class WithLoad extends PureComponent {
       constructor(props) {
         super(props);
 

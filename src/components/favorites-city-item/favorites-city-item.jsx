@@ -1,4 +1,5 @@
 import React, {PureComponent} from "react";
+import PropTypes from "prop-types";
 import FavoritesOfferItem from "../favorites-offer-item/favorites-offer-item.jsx";
 
 
@@ -9,7 +10,6 @@ class FavoritesCityItem extends PureComponent {
   }
 
   render() {
-
     const {city, offers} = this.props;
 
     const cityOffers = offers.filter((offer) => offer.city.name === city.name);
@@ -35,5 +35,10 @@ class FavoritesCityItem extends PureComponent {
     );
   }
 }
+
+FavoritesCityItem.propTypes = {
+  offers: PropTypes.array.isRequired,
+  city: PropTypes.object.isRequired
+};
 
 export default FavoritesCityItem;

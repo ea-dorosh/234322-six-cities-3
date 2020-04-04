@@ -133,17 +133,23 @@ const offerMock = {
   reviews: [
     {
       id: 1,
-      text: `some information about offer, some information about offer`,
+      comment: `some information about offer, some information about offer`,
       rating: 3.4,
-      name: `Konstantin`,
+      user: {
+        name: `Konstantin`,
+        avatarUrl: `avatar.jpg`
+      },
       date: `2019-04-24`,
     },
     {
       id: 2,
       text: `some information about offer, some information about offer`,
-      rating: 4.5,
-      name: `Kostya`,
-      date: `2017-05-26`,
+      rating: 3.4,
+      user: {
+        name: `Konstantin`,
+        avatarUrl: `avatar.jpg`
+      },
+      date: `2019-04-24`,
     },
   ],
 };
@@ -155,4 +161,28 @@ const SortTypeMock = {
   TOP_RATED: `top-rated`
 };
 
-export {offersMock, offerMock, SortTypeMock};
+const citiesMock = [
+  {
+    city: {
+      location: {
+        latitude: 52.38333,
+        longitude: 4.9,
+        zoom: 12
+      },
+      name: `City`,
+    },
+  },
+  {
+    city: {
+      location: {
+        latitude: 52.38333,
+        longitude: 4.9,
+        zoom: 12
+      },
+      name: `City`,
+    }
+  }
+];
+
+
+export {offersMock, offerMock, SortTypeMock, citiesMock};

@@ -1,8 +1,7 @@
 import React, {PureComponent} from "react";
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import {AppRoute} from "../../utils.js";
-import HeaderUser from "../header-user/header-user.jsx";
-import {Link, Redirect} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 import {connect} from "react-redux";
 import {AuthorizationStatus} from "../../reducer/user/user";
 import {getAuthorizationStatus} from "../../reducer/user/selectors";
@@ -11,14 +10,13 @@ import {getCities} from "../../utils";
 import FavoritesCityItem from "../favorites-city-item/favorites-city-item.jsx";
 
 
-class Favorites extends PureComponent {
+export class Favorites extends PureComponent {
   constructor(props) {
     super(props);
 
   }
 
   render() {
-    // eslint-disable-next-line react/prop-types
     const {authorizationStatus, offers, cities} = this.props;
 
     if (authorizationStatus === AuthorizationStatus.NO_AUTH) {
@@ -71,9 +69,9 @@ class Favorites extends PureComponent {
               <section className="favorites">
                 <h1 className="favorites__title">Saved listing</h1>
                 <ul className="favorites__list">
-                  {cities.map((city) => (
+                  {cities.map((city, index) => (
                     <FavoritesCityItem
-                      key={city.name}
+                      key={index}
                       offers={offers}
                       city={city}
                     />
@@ -84,14 +82,20 @@ class Favorites extends PureComponent {
           </main>
         }
         <footer className="footer container">
-          <Link to={AppRoute.ROOT} className="footer__logo-link">
+          <a href className="footer__logo-link">
             <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33"/>
-          </Link>
+          </a>
         </footer>
       </div>
     );
   }
 }
+
+Favorites.propTypes = {
+  authorizationStatus: PropTypes.string.isRequired,
+  offers: PropTypes.array.isRequired,
+  cities: PropTypes.array.isRequired
+};
 
 const mapStateToProps = (state) => {
 

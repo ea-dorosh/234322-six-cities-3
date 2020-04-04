@@ -1,5 +1,3 @@
-import PropTypes from "prop-types";
-
 export const getRandomNumber = (min, max) => {
   return Math.floor(min + Math.random() * (max + 1 - min));
 };

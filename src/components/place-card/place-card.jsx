@@ -37,6 +37,7 @@ class PlaceCard extends PureComponent {
 
       // eslint-disable-next-line react/prop-types
     } else if (this.props.authorizationStatus === AuthorizationStatus.AUTH) {
+      // eslint-disable-next-line react/prop-types
       const status = offer.isFavorite ? 0 : 1;
       // eslint-disable-next-line react/prop-types
       handleFavoriteStatus(status, this.props.offer.id);
