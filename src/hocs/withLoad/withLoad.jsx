@@ -1,4 +1,5 @@
 import React, {PureComponent} from "react";
+import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {LoadingOfferStatus} from "../../reducer/offers/offers";
 
@@ -6,14 +7,13 @@ const withLoad = (Component, loadSelector, errorSelector) => connect((state) => 
   loadingOfferStatus: loadSelector(state),
   error: errorSelector(state),
 }))(
-    class WithLoadItem extends PureComponent {
+    class WithLoad extends PureComponent {
       constructor(props) {
         super(props);
 
       }
 
       render() {
-
         // eslint-disable-next-line react/prop-types
         const {loadingOfferStatus, error} = this.props;
 
@@ -28,6 +28,11 @@ const withLoad = (Component, loadSelector, errorSelector) => connect((state) => 
       }
     }
 );
+
+withLoad.propTypes = {
+  loadingOfferStatus: PropTypes.func.isRequired,
+  error: PropTypes.object,
+};
 
 export default withLoad;
 

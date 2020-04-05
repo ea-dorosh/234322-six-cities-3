@@ -6,11 +6,9 @@ import {connect} from "react-redux";
 import withActiveItem from "../../hocs/withActiveItem/withActiveItem.jsx";
 import {getSortType} from "../../reducer/main/selectors";
 
-class SortOptions extends PureComponent {
+export class SortOptions extends PureComponent {
 
   render() {
-
-    // eslint-disable-next-line react/prop-types
     const {handleOffersSort, sortType, isOpened, handleToggleClick} = this.props;
 
     return (
@@ -43,6 +41,8 @@ class SortOptions extends PureComponent {
 SortOptions.propTypes = {
   handleOffersSort: PropTypes.func.isRequired,
   sortType: PropTypes.string.isRequired,
+  isOpened: PropTypes.bool.isRequired,
+  handleToggleClick: PropTypes.func.isRequired,
 };
 
 

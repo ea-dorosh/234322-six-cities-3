@@ -1,10 +1,69 @@
-import React from "react";
+import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import Review from "../review/review.jsx";
+import {connect} from "react-redux";
+import {getReviews} from "../../reducer/review/selectors";
+import {Operation as ReviewOperation} from "../../reducer/review/review";
 
 
-const ReviewsList = (props) => {
-  const {reviews} = props;
+export class ReviewsList extends PureComponent {
+
+  constructor(props) {
+    super(props);
+
+  }
+
+  render() {
+    const {reviews, id, downloadReviews} = this.props;
+
+    downloadReviews(id);
+
+    return (
+      <>
+        <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">
+          {reviews ? reviews.length : null}
+        </span></h2>
+        <ul className="reviews__list">
+          {reviews.map((review, index) => (
+            index < 10 ?
+              <Review
+                key={review.id}
+                review={review}
+              />
+              :
+              null
+          ))}
+        </ul>
+      </>
+    );
+  }
+}
+
+ReviewsList.propTypes = {
+  reviews: PropTypes.arrayOf(
+      PropTypes.shape(
+          {
+            rating: PropTypes.number.isRequired,
+            comment: PropTypes.string,
+            date: PropTypes.string.isRequired,
+            id: PropTypes.number.isRequired,
+            user: PropTypes.shape(
+                {
+                  avatarUrl: PropTypes.string,
+                  id: PropTypes.number,
+                  isPro: PropTypes.bool,
+                  name: PropTypes.string,
+                })
+          }
+      )
+  ),
+  id: PropTypes.number.isRequired,
+  downloadReviews: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => {
+
+  const reviews = getReviews(state);
 
   reviews.sort(function (a, b) {
     let dateA = new Date(a.date);
@@ -12,41 +71,17 @@ const ReviewsList = (props) => {
     return dateB - dateA;
   });
 
-  return (
-    <ul className="reviews__list">
-      {reviews.map((review, index) => (
-        index < 10 ?
-          <Review
-            key={review.id}
-            review={review}
-          />
-          :
-          null
-      ))}
-    </ul>
-  );
+  return {
+    reviews,
+  };
 };
 
-ReviewsList.propTypes = {
-  reviews: PropTypes.arrayOf(
-      PropTypes.shape(
-          {
-            rating: PropTypes.number.isRequired,
-            comment: PropTypes.string.isRequired,
-            date: PropTypes.string.isRequired,
-            id: PropTypes.number.isRequired,
-            user: PropTypes.shape(
-                {
-                  avatarUrl: PropTypes.string.isRequired,
-                  id: PropTypes.number.isRequired,
-                  isPro: PropTypes.bool.isRequired,
-                  name: PropTypes.string.isRequired,
-                })
-          }
-      )
-  ),
-};
+const mapDispatchToProps = (dispatch) => ({
+
+  downloadReviews(id) {
+    dispatch(ReviewOperation.getReviews(id));
+  },
+});
 
 
-export default ReviewsList;
-
+export default connect(mapStateToProps, mapDispatchToProps)(ReviewsList);

@@ -23,7 +23,7 @@ const api = createAPI();
 
 const store = createStore(
     reducer,
-    composeWithDevTools(
+    composeWithDevTools({trace: true, traceLimit: 25})(
         applyMiddleware(thunk.withExtraArgument(api))
     )
 );

@@ -37,8 +37,9 @@ const Operation = {
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
         dispatch(ActionCreator.getUserProperties(response.data));
       })
-      .catch((err) => {
-        throw err;
+      .catch(() => {
+        // eslint-disable-next-line no-console
+        console.log(`вы не авторизованы`);
       });
   },
 

@@ -1,4 +1,5 @@
 import React, {PureComponent} from "react";
+import PropTypes from "prop-types";
 import {ratingToStar} from "../../utils";
 
 
@@ -11,7 +12,6 @@ class FavoritesOfferItem extends PureComponent {
   render() {
     const {offer} = this.props;
 
-    // eslint-disable-next-line react/prop-types
     const rating = ratingToStar(offer.rating);
 
     return (
@@ -52,5 +52,15 @@ class FavoritesOfferItem extends PureComponent {
     );
   }
 }
+
+FavoritesOfferItem.propTypes = {
+  offer: PropTypes.shape({
+    rating: PropTypes.number.isRequired,
+    img: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+  })
+};
 
 export default FavoritesOfferItem;

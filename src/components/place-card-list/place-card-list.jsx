@@ -12,7 +12,6 @@ class PlaceCardList extends PureComponent {
 
   render() {
 
-    // eslint-disable-next-line react/prop-types
     const {offers, listClass, handleOfferHover} = this.props;
 
     return (
@@ -31,9 +30,9 @@ class PlaceCardList extends PureComponent {
 }
 
 PlaceCardList.propTypes = {
-  offers: PropTypes.array.isRequired,
+  offers: PropTypes.array,
   listClass: PropTypes.string,
-  sortType: PropTypes.string,
+  handleOfferHover: PropTypes.func,
 };
 
 

@@ -1,6 +1,7 @@
 import React, {PureComponent} from 'react';
+import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {getLoadingStatus} from "../../reducer/review/selectors.js";
+import {getSendingStatus} from "../../reducer/review/selectors.js";
 import {Operation as ReviewOperation, ActionCreator, LoadingStatus} from "../../reducer/review/review.js";
 
 const RatingValues = [5, 4, 3, 2, 1];
@@ -14,7 +15,7 @@ const TextRating = new Map([
 ]);
 
 
-class CommentForm extends PureComponent {
+export class CommentForm extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -45,7 +46,6 @@ class CommentForm extends PureComponent {
   }
 
   handleSubmit(evt) {
-    // eslint-disable-next-line react/prop-types
     const {onReviewSubmit, id} = this.props;
     evt.preventDefault();
 
@@ -53,7 +53,6 @@ class CommentForm extends PureComponent {
   }
 
   componentDidUpdate() {
-    // eslint-disable-next-line react/prop-types
     const {loadingStatus, onLoadingStatusClear} = this.props;
 
     if (loadingStatus === LoadingStatus.SUCCESS) {
@@ -62,7 +61,6 @@ class CommentForm extends PureComponent {
   }
 
   render() {
-    // eslint-disable-next-line react/prop-types
     const {loadingStatus} = this.props;
 
     return (
@@ -107,7 +105,7 @@ class CommentForm extends PureComponent {
           maxLength={300}
           disabled={loadingStatus === LoadingStatus.DISABLED}
           onChange={this.reviewHandle}
-          value={loadingStatus === LoadingStatus.SUCCESS ? `` : null}
+          value={loadingStatus === LoadingStatus.SUCCESS ? `` : undefined}
         />
         {loadingStatus === LoadingStatus.FAILED ? <p style={{background: `red`}}>PLEASE TRY AGAIN</p> : null}
         <div className="reviews__button-wrapper">
@@ -127,11 +125,18 @@ class CommentForm extends PureComponent {
   }
 }
 
+CommentForm.propTypes = {
+  onReviewSubmit: PropTypes.func.isRequired,
+  id: PropTypes.number.isRequired,
+  loadingStatus: PropTypes.string.isRequired,
+  onLoadingStatusClear: PropTypes.func.isRequired,
+};
+
 
 const mapStateToProps = (state) => {
 
   return {
-    loadingStatus: getLoadingStatus(state),
+    loadingStatus: getSendingStatus(state),
   };
 };
 
@@ -145,5 +150,6 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.changeLoadingStatus(``));
   },
 });
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(CommentForm);

@@ -1,9 +1,8 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 
-// eslint-disable-next-line no-unused-vars
 const MainEmpty = (props) => {
-  // eslint-disable-next-line react/prop-types
   const {activeCity} = props;
 
   return (
@@ -12,8 +11,7 @@ const MainEmpty = (props) => {
         <section className="cities__no-places">
           <div className="cities__status-wrapper tabs__content">
             <b className="cities__status">No places to stay available</b>
-            <p className="cities__status-description">We could not find any property availbale at the moment in
-              {/* eslint-disable-next-line react/prop-types */}
+            <p className="cities__status-description">We could not find any property available at the moment in
               {activeCity.name}</p>
           </div>
         </section>
@@ -21,6 +19,17 @@ const MainEmpty = (props) => {
       </div>
     </div>
   );
+};
+
+MainEmpty.propTypes = {
+  activeCity: PropTypes.shape({
+    location: PropTypes.shape({
+      latitude: PropTypes.number,
+      longitude: PropTypes.number,
+      zoom: PropTypes.number
+    }),
+    name: PropTypes.string,
+  }).isRequired,
 };
 
 export default MainEmpty;

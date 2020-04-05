@@ -2,7 +2,7 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import PlaceCardList from "../place-card-list/place-card-list.jsx";
 import Map from "../map/map.jsx";
-import LocationsList from "../locations-list/location-list.jsx";
+import LocationsList from "../locations-list/locations-list.jsx";
 import SortOptions from "../sort-options/sort-options.jsx";
 import {connect} from "react-redux";
 import {CITIES} from "../../utils.js";
@@ -15,7 +15,7 @@ import HeaderUser from "../header-user/header-user.jsx";
 import withLoad from "../../hocs/withLoad/withLoad.jsx";
 
 
-class Main extends PureComponent {
+export class Main extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -25,8 +25,8 @@ class Main extends PureComponent {
     const {
       activeCity,
       offers,
-      // eslint-disable-next-line react/prop-types
-      marker, handleOfferHover,
+      marker,
+      handleOfferHover,
     } = this.props;
 
     const advertsCount = offers.length;
@@ -72,7 +72,7 @@ class Main extends PureComponent {
                   <section className="cities__map map">
                     <Map
                       offers={offers}
-                      marker={marker}
+                      activeOffer={marker}
                       activeCity={activeCity}
                     />
                   </section>
@@ -91,7 +91,6 @@ class Main extends PureComponent {
 }
 
 Main.propTypes = {
-  offers: PropTypes.array,
   activeCity: PropTypes.shape({
     location: PropTypes.shape({
       latitude: PropTypes.number,
@@ -100,8 +99,9 @@ Main.propTypes = {
     }),
     name: PropTypes.string,
   }).isRequired,
-  handleOffersSort: PropTypes.func,
-  sortType: PropTypes.string,
+  offers: PropTypes.array,
+  marker: PropTypes.object,
+  handleOfferHover: PropTypes.func.isRequired,
 };
 
 
@@ -126,4 +126,3 @@ const mapDispatchToProps = (dispatch) => ({
 
 
 export default withLoad(connect(mapStateToProps, mapDispatchToProps)(Main), getLoadStatus, getError);
-

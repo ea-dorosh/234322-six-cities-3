@@ -18,22 +18,18 @@ class Review extends PureComponent {
   }
 
   render() {
-    // eslint-disable-next-line no-unused-vars,react/prop-types
-    const {rating, name, comment, date, id, user} = this.props.review;
+    const {rating, comment, date, user} = this.props.review;
 
-    // eslint-disable-next-line react/prop-types
     const ratingReview = ratingToStar(rating);
 
     return (
       <li className="reviews__item">
         <div className="reviews__user user">
           <div className="reviews__avatar-wrapper user__avatar-wrapper">
-            {/* eslint-disable-next-line react/prop-types */}
             <img className="reviews__avatar user__avatar" src={user.avatarUrl} width="54" height="54"
               alt="Reviews avatar"/>
           </div>
           <span className="reviews__user-name">
-            {/* eslint-disable-next-line react/prop-types */}
             {user.name}
           </span>
         </div>
@@ -58,8 +54,9 @@ Review.propTypes = {
   review: PropTypes.shape(
       {
         rating: PropTypes.number.isRequired,
-        comment: PropTypes.string.isRequired,
+        comment: PropTypes.string,
         date: PropTypes.string.isRequired,
+        user: PropTypes.object.isRequired,
       }
   )
 };

@@ -1,5 +1,5 @@
 import React, {PureComponent} from "react";
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {AuthorizationStatus} from "../../reducer/user/user";
 import {Link} from "react-router-dom";
@@ -7,15 +7,13 @@ import {getAuthorizationStatus, getUserProperties} from "../../reducer/user/sele
 import {AppRoute} from "../../utils.js";
 
 
-class HeaderUser extends PureComponent {
+export class HeaderUser extends PureComponent {
   constructor(props) {
     super(props);
 
   }
 
   render() {
-
-    // eslint-disable-next-line react/prop-types
     const {authorizationStatus, userProperties} = this.props;
 
     return (
@@ -36,7 +34,6 @@ class HeaderUser extends PureComponent {
               <div className="header__avatar-wrapper user__avatar-wrapper">
               </div>
               <span className="header__user-name user__name">
-                {/* eslint-disable-next-line react/prop-types */}
                 {userProperties ? userProperties.email : null}
               </span>
             </Link>
@@ -46,6 +43,11 @@ class HeaderUser extends PureComponent {
     );
   }
 }
+
+HeaderUser.propTypes = {
+  authorizationStatus: PropTypes.string.isRequired,
+  userProperties: PropTypes.object,
+};
 
 const mapStateToProps = (state) => {
   return {

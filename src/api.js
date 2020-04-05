@@ -1,6 +1,7 @@
 import axios from "axios";
 import {onError, onUnauthorized} from "./index";
 
+
 const ApiSettings = {
   URL: `https://htmlacademy-react-3.appspot.com/six-cities`,
   TIMEOUT: 5000,
