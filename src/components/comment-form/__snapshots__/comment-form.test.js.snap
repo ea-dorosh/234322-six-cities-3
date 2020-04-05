@@ -151,7 +151,6 @@ exports[`Should CommentForm render correctly 1`] = `
     name="review"
     onChange={[Function]}
     placeholder="Tell how was your stay, what you like and what can be improved"
-    value=""
   />
   <div
     className="reviews__button-wrapper"

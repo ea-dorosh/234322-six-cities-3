@@ -11,7 +11,7 @@ const mockActiveCity = {
   name: `City`,
 };
 
-const mockCities = [mockActiveCity]
+const mockCities = [mockActiveCity];
 
 it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(void 0, {})).toEqual({

@@ -25,31 +25,36 @@ const mockReviews = [
 
 it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(void 0, {})).toEqual({
-    loadingStatus: ``,
+    loadingStatus: `SUCCESS`,
     offerReviews: [],
+    sendStatus: ``,
   });
 });
 
 it(`Reducer change loading status `, () => {
   expect(reducer({
-    loadingStatus: ``,
+    loadingStatus: `SUCCESS`,
     offerReviews: [],
+    sendStatus: ``,
   },
   ActionCreator.changeLoadingStatus(`status`)
   )).toEqual({
     loadingStatus: `status`,
     offerReviews: [],
+    sendStatus: ``,
   });
 });
 
 it(`Reducer get offer reviews`, () => {
   expect(reducer({
-    loadingStatus: ``,
+    loadingStatus: `SUCCESS`,
     offerReviews: [],
+    sendStatus: ``,
   },
   ActionCreator.getOfferReviews(mockReviews)
   )).toEqual({
-    loadingStatus: ``,
+    loadingStatus: `SUCCESS`,
     offerReviews: mockReviews,
+    sendStatus: ``,
   });
 });
