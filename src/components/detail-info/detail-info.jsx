@@ -40,26 +40,16 @@ export class DetailInfo extends PureComponent {
   }
 
   loadData() {
-    const {downloadNear, downloadReviews, offer} = this.props;
+    const {downloadNear, offer} = this.props;
     downloadNear(offer.id);
-    downloadReviews(offer.id);
   }
 
   componentDidMount() {
     this.loadData();
   }
 
-  componentDidUpdate() {
-    // console.log(prevProps.offerReviews !== this.props.offerReviews)
-
-    // if (prevProps.offerReviews !== this.props.offerReviews) {
-    //   this.loadData();
-    // }
-    // prevProps.nearOffers !== this.props.nearOffers
-  }
-
   render() {
-    const {offer, userProperties, offerReviews, nearOffers, activeCity} = this.props;
+    const {offer, userProperties, nearOffers, activeCity} = this.props;
 
     const premium = <div className="property__mark">
       <span>Premium</span>
@@ -170,11 +160,8 @@ export class DetailInfo extends PureComponent {
                   </div>
                 </div>
                 <section className="property__reviews reviews">
-                  <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">
-                    {offerReviews ? offerReviews.length : null}
-                  </span></h2>
                   <ReviewsList
-                    reviews={offerReviews}
+                    id={offer.id}
                   />
                   { userProperties ?
                     <CommentForm
@@ -239,16 +226,16 @@ const mapStateToProps = (state, ownProps) => {
     offer: selectOfferById(state, offerId),
     activeCity: getActiveCity(state),
     userProperties: getUserProperties(state),
-    offerReviews: getReviews(state),
+    // offerReviews: getReviews(state),
     nearOffers: getNearOffers(state),
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
 
-  downloadReviews(id) {
-    dispatch(ReviewOperation.getReviews(id));
-  },
+  // downloadReviews(id) {
+  //   dispatch(ReviewOperation.getReviews(id));
+  // },
 
   downloadNear(id) {
     dispatch(OffersOperation.downloadNearOffers(id));

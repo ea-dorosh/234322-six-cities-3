@@ -16,7 +16,7 @@ const withLoad = (Component, loadSelector, errorSelector) => connect((state) => 
 
         // eslint-disable-next-line react/prop-types
         const {loadingOfferStatus, error} = this.props;
-
+debugger
         return (
         <>
           {loadingOfferStatus === LoadingOfferStatus.PROCESSING && <div style={{fontSize: 60 + `px`}}><p>Connection...</p></div>}
