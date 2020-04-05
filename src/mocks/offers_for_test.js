@@ -172,13 +172,6 @@ const offerMock = {
   ],
 };
 
-const SortTypeMock = {
-  POPULAR: `popular`,
-  PRICE_TO_HIGH: `to-high`,
-  PRICE_TO_LOW: `to-low`,
-  TOP_RATED: `top-rated`
-};
-
 const citiesMock = [
   {
     city: {
@@ -210,4 +203,4 @@ const userPropertiesMock = {
 };
 
 
-export {offersMock, offerMock, SortTypeMock, citiesMock, userPropertiesMock};
+export {offersMock, offerMock, citiesMock, userPropertiesMock};
