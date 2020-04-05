@@ -6,16 +6,14 @@ import Map from "../map/map.jsx";
 import PlaceCardList from "../place-card-list/place-card-list.jsx";
 import {connect} from "react-redux";
 import {createSelector} from "reselect";
-import {ratingToStar, AppRoute} from "../../utils.js";
+import {AppRoute, ratingToStar} from "../../utils.js";
 import HeaderUser from "../header-user/header-user.jsx";
 import CommentForm from "../comment-form/comment-form.jsx";
-import {Operation as ReviewOperation} from "../../reducer/review/review.js";
 import {Operation as OffersOperation} from "../../reducer/offers/offers.js";
 import {Operation as FavoriteOperation} from "../../reducer/favorites/favorites";
 import {AuthorizationStatus} from "../../reducer/user/user";
-import {getActiveCity, selectOffers, getNearOffers, getLoadStatus, getError} from "../../reducer/offers/selectors";
+import {getActiveCity, getError, getLoadStatus, getNearOffers, selectOffers} from "../../reducer/offers/selectors";
 import {getAuthorizationStatus, getUserProperties} from "../../reducer/user/selectors";
-import {getReviews} from "../../reducer/review/selectors";
 import withLoad from "../../hocs/withLoad/withLoad.jsx";
 
 
@@ -226,16 +224,11 @@ const mapStateToProps = (state, ownProps) => {
     offer: selectOfferById(state, offerId),
     activeCity: getActiveCity(state),
     userProperties: getUserProperties(state),
-    // offerReviews: getReviews(state),
     nearOffers: getNearOffers(state),
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
-
-  // downloadReviews(id) {
-  //   dispatch(ReviewOperation.getReviews(id));
-  // },
 
   downloadNear(id) {
     dispatch(OffersOperation.downloadNearOffers(id));

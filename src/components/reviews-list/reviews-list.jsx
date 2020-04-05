@@ -1,9 +1,8 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import Review from "../review/review.jsx";
-import withLoad from "../../hocs/withLoad/withLoad.jsx";
 import {connect} from "react-redux";
-import {getReviews, getLoadingStatus, getError} from "../../reducer/review/selectors";
+import {getReviews} from "../../reducer/review/selectors";
 import {Operation as ReviewOperation} from "../../reducer/review/review";
 
 
@@ -14,21 +13,10 @@ export class ReviewsList extends PureComponent {
 
   }
 
-  componentDidMount() {
-    const {id, downloadReviews} = this.props;
-    downloadReviews(id);
-  }
-
   render() {
+    const {reviews, id, downloadReviews} = this.props;
 
-
-    const {reviews} = this.props;
-
-    reviews.sort(function (a, b) {
-      let dateA = new Date(a.date);
-      let dateB = new Date(b.date);
-      return dateB - dateA;
-    });
+    downloadReviews(id);
 
     return (
       <>
@@ -69,12 +57,22 @@ ReviewsList.propTypes = {
           }
       )
   ),
+  id: PropTypes.number.isRequired,
+  downloadReviews: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
 
+  const reviews = getReviews(state);
+
+  reviews.sort(function (a, b) {
+    let dateA = new Date(a.date);
+    let dateB = new Date(b.date);
+    return dateB - dateA;
+  });
+
   return {
-    reviews: getReviews(state),
+    reviews,
   };
 };
 
@@ -86,4 +84,4 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 
-export default withLoad(connect(mapStateToProps, mapDispatchToProps)(ReviewsList), getLoadingStatus, getError);
+export default connect(mapStateToProps, mapDispatchToProps)(ReviewsList);

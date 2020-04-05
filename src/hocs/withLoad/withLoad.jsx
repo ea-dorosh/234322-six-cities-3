@@ -1,4 +1,5 @@
 import React, {PureComponent} from "react";
+import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {LoadingOfferStatus} from "../../reducer/offers/offers";
 
@@ -13,10 +14,9 @@ const withLoad = (Component, loadSelector, errorSelector) => connect((state) => 
       }
 
       render() {
-
         // eslint-disable-next-line react/prop-types
         const {loadingOfferStatus, error} = this.props;
-debugger
+
         return (
         <>
           {loadingOfferStatus === LoadingOfferStatus.PROCESSING && <div style={{fontSize: 60 + `px`}}><p>Connection...</p></div>}
@@ -28,6 +28,11 @@ debugger
       }
     }
 );
+
+withLoad.propTypes = {
+  loadingOfferStatus: PropTypes.func.isRequired,
+  error: PropTypes.object,
+};
 
 export default withLoad;
 

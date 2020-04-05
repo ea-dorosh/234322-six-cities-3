@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {getLoadingStatus} from "../../reducer/review/selectors.js";
+import {getSendingStatus} from "../../reducer/review/selectors.js";
 import {Operation as ReviewOperation, ActionCreator, LoadingStatus} from "../../reducer/review/review.js";
 
 const RatingValues = [5, 4, 3, 2, 1];
@@ -136,7 +136,7 @@ CommentForm.propTypes = {
 const mapStateToProps = (state) => {
 
   return {
-    loadingStatus: getLoadingStatus(state),
+    loadingStatus: getSendingStatus(state),
   };
 };
 

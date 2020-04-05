@@ -40,6 +40,7 @@ export const Operation = {
     return api.post(`/comments/${id}`, reviewData)
       .then(() => {
         dispatch(ActionCreator.changeSendingStatus(LoadingStatus.SUCCESS));
+        dispatch(Operation.getReviews(id));
       })
       .catch(() => {
         dispatch(ActionCreator.changeSendingStatus(LoadingStatus.FAILED));
