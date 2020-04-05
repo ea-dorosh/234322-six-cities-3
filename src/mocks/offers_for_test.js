@@ -1,5 +1,3 @@
-import {getRandomNumber} from "../utils";
-
 const offersMock = [
   {
     city: {
@@ -34,18 +32,28 @@ const offersMock = [
     },
     reviews: [
       {
-        text: `some information about offer, some information about offer`,
-        rating: 3.3,
-        name: `Konstantin`,
-        date: `2019-04-24`,
         id: 1,
+        comment: `some information about offer, some information about offer`,
+        rating: 3.4,
+        user: {
+          name: `Konstantin`,
+          avatarUrl: `avatar.jpg`,
+          id: 134,
+          isPro: false,
+        },
+        date: `2019-04-24`,
       },
       {
-        text: `some information about offer, some information about offer`,
-        rating: 4.5,
-        name: `Kostya`,
-        date: `2017-05-26`,
         id: 2,
+        text: `some information about offer, some information about offer`,
+        rating: 3.4,
+        user: {
+          name: `Konstantin`,
+          avatarUrl: `avatar.jpg`,
+          id: 124,
+          isPro: false,
+        },
+        date: `2019-04-24`,
       },
     ],
   },
@@ -82,18 +90,28 @@ const offersMock = [
     },
     reviews: [
       {
-        id: getRandomNumber(1, 10000),
-        text: `some information about offer, some information about offer`,
-        rating: 4.5,
-        name: `Konstantin`,
+        id: 1,
+        comment: `some information about offer, some information about offer`,
+        rating: 3.4,
+        user: {
+          name: `Konstantin`,
+          avatarUrl: `avatar.jpg`,
+          id: 34,
+          isPro: false,
+        },
         date: `2019-04-24`,
       },
       {
-        id: getRandomNumber(1, 10000),
+        id: 2,
         text: `some information about offer, some information about offer`,
-        rating: 3.8,
-        name: `Kostya`,
-        date: `2017-05-26`,
+        rating: 3.4,
+        user: {
+          name: `Konstantin`,
+          avatarUrl: `avatar.jpg`,
+          id: 24,
+          isPro: false,
+        },
+        date: `2019-04-24`,
       },
     ],
   }

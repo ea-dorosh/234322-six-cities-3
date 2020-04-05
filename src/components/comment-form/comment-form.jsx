@@ -105,7 +105,7 @@ export class CommentForm extends PureComponent {
           maxLength={300}
           disabled={loadingStatus === LoadingStatus.DISABLED}
           onChange={this.reviewHandle}
-          value={loadingStatus === LoadingStatus.SUCCESS ? `` : null}
+          value={loadingStatus === LoadingStatus.SUCCESS ? `` : this.state.comment}
         />
         {loadingStatus === LoadingStatus.FAILED ? <p style={{background: `red`}}>PLEASE TRY AGAIN</p> : null}
         <div className="reviews__button-wrapper">

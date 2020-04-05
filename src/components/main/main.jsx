@@ -15,7 +15,7 @@ import HeaderUser from "../header-user/header-user.jsx";
 import withLoad from "../../hocs/withLoad/withLoad.jsx";
 
 
-class Main extends PureComponent {
+export class Main extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -72,7 +72,7 @@ class Main extends PureComponent {
                   <section className="cities__map map">
                     <Map
                       offers={offers}
-                      marker={marker}
+                      activeOffer={marker}
                       activeCity={activeCity}
                     />
                   </section>
@@ -91,7 +91,6 @@ class Main extends PureComponent {
 }
 
 Main.propTypes = {
-  offers: PropTypes.array,
   activeCity: PropTypes.shape({
     location: PropTypes.shape({
       latitude: PropTypes.number,
@@ -100,8 +99,9 @@ Main.propTypes = {
     }),
     name: PropTypes.string,
   }).isRequired,
-  handleOfferHover: PropTypes.func,
-  // marker: PropTypes.
+  offers: PropTypes.array,
+  marker: PropTypes.object,
+  handleOfferHover: PropTypes.func.isRequired,
 };
 
 
@@ -126,4 +126,3 @@ const mapDispatchToProps = (dispatch) => ({
 
 
 export default withLoad(connect(mapStateToProps, mapDispatchToProps)(Main), getLoadStatus, getError);
-

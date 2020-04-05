@@ -1,13 +1,13 @@
 import React, {PureComponent, createRef} from "react";
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {Operation as UserOperation} from "../../reducer/user/user";
 import {Link, Redirect} from "react-router-dom";
 import {AppRoute} from "../../utils";
-import {AuthorizationStatus} from "../../reducer/user/user";
+import {Operation as UserOperation, AuthorizationStatus} from "../../reducer/user/user";
 import {getAuthorizationStatus} from "../../reducer/user/selectors";
 
-class SignIn extends PureComponent {
+
+export class SignIn extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -18,7 +18,6 @@ class SignIn extends PureComponent {
   }
 
   handleSubmit(evt) {
-    // eslint-disable-next-line react/prop-types
     const {login} = this.props;
 
     evt.preventDefault();
@@ -30,7 +29,6 @@ class SignIn extends PureComponent {
   }
 
   render() {
-    // eslint-disable-next-line react/prop-types
     const {authorizationStatus} = this.props;
 
     if (authorizationStatus === AuthorizationStatus.AUTH) {
@@ -88,13 +86,17 @@ class SignIn extends PureComponent {
   }
 }
 
+SignIn.propTypes = {
+  login: PropTypes.func.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
+};
+
 const mapStateToProps = (state) => {
   return {
     authorizationStatus: getAuthorizationStatus(state),
   };
 };
 
-// eslint-disable-next-line no-unused-vars
 const mapDispatchToProps = (dispatch) => ({
   login(authData) {
     dispatch(UserOperation.login(authData));
@@ -103,4 +105,3 @@ const mapDispatchToProps = (dispatch) => ({
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
-

@@ -8,6 +8,7 @@ class Map extends PureComponent {
     super(props);
 
     this.map = null;
+    this.markers = [];
 
     this.icon = leaflet.icon({
       iconUrl: `/img/pin.svg`,
@@ -18,35 +19,15 @@ class Map extends PureComponent {
       iconUrl: `/img/pin-active.svg`,
       iconSize: [27, 39]
     });
-
-    this._highlightMarker = this._highlightMarker.bind(this);
   }
-
-  _highlightMarker(offer) {
-
-    leaflet
-      .marker([offer.location.latitude, offer.location.longitude], {icon: this.iconActive})
-      .addTo(this.map);
-  }
-
 
   createMap() {
-    // eslint-disable-next-line react/prop-types
-    const {offers, activeCity, activeOffer} = this.props;
-
-    const city = [activeCity.location.latitude, activeCity.location.longitude];
-
-
-    const zoom = activeCity.location.zoom;
 
     this.map = leaflet.map(`map`, {
-      center: city,
-      zoom,
       zoomControl: false,
       marker: true
     });
 
-    this.map.setView(city, zoom);
 
     this.leafletMap = this.map;
 
@@ -56,17 +37,30 @@ class Map extends PureComponent {
       })
       .addTo(this.map);
 
-    offers.map((offer) => {
+    this.setCity();
+    this.addMarkers();
+  }
 
+  setCity() {
+    const {activeCity} = this.props;
+    const city = [activeCity.location.latitude, activeCity.location.longitude];
+    const zoom = activeCity.location.zoom;
+    this.map.setView(city, zoom);
+  }
+
+  addMarkers() {
+    const {activeOffer, offers} = this.props;
+    this.markers = offers.map((offer) =>
       leaflet
         .marker([offer.location.latitude, offer.location.longitude], {icon: this.icon})
-        .addTo(this.map);
-    });
-
+        .addTo(this.map)
+    );
     if (activeOffer) {
-      leaflet
-        .marker([activeOffer.location.latitude, activeOffer.location.longitude], {icon: this.iconActive})
-        .addTo(this.map);
+      this.markers.push(
+          leaflet
+          .marker([activeOffer.location.latitude, activeOffer.location.longitude], {icon: this.iconActive})
+          .addTo(this.map)
+      );
     }
   }
 
@@ -74,19 +68,11 @@ class Map extends PureComponent {
     this.createMap();
   }
 
-  componentDidUpdate() {
-    // eslint-disable-next-line react/prop-types
-    const {marker} = this.props;
-    if (this.leafletMap) {
-      this.leafletMap.eachLayer(function (layer) {
-        layer.remove();
-      });
-      this.leafletMap.remove();
-
-      this.createMap();
-      if (marker) {
-        this._highlightMarker(marker);
-      }
+  componentDidUpdate(prevProps) {
+    if (prevProps.offers !== this.offers || prevProps.activeCity !== this.activeCity || prevProps.activeOffer !== this.activeOffer) {
+      this.markers.forEach((marker) => marker.remove());
+      this.addMarkers();
+      this.setCity();
     }
   }
 
@@ -131,12 +117,12 @@ Map.propTypes = {
   }),
   activeCity: PropTypes.shape({
     location: PropTypes.shape({
-      latitude: PropTypes.number.isRequired,
-      longitude: PropTypes.number.isRequired,
-      zoom: PropTypes.number.isRequired
+      latitude: PropTypes.number,
+      longitude: PropTypes.number,
+      zoom: PropTypes.number
     }),
     name: PropTypes.string,
-  }).isRequired,
+  }),
 };
 
 

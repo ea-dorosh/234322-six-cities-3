@@ -46,7 +46,7 @@ export class HeaderUser extends PureComponent {
 
 HeaderUser.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
-  userProperties: PropTypes.object.isRequired,
+  userProperties: PropTypes.object,
 };
 
 const mapStateToProps = (state) => {

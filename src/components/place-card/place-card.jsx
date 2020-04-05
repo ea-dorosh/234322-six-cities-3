@@ -1,5 +1,5 @@
 import React, {PureComponent} from "react";
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import {Link, withRouter} from 'react-router-dom';
 import {AppRoute, CITIES, ratingToStar} from "../../utils.js";
 import {connect} from "react-redux";
@@ -9,7 +9,7 @@ import {Operation as FavoriteOperation} from "../../reducer/favorites/favorites.
 import {Operation as OffersOperation} from "../../reducer/offers/offers.js";
 
 
-class PlaceCard extends PureComponent {
+export class PlaceCard extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -19,34 +19,25 @@ class PlaceCard extends PureComponent {
 
 
   _handleOfferHover() {
-    // eslint-disable-next-line react/prop-types
     if (this.props.handleOfferHover) {
-      // eslint-disable-next-line react/prop-types
       this.props.handleOfferHover(this.props.offer);
     }
   }
 
   _toFavoritesHandler() {
-    // eslint-disable-next-line react/prop-types
     const {history, handleFavoriteStatus, offer} = this.props;
 
-    // eslint-disable-next-line react/prop-types
     if (this.props.authorizationStatus === AuthorizationStatus.NO_AUTH) {
-      // eslint-disable-next-line react/prop-types
       history.push(AppRoute.LOGIN);
 
-      // eslint-disable-next-line react/prop-types
     } else if (this.props.authorizationStatus === AuthorizationStatus.AUTH) {
-      // eslint-disable-next-line react/prop-types
       const status = offer.isFavorite ? 0 : 1;
-      // eslint-disable-next-line react/prop-types
       handleFavoriteStatus(status, this.props.offer.id);
     }
   }
 
 
   render() {
-    // eslint-disable-next-line react/prop-types
     const {offer, cardClass, handleOfferHover} = this.props;
 
 
@@ -54,7 +45,6 @@ class PlaceCard extends PureComponent {
       <span>Premium</span>
     </div>;
 
-    // eslint-disable-next-line react/prop-types
     const rating = ratingToStar(offer.rating);
 
     return (
@@ -67,24 +57,19 @@ class PlaceCard extends PureComponent {
           }
         }}
       >
-        {/* eslint-disable-next-line react/prop-types */}
         {offer.isPremium ? premium : null}
         <div className={`${cardClass === CITIES ? CITIES : `near-places`}__image-wrapper place-card__image-wrapper`}>
-          {/* eslint-disable-next-line react/prop-types */}
           <Link to={AppRoute.offer(offer.id)}>
-            {/* eslint-disable-next-line react/prop-types */}
             <img className="place-card__image" src={`${offer.img}`} width="260" height="200" alt="Place image"/>
           </Link>
         </div>
         <div className="place-card__info">
           <div className="place-card__price-wrapper">
             <div className="place-card__price">
-              {/* eslint-disable-next-line react/prop-types */}
               <b className="place-card__price-value">&euro;{offer.price}</b>
               <span className="place-card__price-text">&#47;&nbsp;night</span>
             </div>
             <button
-              /* eslint-disable-next-line react/prop-types */
               className={`place-card__bookmark-button button ${offer.isFavorite ? `place-card__bookmark-button--active` : null}`}
               type="button"
               onClick={this._toFavoritesHandler}
@@ -101,14 +86,11 @@ class PlaceCard extends PureComponent {
               <span className="visually-hidden">Rating</span>
             </div>
           </div>
-          {/* eslint-disable-next-line react/prop-types */}
           <Link to={AppRoute.offer(offer.id)}>
             <h2 className="place-card__name">
-              {/* eslint-disable-next-line react/prop-types */}
               {offer.name}
             </h2>
           </Link>
-          {/* eslint-disable-next-line react/prop-types */}
           <p className="place-card__type">{offer.type}</p>
         </div>
       </article>
@@ -116,19 +98,19 @@ class PlaceCard extends PureComponent {
   }
 }
 
-// PlaceCard.propTypes = {
-//   offer: PropTypes.shape({
-//     isPremium: PropTypes.bool.isRequired,
-//     name: PropTypes.string.isRequired,
-//     price: PropTypes.number.isRequired,
-//     // eslint-disable-next-line camelcase
-//     preview_image: PropTypes.string.isRequired,
-//     type: PropTypes.string.isRequired,
-//     rating: PropTypes.number.isRequired,
-//   }).isRequired,
-//   handleOfferHover: PropTypes.func,
-//   cardClass: PropTypes.string,
-// };
+PlaceCard.propTypes = {
+  offer: PropTypes.object.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
+  history: PropTypes.object,
+  handleFavoriteStatus: PropTypes.func.isRequired,
+  userProperties: PropTypes.object,
+  offerReviews: PropTypes.array,
+  nearOffers: PropTypes.array,
+  offers: PropTypes.array,
+  activeCity: PropTypes.object,
+  cardClass: PropTypes.string,
+  handleOfferHover: PropTypes.func,
+};
 
 const mapStateToProps = (state, ownProps) => {
 

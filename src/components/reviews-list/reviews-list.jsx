@@ -32,15 +32,15 @@ ReviewsList.propTypes = {
       PropTypes.shape(
           {
             rating: PropTypes.number.isRequired,
-            comment: PropTypes.string.isRequired,
+            comment: PropTypes.string,
             date: PropTypes.string.isRequired,
             id: PropTypes.number.isRequired,
             user: PropTypes.shape(
                 {
-                  avatarUrl: PropTypes.string.isRequired,
-                  id: PropTypes.number.isRequired,
-                  isPro: PropTypes.bool.isRequired,
-                  name: PropTypes.string.isRequired,
+                  avatarUrl: PropTypes.string,
+                  id: PropTypes.number,
+                  isPro: PropTypes.bool,
+                  name: PropTypes.string,
                 })
           }
       )
