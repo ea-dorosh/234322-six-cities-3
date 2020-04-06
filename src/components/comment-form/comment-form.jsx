@@ -57,6 +57,11 @@ export class CommentForm extends PureComponent {
 
     if (loadingStatus === LoadingStatus.SUCCESS) {
       onLoadingStatusClear();
+
+      this.setState({
+        rating: null,
+        comment: ``
+      });
     }
   }
 
@@ -147,7 +152,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
 
   onLoadingStatusClear() {
-    dispatch(ActionCreator.changeLoadingStatus(``));
+    dispatch(ActionCreator.changeSendingStatus(``));
   },
 });
 

@@ -1,7 +1,7 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {AppRoute} from "../../utils.js";
-import {Redirect} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import {connect} from "react-redux";
 import {AuthorizationStatus} from "../../reducer/user/user";
 import {getAuthorizationStatus} from "../../reducer/user/selectors";
@@ -31,9 +31,9 @@ export class Favorites extends PureComponent {
           <div className="container">
             <div className="header__wrapper">
               <div className="header__left">
-                <a className="header__logo-link" href="main.html">
+                <Link to={AppRoute.ROOT}>
                   <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
-                </a>
+                </Link>
               </div>
               <nav className="header__nav">
                 <ul className="header__nav-list">
