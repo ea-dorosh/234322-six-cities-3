@@ -13,10 +13,14 @@ export class ReviewsList extends PureComponent {
 
   }
 
-  render() {
-    const {reviews, id, downloadReviews} = this.props;
+  componentDidMount() {
+    const {downloadReviews, id} = this.props;
 
     downloadReviews(id);
+  }
+
+  render() {
+    const {reviews} = this.props;
 
     return (
       <>

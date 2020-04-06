@@ -1,17 +1,16 @@
 import React from "react";
 import renderer from "react-test-renderer";
+import {Router} from 'react-router-dom';
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
-import {Router} from "react-router-dom";
-import FavoritesOfferItem from "./favorites-offer-item";
-import {offerMock} from "../../mocks/offers_for_test";
+import PlaceCardList from "./place-card-list.jsx";
+import {offersMock} from "../../mocks/offers_for_test";
 import NameSpace from "../../reducer/name-space";
 import {LoadingOfferStatus} from "../../reducer/offers/offers";
 import {AuthorizationStatus} from "../../reducer/user/user";
 import {LoadingStatus} from "../../reducer/review/review";
 
 const mockStore = configureStore([]);
-
 const history = {
   length: 33,
   action: `PUSH`,
@@ -25,13 +24,20 @@ const history = {
   createHref: ()=>{},
 };
 
-it(`Should FavoritesOfferItem render correctly`, () => {
+it(`Should LocationsList render correctly`, () => {
   const store = mockStore({
     [NameSpace.OFFERS]: {
       loadingOfferStatus: LoadingOfferStatus.PROCESSING,
       error: null,
       cities: [],
-      activeCity: null,
+      activeCity: {
+        location: {
+          latitude: 52.38333,
+          longitude: 4.9,
+          zoom: 12
+        },
+        name: `City`,
+      },
       offers: [],
       nearOffers: [],
     },
@@ -57,8 +63,10 @@ it(`Should FavoritesOfferItem render correctly`, () => {
     .create(
         <Provider store={store}>
           <Router history={history}>
-            <FavoritesOfferItem
-              offer={offerMock}
+            <PlaceCardList
+              offers={offersMock}
+              listClass={`string`}
+              handleOfferHover={()=>{}}
             />
           </Router>
         </Provider>

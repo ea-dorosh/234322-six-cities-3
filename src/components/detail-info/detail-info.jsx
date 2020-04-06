@@ -28,6 +28,8 @@ export class DetailInfo extends PureComponent {
   _toFavoritesHandler() {
     const {history, handleFavoriteStatus, offer} = this.props;
 
+    console.log(history)
+
     if (this.props.authorizationStatus === AuthorizationStatus.NO_AUTH) {
       history.push(AppRoute.LOGIN);
 

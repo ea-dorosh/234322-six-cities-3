@@ -17,8 +17,7 @@ exports[`Should Favorites render correctly 1`] = `
           className="header__left"
         >
           <a
-            className="header__logo-link"
-            href="main.html"
+            onClick={[Function]}
           >
             <img
               alt="6 cities logo"

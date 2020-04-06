@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should FavoritesCityItem render correctly 1`] = `
+<div
+  style={
+    Object {
+      "fontSize": "60px",
+    }
+  }
+>
+  <p>
+    Connection...
+  </p>
+</div>
+`;

@@ -77,7 +77,7 @@ FavoritesOfferItem.propTypes = {
     name: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
-    isFavorite: PropTypes.bool.isRequired,
+    isFavorite: PropTypes.bool,
   }),
   handleFavoriteStatus: PropTypes.func.isRequired,
 };
