@@ -1,7 +1,7 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import ReviewsList from "../reviews-list/reviews-list.jsx";
-import {withRouter} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import Map from "../map/map.jsx";
 import PlaceCardList from "../place-card-list/place-card-list.jsx";
 import {connect} from "react-redux";
@@ -63,9 +63,9 @@ export class DetailInfo extends PureComponent {
           <div className="container">
             <div className="header__wrapper">
               <div className="header__left">
-                <a className="header__logo-link" href="main.html">
+                <Link to={AppRoute.ROOT} className="header__logo-link">
                   <img className="header__logo" src="/img/logo.svg" alt="6 cities logo" width="81" height="41"/>
-                </a>
+                </Link>
               </div>
               <nav className="header__nav">
                 <HeaderUser/>
@@ -194,7 +194,6 @@ export class DetailInfo extends PureComponent {
 
 DetailInfo.propTypes = {
   downloadNear: PropTypes.func.isRequired,
-  downloadReviews: PropTypes.func.isRequired,
   offer: PropTypes.object.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
   history: PropTypes.object,

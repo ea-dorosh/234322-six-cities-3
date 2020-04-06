@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {getSendingStatus} from "../../reducer/review/selectors.js";
 import {Operation as ReviewOperation, ActionCreator, LoadingStatus} from "../../reducer/review/review.js";
 
-const RatingValues = [5, 4, 3, 2, 1];
+const RATING_VALUES = [5, 4, 3, 2, 1];
 
 const TextRating = new Map([
   [1, `terribly`],
@@ -78,7 +78,7 @@ export class CommentForm extends PureComponent {
       >
         <label className="reviews__label form__label" htmlFor="review">Your review</label>
         <div className="reviews__rating-form form__rating">
-          {RatingValues.map((ratingValue) => (
+          {RATING_VALUES.map((ratingValue) => (
             <React.Fragment key={ratingValue}>
               <input
                 className="form__rating-input visually-hidden"
