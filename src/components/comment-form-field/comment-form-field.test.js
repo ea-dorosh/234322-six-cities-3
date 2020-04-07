@@ -1,23 +1,22 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {CommentForm} from "./comment-form.jsx";
+import CommentFormField from "./comment-form-field";
 
 const initialState = {
   comment: ``,
   rating: null,
 };
 
-it(`Should CommentForm render correctly`, () => {
+it(`Should CommentFormField render correctly`, () => {
   const tree = renderer
     .create(
-        <CommentForm
+        <CommentFormField
           onChange={()=>{}}
-          onReset={()=>{}}
+          onSubmit={()=>{}}
           values={initialState}
-          loadingStatus={`string`}
-          id={1}
-          onReviewSubmit={()=>{}}
-          onLoadingStatusClear={()=>{}}
+          error={false}
+          disabled={false}
+          submitDisabled={false}
         />
     )
     .toJSON();

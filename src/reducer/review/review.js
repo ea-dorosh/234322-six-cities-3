@@ -2,7 +2,6 @@ import {extend, prepareReview} from '../../utils.js';
 
 const LoadingStatus = {
   PROCESSING: `PROCESSING`,
-  DISABLED: `DISABLED`,
   SUCCESS: `SUCCESS`,
   FAILED: `FAILED`,
 };
@@ -36,7 +35,7 @@ const ActionCreator = {
 
 export const Operation = {
   postReview: (reviewData, id) => (dispatch, getState, api) => {
-    dispatch(ActionCreator.changeSendingStatus(LoadingStatus.DISABLED));
+    dispatch(ActionCreator.changeSendingStatus(LoadingStatus.PROCESSING));
     return api.post(`/comments/${id}`, reviewData)
       .then(() => {
         dispatch(ActionCreator.changeSendingStatus(LoadingStatus.SUCCESS));

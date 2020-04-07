@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Should CommentForm render correctly 1`] = `
+exports[`Should CommentFormField render correctly 1`] = `
 <form
   action="#"
   className="reviews__form form"
@@ -170,7 +170,7 @@ exports[`Should CommentForm render correctly 1`] = `
     </p>
     <button
       className="reviews__submit form__submit button"
-      disabled={true}
+      disabled={false}
       type="submit"
     >
       Submit
